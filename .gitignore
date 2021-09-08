@@ -34,4 +34,4 @@ yarn-error.log*
 .vercel
 
 # desktop ini
-.ini
+desktop.ini
