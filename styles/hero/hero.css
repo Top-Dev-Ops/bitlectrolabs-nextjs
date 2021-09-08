@@ -1,0 +1,19 @@
+.hero {
+    width: 30%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10%;
+}
+
+.hero h1 {
+    color: var(--green800);
+}
+
+.hero p {
+    font-size: var(--subHeadingLg);
+    color: var(--pureWhite);
+    opacity: 70%;
+    font-weight: 400;
+}

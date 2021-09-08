@@ -1,0 +1,87 @@
+@font-face {
+  font-family: Platform;
+  src: url('./Platform-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --pureWhite: #FFFFFF;
+  --midGray900: #131315;
+  --midGray800: #1A1B1D;
+  --midGray750: #212226;
+  --midGray700: #2B2C30;
+  --midGray600: #4A4C52;
+  --midGray500: #676972;
+  --midGray400: #7C808A;
+  --midGray300: #9699A4;
+  --midGray200: #B0B2BB;
+  --midGray150: #D0D2D7;
+  --midGray100: #D0D2D7;
+  --midGray50: #D0D2D7;
+  --purple900: #5A00AF;
+  --purple800: #7000D8;
+  --purple750: #7A00EC;
+  --purple700: #8501FF;
+  --purple600: #982AFF;
+  --purple500: #A050F6;
+  --purple400: #BD77FF;
+  --purple300: #CE9AFF;
+  --green900: #6EDC9B;
+  --green800: #6AD495;
+  --yellow900: #C97131;
+  --yellow800: #DF813D;
+  --purpleGradient1: linear-gradient(90deg, #9954F0 0%, #6B11DC 100%);
+  --purpleGradient2: linear-gradient(90deg, #A366F2 0%, #7A2AE0 100%);
+  --boxShadowSm: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  --boxShadowLg: 0px 2px 19px rgba(0, 0, 0, 0.65);
+  --dashedBorder: 1px dashed #7B61FF;
+  --subHeadingLg: 26px;
+  --subHeadingMd: 18px;
+  --subHeadingSm: 16px;
+  --textLg: 24px;
+  --textMd: 18px;
+  --textSm: 14px;
+  --h2Mobile: 40px;
+  --h3Mobile: 36px;
+  --textMobile: 22px;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Platform;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--midGray900);
+  font-family: Platform;
+}
+
+h1 {
+  font-size: 140px;
+}
+
+h2 {
+  font-size: 90px;
+}
+
+h3 {
+  font-size: 58px;
+}
+
+h4 {
+  font-size: 32px;
+}

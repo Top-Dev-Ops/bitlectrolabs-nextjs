@@ -1,0 +1,21 @@
+@media (max-width: 767px) {
+    .main {
+        background: var(--midGray900);
+        min-width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 768px) {
+    .main {
+        background: var(--midGray900);
+        min-width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
