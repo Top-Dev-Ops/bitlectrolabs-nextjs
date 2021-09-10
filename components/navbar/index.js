@@ -2,21 +2,27 @@ import Link from 'next/link'
 import NavMenu from './navmenu'
 import Button from '../custom/Button'
 
-const Navbar = () => {
-    const menus = ['Collections', 'Gallery', 'News', 'About']
+import { Logo, Hamburger } from '../custom/svgs'
 
-    return <div className="top-nav-bar">
+const Navbar = () => {
+    return <section className="top-nav-bar">
         <Link href="/">
-            <a>BitlectroLabs®</a>
+            <a>
+                <Logo />
+            </a>
         </Link>
 
-        <NavMenu menus={menus} />
+        <NavMenu menus={['Collections', 'Gallery', 'News', 'About']} />
 
-        <Button
-            text="Install MetaMask"
-            variant="primary"
-        />
-    </div>
+        <div className="mobile-button">
+            <Button
+                text="Install MetaMask"
+                variant="outline"
+            />
+        </div>
+
+        <Hamburger />
+    </section>
 }
 
 export default Navbar

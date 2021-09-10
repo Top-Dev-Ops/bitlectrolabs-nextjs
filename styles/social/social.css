@@ -1,0 +1,10 @@
+.social {
+    background: var(--midGray750);
+    border-radius: 30px;
+    height: 60px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}

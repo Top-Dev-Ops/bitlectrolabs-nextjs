@@ -1,8 +1,10 @@
 .top-nav-bar {
+    width: 100%;
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
+    z-index: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -26,6 +28,19 @@
     display: flex;
     justify-content: space-between;
     padding: 0 30px;
+}
+
+.mobile-button {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .top-nav-bar {
+        padding-right: 30px;
+    }
+    .top-nav-bar .nav-menu, .mobile-button {
+        display: none;
+    }
 }
 
 .top-nav-bar .nav-menu .nav-menu-item {

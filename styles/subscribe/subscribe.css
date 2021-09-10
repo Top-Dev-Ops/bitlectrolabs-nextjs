@@ -1,0 +1,73 @@
+.subscribe-container {
+    height: 29vh;
+    background: var(--midGray750);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    margin-left: 2%;
+    margin-bottom: 2vh;
+    border-radius: 30px;
+}
+
+.subscribe-container h4 {
+    color: var(--pureWhite);
+}
+
+.subscribe-container p {
+    color: var(--pureWhite);
+    opacity: 70%;
+}
+
+.subscribe-container .subscribe-button {
+    border-radius: 25px;
+    background: var(--midGray900);
+    width: 30%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.subscribe-button input {
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0 20px;
+    color: white;
+}
+
+.subscribe-button input:focus, .subscribe-button input:focus-visible {
+    border: none;
+    outline: none;
+}
+
+@media (max-width: 1160px) {
+    .subscribe-container .subscribe-button {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .subscribe-container {
+        width: 100%;
+        margin-left: 0;
+    }
+    .subscribe-container .subscribe-button {
+        width: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .subscribe-container {
+        align-items: flex-start;
+        padding: 0 4%;
+    }
+    .subscribe-container .subscribe-button {
+        width: 100%;
+    }
+}

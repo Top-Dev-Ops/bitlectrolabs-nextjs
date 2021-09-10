@@ -1,0 +1,30 @@
+.buyNFTs {
+    width: 96%;
+    margin-left: 2%;
+    height: 324px;
+    background: var(--midGray750);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1160px) {
+    .buyNFTs h3 {
+        font-size: 32px;
+    }
+    .buyNFTs p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .buyNFTs {
+        width: 100%;
+        margin: 0;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 20px;
+    }
+}

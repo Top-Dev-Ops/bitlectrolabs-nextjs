@@ -1,0 +1,15 @@
+.brands {
+    height: 243px;
+    background: var(--midGray750);
+    width: 96%;
+    margin: 2vh 2% 2vh 2%;
+    border-radius: 30px;
+    align-items: center;
+}
+
+@media (max-width: 576px) {
+    .brands {
+        width: 100%;
+        margin: 2vh 0;
+    }
+}

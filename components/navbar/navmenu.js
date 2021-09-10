@@ -7,6 +7,7 @@ const NavMenu = ({ menus }) => {
                 <Link href={`/${menu.toLowerCase()}`}>
                     <a>{menu}</a>
                 </Link>
+
                 {index !== menus.length - 1 && <span>▪</span>}
             </div>
         ))}

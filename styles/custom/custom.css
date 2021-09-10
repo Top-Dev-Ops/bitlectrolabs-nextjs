@@ -1,4 +1,4 @@
-.custom-button-primary {
+.custom-button-outline, .custom-button-primary, .custom-button-outline-sm {
     background: var(--midGray900);
     border: 1px solid #7C808A;
     border-radius: 25px;
@@ -9,22 +9,192 @@
     font-weight: 400;
 }
 
-.custom-button-secondary {
+.custom-button-primary {
     background: var(--green900);
-    border: 1px solid #7C808A;
-    border-radius: 30px;
-    display: inline-block;
     padding: 19px 30px;
-    color: var(--pureWhite);
-    font-size: var(--subHeadingMd);
     font-weight: 400;
-    width: 50%;
+    display: inline;
 }
 
-.custom-badge-container {
+.custom-button-outline-sm {
+    background: var(--midGray900);
+    font-size: var(--subHeadingSm);
+    font-weight: normal;
+    font-style: normal;
+    line-height: 130%;
+    height: 40px;
+    padding: 0 20px;
+}
+
+.custom-button-arrow {
+    width: 88px;
+    height: 38px;
+    border-radius: 8px;
+    background: var(--midGray700);
+}
+
+.custom-badge {
     background: var(--pureWhite);
     border-radius: 15px;
     padding: 2px 12px;
-    width: 30%;
     text-align: center;
+}
+
+.custom-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--purple500);
+    font-size: var(--subHeadingLg);
+}
+
+.custom-link span {
+    border: 1px solid var(--purple500);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-divider {
+    background: var(--pureWhite);
+    opacity: .32;
+    height: 1px;
+    width: 100%; 
+}
+
+.logo {
+    width: 208px;
+    height: 28px;
+}
+
+.hamburger {
+    display: none;
+    width: 30px;
+    height:  30px;
+}
+
+.custom-carousel-col-1, .custom-carousel-col-2 {
+    position: relative;
+}
+
+.horizontal-carousel {
+    display: flex;
+    overflow-x: hidden;
+}
+
+.custom-carousel-col-1 > img, .custom-carousel-col-2 > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
+    position: absolute;
+    animation: moveUp 60s linear 0s infinite;
+}
+
+.horizontal-carousel > img {
+    width: 114px;
+    height: 114px;
+}
+
+@media (max-width: 1600px) {
+    .custom-carousel-col-1 > img, .custom-carousel-col-2 > img {
+        width: 160px;
+        height: 160px;
+    }
+    .logo {
+        width: 204px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 1160px) {
+    .custom-carousel-col-1 > img, .custom-carousel-col-2 > img {
+        width: 114px;
+        height: 114px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hamburger {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-carousel-col-1 > img, .custom-carousel-col-2 > img {
+        width: 90px;
+        height: 90px;
+    }
+    .logo {
+        width: 120px;
+        height: 16px;
+    }
+    .hamburger {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-carousel-col-1 > img, .custom-carousel-col-2 > img {
+        width: 114px;
+        height: 114px;
+    }
+}
+
+@media (min-width: 576px) {
+    .custom-carousel-col-1 > img:first-child {
+        top: 0;
+    }
+
+    .custom-carousel-col-1 > img:nth-child(2) {
+        top: 200px;
+    }
+
+    .custom-carousel-col-1 > img:nth-child(3) {
+        top: 400px;
+    }
+
+    .custom-carousel-col-1 > img:nth-child(4) {
+        top: 600px;
+    }
+
+    .custom-carousel-col-1 > img:nth-child(5) {
+        top: 800px;
+    }
+
+    .custom-carousel-col-1 > img:nth-child(6) {
+        top: 1000px;
+    }
+
+    .custom-carousel-col-2 > img:first-child {
+        top: 100px;
+    }
+
+    .custom-carousel-col-2 > img:nth-child(2) {
+        top: 300px;
+    }
+
+    .custom-carousel-col-2 > img:nth-child(3) {
+        top: 500px;
+    }
+
+    .custom-carousel-col-2 > img:nth-child(4) {
+        top: 700px;
+    }
+
+    .custom-carousel-col-2 > img:nth-child(5) {
+        top: 900px;
+    }
+
+    .custom-carousel-col-2 > img:nth-child(6) {
+        top: 1100px;
+    }
+}
+
+@keyframes moveUp {
+    0% { transform: translateY(-200px); }
+    50% { transform: translateY(80vh); }
+    100% { transform: translateY(-200px); }
 }
