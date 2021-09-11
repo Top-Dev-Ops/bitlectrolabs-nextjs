@@ -1,0 +1,18 @@
+.collectionSubHeadingLayout h3 {
+    background: linear-gradient(90deg, #9954F0 0%, #6B11DC 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    margin: 0 20px;
+    line-height: 90%;
+}
+
+.collectionSubHeadingLayout p {
+    font-size: var(--textLg);
+    color: var(--pureWhite);
+}
+
+.collectionSubHeadingLayout span {
+    font-size: var(--textMd);
+    color: var(--midGray400);
+}

@@ -12,6 +12,7 @@ import '../styles/roadmap/roadmap.css'
 import '../styles/brands/brands.css'
 import '../styles/social/social.css'
 import '../styles/buyNFTs/buyNFTs.css'
+import '../styles/collection-images/collection-images.css'
 
 function MyApp({ Component, pageProps }) {
   return <Layout>

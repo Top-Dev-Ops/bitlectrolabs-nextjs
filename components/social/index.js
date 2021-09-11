@@ -1,8 +1,8 @@
 import { Boat, Discord, Instagram, Magnet, Twitter, Youtube } from '../custom/svgs'
 
-const Social = () => {
+const Social = ({ extraClassNames }) => {
     return (
-        <section className="social">
+        <section className={`social ${extraClassNames}`}>
             <Twitter />
             <Discord />
             <Instagram />

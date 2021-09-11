@@ -73,6 +73,11 @@
     display: none;
     width: 30px;
     height:  30px;
+    fill: var(--pureWhite);
+}
+
+.hamburger:hover, .hamburger:focus {
+    fill: var(--purple500);
 }
 
 .custom-carousel-col-1, .custom-carousel-col-2 {

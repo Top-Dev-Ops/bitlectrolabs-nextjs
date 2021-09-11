@@ -1,3 +1,11 @@
+.nav-bar {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--midGray900);
+}
+
 .top-nav-bar {
     width: 100%;
     position: fixed;
@@ -10,6 +18,22 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+}
+
+.nav-bar .top-nav-bar {
+    position: relative;
+}
+
+.nav-bar h2 {
+    font-size: 90px;
+    color: var(--purple500);
+}
+
+.nav-bar p {
+    font-size: var(--subHeadingSm);
+    font-weight: 400;
+    color: var(--midGray400);
+    line-height: 70%;
 }
 
 .top-nav-bar a {
@@ -40,6 +64,12 @@
     }
     .top-nav-bar .nav-menu, .mobile-button {
         display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .nav-bar h2 {
+        font-size: 58px;
     }
 }
 
