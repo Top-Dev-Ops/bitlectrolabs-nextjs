@@ -1,5 +1,10 @@
-const Divider = ({ extraClassNames }) => {
-    return <div className={`custom-divider ${extraClassNames}`} />
+const Divider = ({ extraClassNames, extraStyles }) => {
+    return (
+        <div
+            className={`custom-divider ${extraClassNames}`}
+            style={extraStyles}
+        />
+    )
 }
 
 export default Divider

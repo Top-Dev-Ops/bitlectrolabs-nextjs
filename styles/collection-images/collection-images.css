@@ -47,6 +47,9 @@
 }
 
 @media (max-width: 1200px) {
+    .collection-images {
+        height: 600px;
+    }
     .collection-images img {
         width: 303px;
         height: 303px;
@@ -90,6 +93,9 @@
 }
 
 @media (max-width: 768px) {
+    .collection-images {
+        height: 300px;
+    }
     .collection-images img {
         width: 144px;
         height: 144px;

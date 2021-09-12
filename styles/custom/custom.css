@@ -33,6 +33,31 @@
     background: var(--midGray700);
 }
 
+.custom-button-svg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--midGray750);
+}
+
+.custom-button-text {
+    background: var(--midGray750);
+    height: 50px;
+    border-radius: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: var(--pureWhite);
+    font-size: var(--subHeadingMd);
+    font-family: Platform;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.custom-button-text.active {
+    background: var(--pureWhite);
+    color: var(--midGray900);
+}
+
 .custom-badge {
     background: var(--pureWhite);
     border-radius: 15px;
@@ -62,6 +87,57 @@
     opacity: .32;
     height: 1px;
     width: 100%; 
+}
+
+.custom-flexible-divider {
+    width: 80%;
+    margin-left: 10%;
+}
+
+@media (max-width: 1200px) {
+    .custom-flexible-divider {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+    }
+}
+
+.custom-progress p {
+    font-size: var(--subHeadingLg);
+    font-family: Platform;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--pureWhite);
+}
+
+.custom-progress span {
+    font-size: var(--textMd);
+    color: var(--midGray400);
+}
+
+.custom-progress .custom-box-filled {
+    width: 10px;
+    height: 10px;
+    background: var(--pureWhite);
+}
+
+.custom-progress .custom-box-unfilled {
+    width: 10px;
+    height: 10px;
+    background: var(--midGray700);
+}
+
+@media (max-width: 768px) {
+    .custom-progress span {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-progress .custom-box-filled,
+    .custom-progress .custom-box-unfilled {
+        width: 6px;
+        height: 6px;
+    }
 }
 
 .logo {

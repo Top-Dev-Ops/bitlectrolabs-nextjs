@@ -1,9 +1,4 @@
-import {
-    IoMdArrowDropup,
-    IoMdArrowDropdown,
-    IoMdArrowDropleft,
-    IoMdArrowDropright
-} from 'react-icons/io'
+import Arrow from "./svgs/Arrow"
 
 const Button = ({ icon, text, variant, onClick }) => {
     const style = variant === 'primary' ?
@@ -25,15 +20,24 @@ const Button = ({ icon, text, variant, onClick }) => {
 
 export const ArrowButton = ({ direction, onClick, extraClassNames }) => {
     return (
-        <button className={`btn btn-sm custom-button-arrow ${extraClassNames}`} onClick={onClick}>
-            {direction === 'up' ?
-                <IoMdArrowDropup color="white" /> :
-                direction === 'down' ?
-                    <IoMdArrowDropdown color="white" /> :
-                    direction === 'left' ?
-                        <IoMdArrowDropleft color="white" /> :
-                        <IoMdArrowDropright color="white" />
-            }
+        <button className={`btn btn-sm border-0 custom-button-arrow ${extraClassNames}`} onClick={onClick}>
+            <Arrow direction={direction} />
+        </button>
+    )
+}
+
+export const TextButton = ({ text, onClick, extraClassNames}) => {
+    return (
+        <button className={`custom-button-text border-0 ${extraClassNames}`} onClick={onClick}>
+            {text}
+        </button>
+    )
+}
+
+export const SVGButton = ({ icon, onClick, extraClassNames }) => {
+    return (
+        <button className={`custom-button-svg border-0 ${extraClassNames}`} onClick={onClick}>
+            {icon}
         </button>
     )
 }
