@@ -12,6 +12,7 @@ export default function CollectionCard({
 
             {progresses.map(progress =>
                 <Progresser
+                    key={progress.heading}
                     heading={progress.heading}
                     subHeading={progress.subHeading}
                     percentage={progress.percentage}

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 import Social from '../../components/social'
 
@@ -18,23 +19,29 @@ export default function Collections() {
                     <div
                         className="col-12 col-lg-6 d-inline-flex px-lg-2 py-2"
                     >
-                        <div className="w-100 h-100 d-inline-flex align-items-center justify-content-center" style={{background: 'var(--purpleGradient1)', borderRadius: '30px'}}>
-                            <h2 className="text-white">Dreamloops</h2>
-                        </div>
+                        <Link href="/collections/collection">
+                            <div className="w-100 h-100 d-inline-flex align-items-center justify-content-center" style={{background: 'var(--purpleGradient1)', borderRadius: '30px'}}>
+                                <h2 className="text-white">Dreamloops</h2>
+                            </div>
+                        </Link>
                     </div>
                     <div
                         className="col-12 col-lg-6 d-inline-flex px-lg-2 py-2"
                     >
-                        <div className="w-100 h-100 d-inline-flex align-items-center justify-content-center" style={{background: 'var(--green800)', borderRadius: '30px'}}>
-                            <h2 className="text-white">Dreamers</h2>
-                        </div>
+                        <Link href="/collections/collection">
+                            <div className="w-100 h-100 d-inline-flex align-items-center justify-content-center" style={{background: 'var(--green800)', borderRadius: '30px'}}>
+                                <h2 className="text-white">Dreamers</h2>
+                            </div>
+                        </Link>
                     </div>
                     <div
                         className="col-12 col-lg-6 d-inline-flex px-lg-2 py-2"
                     >
-                        <div className="w-100 h-100 d-inline-flex align-items-center justify-content-center" style={{background: 'var(--yellow800)', borderRadius: '30px'}}>
-                            <h2 className="text-white">STRFKR</h2>
-                        </div>
+                        <Link href="/collections/collection">
+                            <div className="w-100 h-100 d-inline-flex align-items-center justify-content-center" style={{background: 'var(--yellow800)', borderRadius: '30px'}}>
+                                <h2 className="text-white">STRFKR</h2>
+                            </div>
+                        </Link>
                     </div>
                 </div>
 
