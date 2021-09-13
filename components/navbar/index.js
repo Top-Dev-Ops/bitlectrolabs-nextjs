@@ -12,10 +12,10 @@ const Navbar = () => {
     const onClick = () => setModalOpen(!modalOpen)
 
     return (
-        <section className={`${modalOpen ? 'modal nav-bar' : undefined}`}>
+        <section className={`${modalOpen ? 'modal nav-bar' : undefined}`} style={{zIndex: '7'}}>
             <div className="top-nav-bar">
                 <Link href="/">
-                    <a>
+                    <a onClick={() => setModalOpen(false)}>
                         <Logo />
                     </a>
                 </Link>
@@ -34,10 +34,18 @@ const Navbar = () => {
 
             {modalOpen && <div className="p-3">
                 <h2 style={{color: 'var(--midGray700)'}}>Sale</h2>
-                <h2>Collections</h2>
-                <h2>Gallery</h2>
-                <h2>News</h2>
-                <h2>About</h2>
+                <Link href="/collections">
+                    <h2 onClick={onClick}>Collections</h2>
+                </Link>
+                <Link href="/gallery">
+                    <h2 onClick={onClick}>Gallery</h2>
+                </Link>
+                <Link href="/news">
+                    <h2 onClick={onClick}>News</h2>
+                </Link>
+                <Link href="/about">
+                    <h2 onClick={onClick}>About</h2>
+                </Link>
 
                 <p className="mt-5">Visit on desktop for better</p>
                 <p className="text-white mb-5">NFT experience</p>

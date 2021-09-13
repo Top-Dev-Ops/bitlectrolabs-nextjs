@@ -1,6 +1,6 @@
-export default function Close({ onClick }) {
+export default function Close({ onClick, extraClassNames }) {
     return (
-        <button className="hamburger bg-transparent border-0 outline-0" onClick={onClick}>
+        <button className={`hamburger bg-transparent border-0 outline-0 ${extraClassNames}`} onClick={onClick}>
             <svg
                 width="30"
                 height="30"

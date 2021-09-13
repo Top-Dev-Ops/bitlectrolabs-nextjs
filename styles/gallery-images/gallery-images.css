@@ -7,3 +7,8 @@
     animation-delay: 3s;
     animation-fill-mode: forwards;
 }
+
+.galleryImage:hover {
+    cursor: url('/pointer.svg') 28 32, pointer;
+    color: var(--pureWhite);
+}
