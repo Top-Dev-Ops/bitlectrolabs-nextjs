@@ -10,16 +10,16 @@ const Social = ({ extraClassNames }) => {
             <Link href="www.discord.com">
                 <Discord />
             </Link>
-            <Link href="">
+            <Link href="www.instagram.com">
                 <Instagram />
             </Link>
-            <Link href="">
+            <Link href="www.youtube.com">
                 <Youtube />
             </Link>
-            <Link href="">
+            <Link href="www.google.com">
                 <Magnet />
             </Link>
-            <Link href="">
+            <Link href="www.google.com">
                 <Boat />
             </Link>
         </section>

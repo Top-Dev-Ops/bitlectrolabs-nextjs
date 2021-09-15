@@ -11,7 +11,7 @@ export default function CollectionSubHeading({ extraClassNames }) {
                 </h3>
 
                 <p className="my-3">
-                    The "album covers" are inspired by classic gaming platforms such as the Amiga, PC98, and Super Nintendo and feature a retro-futuristic aesthetic. The music for each Dreamloop is composed entirely on a classic NES using a Midines cartridge. Each Dreamloop's music and art is unique and features elements of varying scarcity.
+                    The &ldquo;album covers&rdquo; are inspired by classic gaming platforms such as the Amiga, PC98, and Super Nintendo and feature a retro-futuristic aesthetic. The music for each Dreamloop is composed entirely on a classic NES using a Midines cartridge. Each Dreamloop&prime;s music and art is unique and features elements of varying scarcity.
                 </p>
 
                 <Divider extraClassNames={'custom-flexible-divider my-4'} />
