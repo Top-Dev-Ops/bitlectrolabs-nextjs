@@ -1,0 +1,301 @@
+.aboutHero, .aboutWhiteSection, .aboutGraySection {
+    padding: 109px 10% 120px 10%;
+}
+
+.gradientSection {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(180deg, #C4C4C4 0%, #FFFFFF 0.01%, #5A00AF 100%);
+}
+
+.aboutHero > div:first-child {
+    background-image: url('../public/images/about.png');
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 407px;
+}
+
+.aboutGradientText {
+    width: 50%;
+    text-indent: 10%;
+    line-height: 90%;
+    font-size: 90px;
+    background-color: red;
+    background-image: linear-gradient(45deg, #B788F3, #6309D7);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.aboutHero > div:nth-child(3) {
+    width: 60%;
+}
+
+.aboutMiddleText {
+    font-size: var(--textLg);
+    line-height: 130%;
+    color: var(--midGray100);
+    padding-left: 20%;
+    padding-top: 40px;
+    padding-bottom: 150px;
+    width: 60%;
+}
+
+.aboutWhiteSection {
+    background: var(--pureWhite);
+    border-radius: 60px 60px 0 0;
+}
+
+.aboutWhiteSection > div:first-child {
+    width: 80%;
+}
+
+.aboutWhiteSection > div:nth-child(2) {
+    width: 100%;
+    padding-left: 20%;
+    color: var(--midGray900);
+}
+
+.aboutWhiteSection > div:nth-child(2) p {
+    width: 40%;
+    font-size: var(--textLg);
+}
+
+.aboutWhiteSection > div:nth-child(2) p:last-child {
+    font-size: var(--textMd);
+    width: 100%;
+    padding-left: 65%;
+    padding-right: 5%;
+    justify-content: right;
+}
+
+.aboutGraySection {
+    border-radius: 0 0 60px 60px;
+    background: var(--purple900);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.aboutGraySection1 {
+    width: 50%;
+}
+
+.aboutGraySection2 {
+    color: white;
+    font-family: 'Platform';
+    padding-left: 65%;
+    padding-right: 5%;
+}
+
+.aboutEmailSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--pureWhite);
+    width: 96%;
+    border-radius: 58px;
+    background: var(--midGray750);
+    height: 817px;
+    margin: 2%;
+}
+
+@media (max-width: 1200px) {
+    .aboutEmailSection {
+        height: 646px;
+    }
+    .aboutHero > div:first-child {
+        background-image: url('../public/images/about.png');
+        background-position: right top;
+        background-repeat: no-repeat;
+        background-size: 317px;
+    }
+    .aboutGradientText {
+        width: 65%;
+    }
+    .aboutHero > div:nth-child(3) {
+        width: 80%;
+    }
+    .aboutWhiteSection > div:first-child {
+        width: 100%;
+    }
+    .aboutWhiteSection > div:nth-child(2) p {
+        width: 60%;
+    }
+    .aboutWhiteSection > div:nth-child(2) p:last-child {
+        padding-right: 0;
+    }
+    .aboutGraySection1 {
+        width: 60%;
+    }    
+    .aboutGraySection2 {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 1024px) {
+    .aboutHero, .aboutWhiteSection, .aboutGraySection {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    .aboutHero > div:first-child {
+        background-image: url('../public/images/about.png');
+        background-position: right top;
+        background-repeat: no-repeat;
+        background-size: 295px;
+    }
+    .aboutEmailSection {
+        height: 448px;
+    }
+    .aboutGradientText {
+        width: 90%;
+    }
+    .aboutHero > div:nth-child(3) {
+        width: 95%;
+    }
+    .aboutWhiteSection > div:nth-child(2) p {
+        width: 70%;
+    }
+    .aboutWhiteSection > div:nth-child(2) p:last-child {
+        font-size: var(--textMd);
+        width: 100%;
+        padding-left: 50%;
+        justify-content: right;
+    }
+    .aboutGraySection1 {
+        width: 60%;
+    }    
+    .aboutGraySection2 {
+        color: white;
+        font-family: 'Platform';
+        padding-left: 70%;
+    }
+}
+
+@media (max-width: 992px) {
+    .aboutHero {
+        padding-bottom: 0;
+    }
+    .aboutHero > div:first-child {
+        background-image: url('../public/images/about.png');
+        background-position: right top;
+        background-repeat: no-repeat;
+        background-size: 209px;
+    }
+    .aboutEmailSection {
+        height: 300px;
+    }
+    .aboutEmailSection h3 {
+        font-size: 32px;
+    }
+    .aboutGradientText {
+        font-size: 58px;
+    }
+    .aboutHero > div:nth-child(3) {
+        width: 80%;
+    }
+    .aboutWhiteSection {
+        border-radius: 30px 30px 0 0;
+    }
+    .aboutWhiteSection > div:first-child {
+        width: 80%;
+    }
+    .aboutWhiteSection > div:nth-child(2) p {
+        width: 70%;
+    }
+    .aboutWhiteSection > div:nth-child(2) p:last-child {
+        padding-left: 50%;
+    }
+    .aboutGraySection {
+        border-radius: 0 0 30px 30px;
+    }
+    .aboutGraySection1 {
+        width: 70%;
+    }    
+    .aboutGraySection2 {
+        color: white;
+        font-family: 'Platform';
+        padding-left: 45%;
+    }
+    .gradientSection {
+        height: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutHero > div:first-child {
+        background-image: url('../public/images/about.png');
+        background-position: right top;
+        background-repeat: no-repeat;
+        background-size: 150px;
+    }
+    .aboutEmailSection {
+        height: 200px;
+    }
+    .aboutEmailSection h3 {
+        font-size: var(--subHeadingMd);
+    }
+    .aboutGradientText {
+        width: 70%;
+        font-size: 40px;
+    }
+    .aboutMiddleText {
+        width: 80%;
+        font-size: var(--textMobile);
+    }
+    .aboutHero > div:nth-child(3) {
+        width: 80%;
+    }
+    .aboutWhiteSection > div:nth-child(2) {
+        padding-left: 30%;
+    }
+    .aboutWhiteSection > div:nth-child(2) p {
+        width: 80%;
+        font-size: var(--textMobile);
+    }
+    .aboutWhiteSection > div:nth-child(2) p:last-child {
+        padding-left: 0;
+    }
+    .aboutGraySection1 {
+        width: 80%;
+    }    
+    .aboutGraySection2 {
+        padding-left: 20%;
+    }
+}
+
+@media (max-width: 576px) {
+    .aboutHero > div:first-child {
+        background-image: url('../public/images/about.png');
+        background-position: right 20%;
+        background-repeat: no-repeat;
+        background-size: 150px;
+    }
+    .aboutGradientText, .aboutHero > div:nth-child(3) {
+        width: 100%;
+    }
+    .aboutMiddleText {
+        width: 100%;
+        padding-left: 0;
+    }
+    .aboutWhiteSection > div:first-child {
+        width: 100%;
+    }
+    .aboutWhiteSection > div:nth-child(2) {
+        padding-left: 0;
+    }
+    .aboutWhiteSection > div:nth-child(2) p {
+        width: 100%;
+        padding-left: 0;
+        font-size: var(--textMobile);
+    }
+    .aboutGraySection1 {
+        width: 100%;
+    }    
+    .aboutGraySection2 {
+        padding-left: 0;
+    }
+}

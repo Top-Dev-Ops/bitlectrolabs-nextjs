@@ -88,3 +88,7 @@
     color: var(--midGray600);
     font-size: var(--subHeadingMd);
 }
+
+.top-nav-bar .nav-menu .nav-menu-item a:hover {
+    color: var(--midGray200);
+}

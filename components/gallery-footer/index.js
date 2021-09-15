@@ -5,6 +5,7 @@ import { TextButton, SVGButton, ArrowButton } from "../custom/Button"
 import { Grid, List, Settings, CircleBadge } from "../custom/svgs"
 
 import GalleryFilter from './gallery-filter'
+import { Close } from '../custom/svgs'
 
 const GalleryFooter = ({ view, changeView }) => {
     const [activeTab, setActiveTab] = useState('Dreamloops')

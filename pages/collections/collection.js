@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 import { CollectionHero } from '../../components/hero'
 import CollectionImages from '../../components/collection-images'
@@ -99,9 +100,11 @@ export default function Collection() {
                     extraClassNames={'mb-5 pb-5'}
                 />
 
-                <section className={styles.collectionGallery}>
-                    <h4 className="text-white">Gallery</h4>
-                </section>
+                <Link href="/gallery">
+                    <section className={styles.collectionGallery}>
+                        <h4 className="text-white">Gallery</h4>
+                    </section>
+                </Link>
 
                 {/* SOCIALS, LOGO & TERMS OF USE */}
                 <section className="row gx-0" style={{width: '96%', margin: '2vh 2% 2vh 2%'}}>

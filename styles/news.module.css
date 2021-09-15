@@ -1,0 +1,10 @@
+.news {
+    padding: 109px 20% 0 20%;
+}
+
+@media (max-width: 768px) {
+    .news {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}

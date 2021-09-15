@@ -8,3 +8,8 @@
     justify-items: center;
     align-items: center;
 }
+
+.social > svg:hover {
+    opacity: 70%;
+    cursor: pointer;
+}

@@ -16,6 +16,7 @@ import '../styles/collection-card/collection-card.css'
 import '../styles/collection-paragraph/collection-paragraph.css'
 import '../styles/gallery-footer/gallery-footer.css'
 import '../styles/gallery-images/gallery-images.css'
+import '../styles/news-card/news-card.css'
 import '../styles/custom/custom.css'
 
 function MyApp({ Component, pageProps }) {

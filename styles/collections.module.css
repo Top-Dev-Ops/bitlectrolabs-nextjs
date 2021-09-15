@@ -11,6 +11,11 @@
     height: 50%;
 }
 
+.collections > div:hover, .collections > div:focus {
+    opacity: 90%;
+    cursor: pointer;
+}
+
 .collections h2 {
     font-size: 90px;
 }
@@ -28,12 +33,6 @@
 
     .collections > div {
         height: 33%;
-    }
-}
-
-@media (max-width: 768px) {
-    .collections h2 {
-        /* font-size: 90px; */
     }
 }
 

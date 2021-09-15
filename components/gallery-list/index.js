@@ -20,14 +20,12 @@ export default function GalleryList({ extraClassNames }) {
 
     const slide = (end) => {
         if (Math.abs(start - end) > 150 && start > end) {           // slide to right
-            console.log('slide right')
             const [first, ...rest] = LgImages
             const temp = [...rest, first]
             setLgImages(temp)
             setMdImages(temp.slice(1, 6))
             setSmImages(temp.slice(1, 4))
         } else if (Math.abs(start - end) > 150 && start < end) {    // slide to left
-            console.log('slide left')
             const last = LgImages.slice(-1)
             const rest = LgImages.slice(0, -1)
             const temp = [last, ...rest]
@@ -61,7 +59,7 @@ export default function GalleryList({ extraClassNames }) {
                 <div style={{width: '17.5%', margin: '0 .25%', height: '90%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.8'}}>
                     <img src={`/images/${LgImages[4]}`} className="galleryImage" />
                 </div>
-                <div style={{width: '17.5%', margin: '0 .25%', height: '80%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.6'}}>
+                <div style={{width: '11.5%', margin: '0 .25%', height: '80%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.6'}}>
                     <img src={`/images/${LgImages[5]}`} className="galleryImage" />
                 </div>
                 <div style={{width: '5.5%', margin: '0 .25%', height: '70%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.4'}}>

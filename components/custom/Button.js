@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react"
+
 import Arrow from "./svgs/Arrow"
 
-const Button = ({ icon, text, variant, onClick }) => {
+export default function Button({ icon, text, variant, onClick }) {
     const style = variant === 'primary' ?
     'custom-button-primary' : variant === 'outline-sm' ?
     'custom-button-outline-sm' : 'custom-button-outline'
@@ -44,4 +46,58 @@ export const SVGButton = ({ icon, badge, onClick, extraClassNames }) => {
     )
 }
 
-export default Button
+export const RadioButton = ({ text, onChange, reset }) => {
+    const [checked, setChecked] = useState(false)
+
+    const onClick = () => {
+        if (onChange) onChange(!checked, text)
+        setChecked(!checked)
+    }
+
+    useEffect(() => setChecked(false), [reset])
+
+    return (
+        <section>
+            <div className="radio-button" onClick={onClick}>
+                <div className={checked && 'checked'} />
+
+                <span>{text}</span>
+            </div>
+
+            <style jsx>{`
+                .radio-button {
+                    display: inline-block;
+                }
+                .radio-button:hover {
+                    cursor: pointer;
+                }
+                span {
+                    margin-left: 10px;
+                    color: var(--pureWhite);
+                    font-size: var(--textMd);
+                    vertical-align: middle;
+                }
+                .radio-button > div {
+                    width: 20px;
+                    height: 20px;
+                    background: var(--midGray600);
+                    position: relative;
+                    border-radius: 50%;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                .radio-button > div.checked:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 6px;
+                    left: 6px;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: var(--pureWhite);
+                }
+            `}</style>
+        </section>
+    )
+}
