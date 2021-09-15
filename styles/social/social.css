@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.social > svg:hover {
+.social > a:hover {
     opacity: 70%;
     cursor: pointer;
 }

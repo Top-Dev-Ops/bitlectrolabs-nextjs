@@ -1,27 +1,26 @@
-import Link from 'next/link'
 import { Boat, Discord, Instagram, Magnet, Twitter, Youtube } from '../custom/svgs'
 
 const Social = ({ extraClassNames }) => {
     return (
         <section className={`social ${extraClassNames}`}>
-            <Link href="www.twitter.com">
+            <a href="https://www.twitter.com" target="_blank">
                 <Twitter />
-            </Link>
-            <Link href="www.discord.com">
+            </a>
+            <a href="https://www.discord.com" target="_blank">
                 <Discord />
-            </Link>
-            <Link href="www.instagram.com">
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
                 <Instagram />
-            </Link>
-            <Link href="www.youtube.com">
+            </a>
+            <a href="https://www.youtube.com" target="_blank">
                 <Youtube />
-            </Link>
-            <Link href="www.google.com">
+            </a>
+            <a href="https://www.google.com" target="_blank">
                 <Magnet />
-            </Link>
-            <Link href="www.google.com">
+            </a>
+            <a href="https://www.google.com" target="_blank">
                 <Boat />
-            </Link>
+            </a>
         </section>
     )
 }
