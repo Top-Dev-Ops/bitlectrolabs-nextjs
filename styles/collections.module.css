@@ -7,9 +7,9 @@
     align-items: flex-end;
 }
 
-.collections > div {
+/* .collections > div {
     height: 50%;
-}
+} */
 
 .collections > div:hover, .collections > div:focus {
     opacity: 90%;
@@ -31,9 +31,9 @@
         padding-top: 89px;
     }
 
-    .collections > div {
+    /* .collections > div {
         height: 33%;
-    }
+    } */
 }
 
 @media (max-width: 576px) {

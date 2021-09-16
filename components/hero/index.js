@@ -29,20 +29,20 @@ const Hero = () => {
     </section>
 }
 
-export const CollectionHero = () => {
+export const CollectionHero = ({ hero }) => {
     return <section className="collection-hero">
         <div className="row gx-0">
             <div className="col-12 col-xl-8 offset-xl-2 text-center">
                 <h2 className="text-center">
-                    Dreamloops are a series of audio-visual non-fungible tokens, minted on the Ethereum blockchain, and hosted via IPFS*
+                    {hero.title[0].text}
                 </h2>
 
                 <p className="my-5 text-center">
-                    1 in 5 Dreamloops will be redeemable for physical media – vinyl record or cassette tape. Maximum supply of 10,000.
+                    {hero.body_paragraph[0].text}
                 </p>
 
                 <span className="text-center">
-                    *Interplanetary File System
+                    {hero.support_text[0].text}
                 </span>
             </div>
         </div>

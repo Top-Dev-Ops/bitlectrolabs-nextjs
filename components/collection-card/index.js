@@ -2,7 +2,7 @@ import Progresser from "../custom/Progresser"
 
 export default function CollectionCard({
     heading,
-    progresses,
+    categories,
     extraClassNames,
 }) {
 
@@ -10,13 +10,13 @@ export default function CollectionCard({
         <section className={`collection-card ${extraClassNames}`}>
             <h3 className="mb-5">{heading}</h3>
 
-            {progresses.map(progress =>
+            {categories.map(category =>
                 <Progresser
-                    key={progress.heading}
-                    heading={progress.heading}
-                    subHeading={progress.subHeading}
-                    percentage={progress.percentage}
-                    extraClassNames={progress.extraClassNames}
+                    key={`collection_stats_${category.category_title[0].text}_${category.category_description}`}
+                    heading={`${category.category_title[0].text}`}
+                    subHeading={`${category.category_name[0].text}`}
+                    percentage={`${category.category_description}`}
+                    extraClassNames={'mt-4'}
                 />
             )}
         </section>

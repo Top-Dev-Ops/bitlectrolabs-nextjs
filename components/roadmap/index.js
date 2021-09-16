@@ -2,7 +2,9 @@ import { useRef } from 'react'
 import { ArrowButton } from '../custom/Button'
 import RoadmapCard from './roadmap-card'
 
-const Roadmap = () => {
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+export default function Roadmap({ roadmaps }) {
     const roadmap = useRef()
     
     const onClickLeft = () => roadmap.current.scrollLeft -= 50
@@ -27,44 +29,17 @@ const Roadmap = () => {
         </div>
 
         <div ref={roadmap} className="roadmap-content" >
-            <RoadmapCard
-                title={'September 9'}
-                info={'Dreamloopers Snapshot'}
-                description={'A snapshot of the Dreamloops holders will occur on this date, to determine who will receive free airdrops in the next phase.'}
-                extraClassNames="mx-2"
-            />
-            <RoadmapCard
-                title={'September 17'}
-                info={'Dreamers CrossChain Airdrop'}
-                description={'Airdrop of “Dreamers” on the Polygon network to Dreamloops holders during the airdrop.'}
-                extraClassNames="mx-2"
-            />
-            <RoadmapCard
-                title={'September 30'}
-                info={'Dreamers Burn to Mint Event'}
-                description={'Trade your Dreamloops for Dreamers using our “burn to mint” tool'}
-                extraClassNames="mx-2"
-            />
-            <RoadmapCard
-                title={'October 7'}
-                info={'Dreamers Genesis Event and Sale'}
-                description={'The remaining Dreamers will be sold in a public sale - and the cryostasis chambers can be unfrozen.'}
-                extraClassNames="mx-2"
-            />
-            <RoadmapCard
-                title={'October 7'}
-                info={'Dreamers Genesis Event and Sale'}
-                description={'The remaining Dreamers will be sold in a public sale - and the cryostasis chambers can be unfrozen.'}
-                extraClassNames="mx-2"
-            />
-            <RoadmapCard
-                title={'October 7'}
-                info={'Dreamers Genesis Event and Sale'}
-                description={'The remaining Dreamers will be sold in a public sale - and the cryostasis chambers can be unfrozen.'}
-                extraClassNames="mx-2"
-            />
+            {roadmaps.length > 0 && roadmaps.map(roadmap => {
+                const d = new Date(roadmap.data.date)
+
+                return <RoadmapCard
+                    key={`roadmap_${roadmap.uid}`}
+                    title={`${monthNames[d.getMonth()]} ${d.getDate()}`}
+                    info={`${roadmap.data.title[0].text}`}
+                    description={`${roadmap.data.body_paragraph[0].text}`}
+                    extraClassNames="mx-2"
+                />
+            })}
         </div>
     </section>
 }
-
-export default Roadmap

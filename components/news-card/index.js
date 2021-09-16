@@ -1,26 +1,38 @@
-export default function NewsCard({ heading, image, children, extraClassNames }) {
+export default function NewsCard({ news, extraClassNames }) {
     return (
         <div className={`news-card ${extraClassNames}`}>
             <div className="d-flex justify-content-between">
                 <div className="d-flex justify-content-between">
-                    <span>July 20</span>
-                    <span className="d-none d-md-block mx-4">2 min read</span>
+                    <span>{news.data.date}</span>
+                    <span className="d-none d-md-block mx-4">{news.data.time_to_read[0].text}</span>
                 </div>
 
-                <span className="d-none d-md-block">Development update</span>
-                <span className="d-block d-md-none">2 min read</span>
+                <span className="d-none d-md-block">{news.data.sub_title[0].text}</span>
+                <span className="d-block d-md-none">{news.data.time_to_read[0].text}</span>
             </div>
 
-            <h3 className="my-4 my-lg-5">{heading}</h3>
+            <h3 className="my-4 my-lg-5">{news.data.title[0].text}</h3>
 
             <img
-                src={`/images/${image}`}
+                src={`${news.data.banner_image.url}`}
                 className="w-100 h-auto my-lg-3"
             />
 
-            <p className="mt-3">
-                {children}
-            </p>
+            {news.data.article_with_subheading.map(articlew => (
+                <div key={`article_w_${articlew.text}`} className="mt-3">
+                    {articlew.article_image !== undefined && articlew.article_image.url !== undefined && <img src={`${articlew.article_image.url}`} />}
+                    <p>{articlew.subheading !== undefined && articlew.subheading[0] !== undefined && articlew.subheading[0].text}</p>
+                    <p>{articlew.body_paragraph !== undefined && articlew.body_paragraph[0] !== undefined && articlew.body_paragraph[0].text}</p>
+                </div>
+            ))}
+
+            {news.data.article_without_subheading.map(articlewo => (
+                <div key={`article_wo_${articlewo.body_paragraph[0].text}`} className="mt-3">
+                    {articlewo.article_image !== undefined && articlewo.article_image.url !== undefined && <img src={`${articlewo.article_image.url}`} />}
+                    <p>{articlewo.subheading !== undefined && articlewo.subheading[0] !== undefined && articlewo.subheading[0].text}</p>
+                    <p>{articlewo.body_paragraph !== undefined && articlewo.body_paragraph[0] !== undefined && articlewo.body_paragraph[0].text}</p>
+                </div>
+            ))}
 
             <div className="mt-5">
                 <span className="text-white">Read more</span>

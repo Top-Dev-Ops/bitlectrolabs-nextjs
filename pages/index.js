@@ -3,15 +3,19 @@ import Head from 'next/head'
 import Hero from '../components/hero'
 import Subscribe from '../components/subscribe'
 import Roadmap from '../components/roadmap'
-import Brands from '../components/brands'
+import Partners from '../components/partners'
 import Social from '../components/social'
-import BuyNFTs from '../components/buyNFTs'
+import MarketingBanner from '../components/marketing-banner'
 
 import LinkTo from '../components/custom/LinkTo'
 import CardLayout from '../layouts/card-layout'
 import { BsArrowRight } from 'react-icons/bs'
 
-export default function Home() {
+import Prismic from 'prismic-javascript'
+import { Client } from '../prismic-configuration'
+
+export default function Home({ marketingCards, roadmaps, partners, marketingBanners }) {
+
   return (
     <>
       <Head>
@@ -25,7 +29,6 @@ export default function Home() {
 
         <Subscribe />
 
-        {/* DREAMLOOPS */}
         <CardLayout variant="primary">
           <img
             src="/images/4.png"
@@ -43,113 +46,108 @@ export default function Home() {
           </div>
         </CardLayout>
         
-        {/* 20% OF NFTS */}
-        <CardLayout variant="secondary">
-          <div className="d-flex flex-column justify-content-center align-items-center mx-0 mt-5 mt-md-0 mx-md-5">
-            <h3 className="text-white w-75">
-              20% of NFTs may be redeemed for vinyl or cassette containing many songs from the collection
-            </h3>
-            <div className="w-75 d-inline-flex justify-content-left">
-              <LinkTo
-                href={'/'}
-                text={'Learn more'}
-                icon={<BsArrowRight />}
-                extraClassNames="mb-4 my-md-4"
+        {/* FIRST MARKETING CARD */}
+        {marketingCards.length > 0 &&
+          <CardLayout key={`marketing_card_${marketingCards[0].uid}`} variant={marketingCards[0].data.toggle ? 'secondary' : 'primary'}>
+            <div className="d-flex flex-column justify-content-center align-items-center mx-0 mt-5 mt-md-0 mx-md-5">
+              {marketingCards[0].data.subtitle.length > 0 && (
+                <div className="w-100 w-md-75">
+                  <p className="w-100 text-left">
+                    {marketingCards[0].data.subtitle[0].text}
+                  </p>
+                </div>
+              )}
+
+              {marketingCards[0].data.title.length > 0 && (
+                <h3 className="text-white w-100 w-md-75">
+                  {marketingCards[0].data.title[0].text}
+                </h3>
+              )}
+              
+              {marketingCards[0].data.linktext.length > 0 && (
+                <div className="w-100 w-md-75 d-inline-flex flex-row justify-content-left">
+                  <LinkTo
+                    href={marketingCards[0].data.link.url !== undefined ? marketingCards[0].data.link.url : '/'}
+                    text={marketingCards[0].data.linktext[0].text}
+                    icon={<BsArrowRight />}
+                    extraClassNames="my-0 my-lg-4"
+                  />
+                </div>
+              )}
+            </div>
+            <div
+              className="bg-white w-100 h-100 d-flex justify-content-center justify-content-sm-start align-items-center"
+            >
+              <img
+                src={`${marketingCards[0].data.image.url}`}
+                className="w-100 h-auto"
               />
             </div>
-          </div>
-          <div
-            className="bg-white w-100 h-100 d-flex justify-content-center justify-content-sm-start align-items-center"
-          >
-            <img
-              src="/images/5.png"
-              className="w-100 h-auto"
-            />
-          </div>
-        </CardLayout>
-      
+          </CardLayout>
+        }
+        
         {/* ROADMAP */}
-        <Roadmap />
+        <Roadmap roadmaps={roadmaps} />
 
-        {/* USE THE MUSIC */}
-        <CardLayout variant="primary">
-          <img
-            src="/images/6.png"
-            className="card-full-image w-md-100 h-md-100"
+        {/* MARKETING CARDS */}
+        {marketingCards.length > 0 && marketingCards.map((marketingCard, index) => {
+          return index === 0 ? undefined : (
+            <CardLayout key={`marketing_card_${marketingCard.uid}`} variant={marketingCard.data.toggle ? 'secondary' : 'primary'}>
+              <img
+                src={`${marketingCard.data.image.url}`}
+                className={`card-full-image w-md-100 h-md-100 ${marketingCard.data.toggle ? 'd-block d-sm-none' : undefined}`}
+              />
+
+              <div className="d-flex flex-column align-items-center justify-content-center mx-5 pb-3 pb-sm-0">
+                {marketingCard.data.subtitle.length > 0 && (
+                  <div className="w-100 w-md-75">
+                    <p className="w-100 text-left">
+                      {marketingCard.data.subtitle[0].text}
+                    </p>
+                  </div>
+                )}
+
+                {marketingCard.data.title.length > 0 && (
+                  <h3 className="text-white w-100 w-md-75">
+                    {marketingCard.data.title[0].text}
+                  </h3>
+                )}
+                
+                {marketingCard.data.linktext.length > 0 && (
+                  <div className="w-100 w-md-75 d-inline-flex flex-row justify-content-left">
+                    <LinkTo
+                      href={marketingCard.data.link.url !== undefined ? marketingCard.data.link.url : '/'}
+                      text={marketingCard.data.linktext[0].text}
+                      icon={<BsArrowRight />}
+                      extraClassNames="my-0 my-lg-4"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {marketingCard.data.toggle && (
+                <img
+                  src={`${marketingCard.data.image.url}`}
+                  className="card-full-image d-none d-sm-block h-md-100 w-md-100"
+                />
+              )}
+            </CardLayout>
+          )
+        })}
+
+        {/* PARTNERS */}
+        <Partners partners={partners} />
+
+        {/* MARKETING BANNER - HOW TO BUY NFTS */}
+        {marketingBanners.length > 0 && marketingBanners.map((marketingBanner => (
+          <MarketingBanner
+            key={`marketing_banner_${marketingBanner.uid}`}
+            heading={marketingBanner.data.title[0].text}
+            paragraph={marketingBanner.data.body_paragraph[0].text}
+            linkText={marketingBanner.data.link_text[0].text}
+            link={marketingBanner.data.link.url}
           />
-          
-          <div className="d-flex flex-column align-items-center justify-content-center mx-5 pb-3 pb-sm-0">
-            <h3 className="text-white w-100 w-md-75">
-              Use the music for your podcast, video game, Twitch stream, or YouTube video
-            </h3>
-            <div className="w-100 w-md-75">
-              <p className="w-100 text-left">
-                Dreamloops and the Dreamers NFTs come with a Creative Commons CC BY-ND license for each musical loop and a CC BY license for the visual composition.
-              </p>
-            </div>
-            <div className="w-100 w-md-75 d-inline-flex flex-row justify-content-left">
-              <LinkTo
-                href={'/'}
-                text={'More info'}
-                icon={<BsArrowRight />}
-                extraClassNames="my-0 my-lg-4"
-              />
-            </div>
-          </div>
-        </CardLayout>
-
-        {/* DREAMLOOPS APPAREL */}
-        <CardLayout variant="secondary">
-          <img className="card-full-image h-md-100 w-md-100 d-block d-sm-none" src="/images/7.png" width="100%" />
-
-          <div className="d-flex flex-column justify-content-center align-items-center mx-5 pb-5 pb-sm-0">
-            <h3 className="text-white w-100 w-md-75">
-              Dreamloops apparel is now available for purchase in our online store
-            </h3>
-            <div className="w-100 w-md-75 d-inline-flex justify-content-left">
-              <LinkTo
-                href={'/'}
-                text={'Purchase'}
-                icon={<BsArrowRight />}
-                extraClassNames="mt-4"
-              />
-            </div>
-          </div>
-
-          <img className="card-full-image d-none d-sm-block h-md-100 w-md-100" src="/images/7.png" width="100%" />
-        </CardLayout>
-
-        <CardLayout variant="primary">
-          <img
-            src="/images/8.png"
-            className="card-full-image w-md-100 h-md-100"
-          />
-
-          <div className="d-flex flex-column align-items-center justify-content-center mx-5 pb-3 pb-sm-0">
-            <div className="w-100 w-md-75">
-              <p className="w-100 text-left">
-                Sandbox Integration
-              </p>
-            </div>
-            <h3 className="text-white w-100 w-md-75">
-              Dreamers NFT holders will be able to use their favorite Dreamers as avatars in The Sandbox with a voxelized version of their NFT
-            </h3>
-            <div className="w-100 w-md-75 d-inline-flex flex-row justify-content-left">
-              <LinkTo
-                href={'/'}
-                text={'More info'}
-                icon={<BsArrowRight />}
-                extraClassNames="my-0 my-lg-4"
-              />
-            </div>
-          </div>
-        </CardLayout>
-      
-        {/* BRANDS */}
-        <Brands />
-
-        {/* HOW TO BUY NFTS */}
-        <BuyNFTs />
+        )))}
 
         {/* SOCIALS, LOGO & TERMS OF USE */}
         <section className="row gx-0" style={{width: '96%', margin: '2vh 2% 2vh 2%'}}>
@@ -177,3 +175,30 @@ export default function Home() {
     </>
   )
 }
+
+export async function getStaticProps() {
+  const marketingCards = await Client().query(
+    Prismic.Predicates.at('document.type', 'marketing_card')
+  )
+
+  const roadmaps = await Client().query(
+    Prismic.Predicates.at('document.type', 'roadmap')
+  )
+
+  const partners = await Client().query(
+    Prismic.Predicates.at('document.type', 'partners')
+  )
+
+  const marketingBanners = await Client().query(
+    Prismic.Predicates.at('document.type', 'marketing_banner')
+  )
+
+  return {
+    props: {
+      marketingCards: marketingCards.results.sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date)),
+      roadmaps: roadmaps.results.sort((a, b) => new Date(a.data.date) - new Date(b.data.date)),
+      partners: partners.results.sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date)),
+      marketingBanners: marketingBanners.results.sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date)),
+    }
+  }
+} 

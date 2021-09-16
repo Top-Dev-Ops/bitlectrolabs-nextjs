@@ -1,4 +1,4 @@
-.brands {
+.partners {
     height: 243px;
     background: var(--midGray750);
     width: 96%;
@@ -8,8 +8,13 @@
 }
 
 @media (max-width: 1024px) {
-    .brands {
+    .partners {
         width: 100%;
         margin: 2vh 0;
     }
+}
+
+.partners img:hover {
+    opacity: 70%;
+    cursor: pointer;
 }
