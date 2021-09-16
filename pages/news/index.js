@@ -6,7 +6,6 @@ import Prismic from "prismic-javascript"
 import { Client } from "../../prismic-configuration"
 
 export default function News({ newses }) {
-    console.log(newses)
 
     return (
         <section className="d-flex flex-column">
