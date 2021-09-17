@@ -3,9 +3,37 @@
     height: 100%;
     object-fit: cover;
     border-radius: 16px;
-    animation: fadeOut 3s;
+    /* animation: fadeOut 3s;
     animation-delay: 3s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
+    /* animation-name: moveLeft;
+    animation-duration: 3s; */
+}
+
+.galleryImage + div {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background: var(--pureWhite);
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+}
+
+.galleryImage + div > span {
+    color: var(--midGray900);
+}
+
+@keyframes moveLeft {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
+}
+
+@keyframes moveRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0%); }
 }
 
 .galleryImage:hover {

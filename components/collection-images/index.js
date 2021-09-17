@@ -1,12 +1,13 @@
-const CollectionImages = () => {
+const CollectionImages = ({ images }) => {
     return (
         <section className="collection-images">
-            <img src="/images/4.png" />
-            <img src="/images/11.png" />
-            <img src="/images/4.png" />
-            <img src="/images/10.png" />
-            <img src="/images/9.png" />
-            <img src="/images/4.png" />
+            {Array.from(Array(6).keys()).map(index => images[index] === undefined ?
+                undefined :
+                <img
+                    key={`collection_image_${images[index].single_image.url}${index}`}
+                    src={images[index].single_image.url}
+                />
+            )}
         </section>
     )
 }

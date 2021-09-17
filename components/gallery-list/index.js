@@ -7,6 +7,7 @@ export default function GalleryList({ extraClassNames, left, right }) {
     const [MdImages, setMdImages] = useState(images.slice(1, 6))
     const [SmImages, setSmImages] = useState(images.slice(1, 4))
     const [start, setStart] = useState(0)
+    const [hover, setHover] = useState('')
 
     const onMouseDown = e => {
         e.preventDefault()
@@ -51,26 +52,96 @@ export default function GalleryList({ extraClassNames, left, right }) {
                 onTouchStart={onMouseDown}
                 onTouchEnd={onMouseUp}
             >
-                <div style={{width: '5.5%', margin: '0 .25%', height: '70%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.4'}}>
-                    <img src={`/images/${LgImages[0]}`} className="galleryImage" />
+                <div style={{width: '5.5%', margin: '0 .25%', height: '70%', position: 'relative', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.4'}}>
+                    <img
+                        src={`/images/${LgImages[0]}`}
+                        className="galleryImage"
+                        onMouseEnter={() => setHover('Lg0')}
+                        onMouseLeave={() => setHover('')}
+                    />
+                    {hover === 'Lg0' && <div>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                    </div>}
                 </div>
-                <div style={{width: '11.5%', margin: '0 .25%', height: '80%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.6'}}>
-                    <img src={`/images/${LgImages[1]}`} className="galleryImage" />
+                <div style={{width: '11.5%', margin: '0 .25%', height: '80%', position: 'relative', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.6'}}>
+                    <img
+                        src={`/images/${LgImages[1]}`}
+                        className="galleryImage"
+                        onMouseEnter={() => setHover('Lg1')}
+                        onMouseLeave={() => setHover('')}
+                    />
+                    {hover === 'Lg1' && <div>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                    </div>}
                 </div>
-                <div style={{width: '17.5%', margin: '0 .25%', height: '90%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.8'}}>
-                    <img src={`/images/${LgImages[2]}`} className="galleryImage" />
+                <div style={{width: '17.5%', margin: '0 .25%', height: '90%', position: 'relative', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.8'}}>
+                    <img
+                        src={`/images/${LgImages[2]}`}
+                        className="galleryImage"
+                        onMouseEnter={() => setHover('Lg2')}
+                        onMouseLeave={() => setHover('')}
+                    />
+                    {hover === 'Lg2' && <div>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                    </div>}
                 </div>
-                <div style={{width: '27.5%', margin: '0 .25%', height: '100%', borderRadius: '16px', border: '4px solid var(--pureWhite)'}}>
-                    <img src={`/images/${LgImages[3]}`} className="galleryImage" />
+                <div style={{width: '27.5%', margin: '0 .25%', height: '100%', position: 'relative', borderRadius: '16px', border: '4px solid var(--pureWhite)'}}>
+                    <img
+                        src={`/images/${LgImages[3]}`}
+                        className="galleryImage"
+                        onMouseEnter={() => setHover('Lg3')}
+                        onMouseLeave={() => setHover('')}
+                    />
+                    {hover === 'Lg3' && <div>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                    </div>}
                 </div>
-                <div style={{width: '17.5%', margin: '0 .25%', height: '90%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.8'}}>
-                    <img src={`/images/${LgImages[4]}`} className="galleryImage" />
+                <div style={{width: '17.5%', margin: '0 .25%', height: '90%', position: 'relative', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.8'}}>
+                    <img
+                        src={`/images/${LgImages[4]}`}
+                        className="galleryImage"
+                        onMouseEnter={() => setHover('Lg4')}
+                        onMouseLeave={() => setHover('')}
+                    />
+                    {hover === 'Lg4' && <div>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                    </div>}
                 </div>
-                <div style={{width: '11.5%', margin: '0 .25%', height: '80%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.6'}}>
-                    <img src={`/images/${LgImages[5]}`} className="galleryImage" />
+                <div style={{width: '11.5%', margin: '0 .25%', height: '80%', position: 'relative', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.6'}}>
+                    <img
+                        src={`/images/${LgImages[5]}`}
+                        className="galleryImage"
+                        onMouseEnter={() => setHover('Lg5')}
+                        onMouseLeave={() => setHover('')}
+                    />
+                    {hover === 'Lg5' && <div>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                    </div>}
                 </div>
-                <div style={{width: '5.5%', margin: '0 .25%', height: '70%', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.4'}}>
-                    <img src={`/images/${LgImages[6]}`} className="galleryImage" />
+                <div style={{width: '5.5%', margin: '0 .25%', height: '70%', position: 'relative', borderRadius: '16px', border: '4px solid var(--pureWhite)', opacity: '.4'}}>
+                    <img
+                        src={`/images/${LgImages[6]}`}
+                        className="galleryImage"
+                        onMouseEnter={() => setHover('Lg6')}
+                        onMouseLeave={() => setHover('')}
+                    />
+                    {hover === 'Lg6' && <div>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                        <span>#3298</span>
+                    </div>}
                 </div>
             </div>
             

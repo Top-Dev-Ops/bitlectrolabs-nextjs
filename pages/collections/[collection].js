@@ -13,8 +13,14 @@ import styles from '../../styles/collection.module.css'
 import { Client } from '../../prismic-configuration'
 import Prismic from 'prismic-javascript'
 
-export default function Collection({ hero, overview, paragraph, statisticses, statisticss }) {
-    
+export default function Collection({
+    hero,
+    heroImages,
+    overview,
+    paragraph,
+    statisticses
+}) {
+
     return (
         <>
             <Head>
@@ -26,11 +32,11 @@ export default function Collection({ hero, overview, paragraph, statisticses, st
             <main className="w-100 collection">
                 <CollectionHero hero={hero.data} />
 
-                <CollectionImages />
+                <CollectionImages images={heroImages.length > 0 ? heroImages[0].data.single_image_group : []} />
 
                 <CollectionSubHeading overview={overview.data} extraClassNames={'my-5 py-5'} />
 
-                {statisticses.map(statistics => (
+                {statisticses.length > 0 && statisticses.map(statistics => (
                     <CollectionCard
                         key={`collection_statistics_${statistics.uid}`}
                         heading={statistics.data.statistic_section_title[0].text}
@@ -39,7 +45,7 @@ export default function Collection({ hero, overview, paragraph, statisticses, st
                     />
                 ))}
                 
-                {paragraph.data.additional_information.map((paragraph, index) => (
+                {paragraph.length > 0 && paragraph.data.additional_information.map((paragraph, index) => (
                     <CollectionParagraph
                         key={`collection_paragraph_${index}`}
                         heading={`${paragraph.additional_information_title[0].text}`}
@@ -99,6 +105,10 @@ export async function getStaticProps({ params }) {
         Prismic.Predicates.at('document.type', 'hero_section')
     )
 
+    const heroImage = await Client().query(
+        Prismic.Predicates.at('document.type', 'hero_images')
+    )
+
     const overviews = await Client().query(
         Prismic.Predicates.at('document.type', 'overview_section')
     )
@@ -111,18 +121,19 @@ export async function getStaticProps({ params }) {
         Prismic.Predicates.at('document.type', 'statistics_section')
     )
 
-    const hero = heroes.results.filter(item => item.data.collection_name[0].text === params.collection)[0]
-    const overview = overviews.results.filter(item => item.data.collection_name[0].text === params.collection)[0]
-    const paragraph = paragraphs.results.filter(item => item.data.collection_name[0].text === params.collection)[0]
+    const hero = heroes.results.filter(item => item.data.collection_name[0].text === params.collection)
+    const heroImages = heroImage.results.filter(item => item.data.collection_name[0].text === params.collection)
+    const overview = overviews.results.filter(item => item.data.collection_name[0].text === params.collection)
+    const paragraph = paragraphs.results.filter(item => item.data.collection_name[0].text === params.collection)
     const statisticses = statisticss.results.filter(item => item.data.collection_name[0].text === params.collection)
     
     return {
         props: {
-            hero,
-            overview,
-            paragraph,
+            hero: hero.length > 0 ? hero[0] : [],
+            overview: overview.length > 0 ? overview[0] : [],
+            paragraph: paragraph.length > 0 ? paragraph[0] : [],
+            heroImages,
             statisticses,
-            statisticss
         }
     }
 }
