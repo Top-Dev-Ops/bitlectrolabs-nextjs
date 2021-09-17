@@ -8,6 +8,10 @@ import styles from '../../styles/gallery.module.css'
 export default function Gallery() {
     const [app, setApp] = useState(null)
     const [view, setView] = useState(false)
+    const [left, setLeft] = useState(false)
+    const [right, setRight] = useState(false)
+    const [up, setUp] = useState(false)
+    const [down, setDown] = useState(false)
 
     const containerRef = useRef(null)
 
@@ -45,7 +49,13 @@ export default function Gallery() {
                 <p className={styles.galleryResetFilter}>Reset filter</p> */}
             </div>
 
-            {!view && <GalleryList extraClassNames={'my-5'} />}
+            {!view && (
+                <GalleryList
+                    extraClassNames={'my-5'}
+                    left={left}
+                    right={right}
+                />
+            )}
 
             <p
                 className="text-white text-center pt-0 pt-sm-5 pt-md-5 mt-5 pt-xl-0 mt-xl-0"
@@ -57,6 +67,10 @@ export default function Gallery() {
             <GalleryFooter
                 view={view}
                 changeView={() => setView(!view)}
+                onClickLeft={() => setLeft(!left)}
+                onClickRight={() => setRight(!right)}
+                onClickUp={() => setUp(!up)}
+                onClickDown={() => setDown(!down)}
             />
         </section>
     )

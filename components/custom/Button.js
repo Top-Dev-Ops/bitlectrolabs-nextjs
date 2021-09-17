@@ -22,7 +22,10 @@ export default function Button({ icon, text, variant, onClick }) {
 
 export const ArrowButton = ({ direction, onClick, extraClassNames }) => {
     return (
-        <button className={`btn btn-sm border-0 custom-button-arrow ${extraClassNames}`} onClick={onClick}>
+        <button
+            className={`border-0 outline-0 custom-button-arrow ${extraClassNames}`}
+            onClick={onClick}
+        >
             <Arrow direction={direction} />
         </button>
     )

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default function GalleryList({ extraClassNames }) {
+export default function GalleryList({ extraClassNames, left, right }) {
     const images = ['1.png', '2.png', '3.png', '4.png', '9.png', '10.png', '11.png']
 
     const [LgImages, setLgImages] = useState(images)
@@ -15,24 +15,31 @@ export default function GalleryList({ extraClassNames }) {
 
     const onMouseUp = e => {
         e.preventDefault()
-        slide(e.clientX)
+        if (Math.abs(start - e.clientX) > 150 && start > e.clientX) {           // slide to right
+            slideLeft()
+        } else if (Math.abs(start - e.clientX) > 150 && start < e.clientX) {    // slide to left
+            slideRight()
+        }
     }
 
-    const slide = (end) => {
-        if (Math.abs(start - end) > 150 && start > end) {           // slide to right
-            const [first, ...rest] = LgImages
-            const temp = [...rest, first]
-            setLgImages(temp)
-            setMdImages(temp.slice(1, 6))
-            setSmImages(temp.slice(1, 4))
-        } else if (Math.abs(start - end) > 150 && start < end) {    // slide to left
-            const last = LgImages.slice(-1)
-            const rest = LgImages.slice(0, -1)
-            const temp = [last, ...rest]
-            setLgImages(temp)
-            setMdImages(temp.slice(1, 6))
-            setSmImages(temp.slice(1, 4))
-        }
+    useEffect(() => slideLeft, [left])
+    useEffect(() => slideRight, [right])
+
+    const slideLeft = () => {
+        const [first, ...rest] = LgImages
+        const temp = [...rest, first]
+        setLgImages(temp)
+        setMdImages(temp.slice(1, 6))
+        setSmImages(temp.slice(1, 4))
+    }
+
+    const slideRight = () => {
+        const last = LgImages.slice(-1)
+        const rest = LgImages.slice(0, -1)
+        const temp = [last, ...rest]
+        setLgImages(temp)
+        setMdImages(temp.slice(1, 6))
+        setSmImages(temp.slice(1, 4))
     }
 
     return (
