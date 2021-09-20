@@ -18,6 +18,10 @@
     color: var(--midGray600)
 }
 
+.roadmap-header h3 {
+    color: var(--midGray600);
+}
+
 .roadmap-content {
     display: flex;
     justify-content: left;

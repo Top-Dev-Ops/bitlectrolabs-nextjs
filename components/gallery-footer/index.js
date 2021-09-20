@@ -16,15 +16,17 @@ const GalleryFooter = ({
 }) => {
     const [activeTab, setActiveTab] = useState('Dreamloops')
     const [modalOpen, setModalOpen] = useState(false)
+    const [hoverGridList, setHoverGridList] = useState(false)
+    const [hoverSettings, setHoverSettings] = useState(false)
 
     return (
         <>
             {modalOpen ?
                 <GalleryFilter
-                    onClose={() => setModalOpen(false)}
+                    onClose={() => { setHoverGridList(false); setHoverSettings(false); setModalOpen(false) }}
                 /> :
                 <section className="gallery-footer row">
-                    <div className="col-12 col-xl-5 d-inline-flex flex-row mb-2 mb-lg-0" style={{zIndex: '3'}}>
+                    <div className="col-12 col-lg-5 d-inline-flex flex-row mb-2 mb-lg-0" style={{zIndex: '3'}}>
                         <div className="gallery-footer-text-button mr-0 mx-xl-2">
                             <TextButton
                                 text='Dreamloops'
@@ -43,25 +45,31 @@ const GalleryFooter = ({
                             />
                         </div>
                         <SVGButton
-                            icon={view ? <Grid /> : <List />}
+                            icon={view ? <Grid hover={hoverGridList} /> : <List hover={hoverGridList} />}
                             extraClassNames="d-none d-xl-block"
                             onClick={changeView}
+                            onMouseEnter={() => { setHoverGridList(true); setHoverSettings(false) }}
+                            onMouseLeave={() => { setHoverGridList(false); setHoverSettings(false)}}
                         />
                     </div>
 
-                    <div className="col-12 col-xl-5 offset-xl-2 d-inline-flex flex-row justify-content-between justify-content-sm-start flex-lg-row-reverse" style={{zIndex: '3'}}>
+                    <div className="col-12 col-lg-5 offset-lg-2 d-inline-flex flex-row justify-content-between justify-content-sm-start flex-lg-row-reverse" style={{zIndex: '3'}}>
                         <TextButton text={'About collection'} extraClassNames="mx-1" />
                         <div className="d-inline-flex flex-row-reverse">
                             <SVGButton
-                                icon={<Settings />}
+                                icon={<Settings hover={hoverSettings} />}
                                 badge={<CircleBadge />}
                                 extraClassNames={'mx-1'}
-                                onClick={() => setModalOpen(!modalOpen)}
+                                onClick={() => { setModalOpen(!modalOpen); setHoverSettings(false); setHoverGridList(false) }}
+                                onMouseEnter={() => { setHoverSettings(true); setHoverGridList(false)}}
+                                onMouseLeave={() => { setHoverSettings(false); setHoverGridList(false)}}
                             />
                             <SVGButton
-                                icon={view ? <Grid /> : <List />}
+                                icon={view ? <Grid hover={hoverGridList} /> : <List hover={hoverGridList} />}
                                 extraClassNames="d-block d-xl-none mx-1"
                                 onClick={changeView}
+                                onMouseEnter={() => { setHoverGridList(true); setHoverSettings(false) }}
+                                onMouseLeave={() => { setHoverGridList(false); setHoverSettings(false) }}
                             />
                         </div>
                     </div>

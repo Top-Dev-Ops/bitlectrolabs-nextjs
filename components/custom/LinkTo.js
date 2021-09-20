@@ -1,16 +1,19 @@
 import Link from 'next/link'
 
 const LinkTo = ({ text, icon, href, extraClassNames }) => {
-    return (
-        <Link href={href}>
-            <a className={`custom-link ${extraClassNames}`}>
-                {text}
 
-                <span className="mx-3">
-                    {icon}
-                </span>
-            </a>
-        </Link>
+    return (
+        <div className={`custom-link ${extraClassNames}`}>
+            {text}
+
+            <Link href={href}>
+                <a>
+                    <span className="mx-3">
+                        {icon}
+                    </span>
+                </a>
+            </Link>
+        </div>
     )
 }
 

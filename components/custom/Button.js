@@ -39,9 +39,14 @@ export const TextButton = ({ text, onClick, extraClassNames}) => {
     )
 }
 
-export const SVGButton = ({ icon, badge, onClick, extraClassNames }) => {
+export const SVGButton = ({ icon, badge, onClick, extraClassNames, onMouseEnter, onMouseLeave }) => {
     return (
-        <button className={`custom-button-svg position-relative border-0 ${extraClassNames}`} onClick={onClick}>
+        <button
+            className={`custom-button-svg position-relative border-0 ${extraClassNames}`}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+        >
             {icon}
             
             <div className="badge">{badge}</div>

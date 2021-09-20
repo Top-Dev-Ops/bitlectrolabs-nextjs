@@ -5,7 +5,7 @@ import HorizontalCarousel from '../custom/HorizontalCarousel'
 
 const Hero = () => {
     return <section className='hero'>
-        <div className="row gx-0">
+        <div className="row gx-0 flex-column justify-content-between flex-sm-row">
             <div className="col-12 px-5 col-sm-4 px-sm-0 offset-sm-1 d-flex flex-column justify-content-center">
                 <Badge text={'Recent Drop'} />
                 <h1>Dreamers</h1>
@@ -22,7 +22,7 @@ const Hero = () => {
                 <VerticalCarousel />
             </div>
 
-            <div className="d-block d-sm-none pt-4">
+            <div className="d-block d-sm-none pt-4 overflow-hidden">
                 <HorizontalCarousel />
             </div>
         </div>

@@ -9,6 +9,7 @@
     margin-left: 2%;
     margin-bottom: 2vh;
     border-radius: 30px;
+    z-index: 1;
 }
 
 .subscribe-container h4 {
@@ -44,6 +45,10 @@
 .subscribe-button input:focus, .subscribe-button input:focus-visible {
     border: none;
     outline: none;
+}
+
+.subscribe-button button:focus {
+    box-shadow: none;
 }
 
 @media (max-width: 1160px) {

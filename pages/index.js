@@ -49,7 +49,7 @@ export default function Home({ marketingCards, roadmaps, partners, marketingBann
         {/* FIRST MARKETING CARD */}
         {marketingCards.length > 0 &&
           <CardLayout key={`marketing_card_${marketingCards[0].uid}`} variant={marketingCards[0].data.toggle ? 'secondary' : 'primary'}>
-            <div className="d-flex flex-column justify-content-center align-items-center mx-0 mt-5 mt-md-0 mx-md-5">
+            <div className="d-flex flex-column justify-content-center align-items-center mx-5 my-4 mt-md-0">
               {marketingCards[0].data.subtitle.length > 0 && (
                 <div className="w-100 w-md-75">
                   <p className="w-100 text-left">
