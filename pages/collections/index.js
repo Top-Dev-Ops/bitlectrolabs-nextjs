@@ -88,7 +88,9 @@ export async function getStaticProps() {
 
     return {
         props: {
-            collections: collections.results.sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date))
+            collections: collections.results
+                .sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date))
+                .filter((item, index) => index < 3)
         }
     }
 }

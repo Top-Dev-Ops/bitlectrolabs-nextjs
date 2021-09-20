@@ -4,10 +4,11 @@ import Hero from '../components/hero'
 import Subscribe from '../components/subscribe'
 import Roadmap from '../components/roadmap'
 import Partners from '../components/partners'
-import Social from '../components/social'
 import MarketingBanner from '../components/marketing-banner'
+import Footer from '../components/footer'
 
 import LinkTo from '../components/custom/LinkTo'
+import ProgressBar from '../components/custom/ProgressBar'
 import CardLayout from '../layouts/card-layout'
 import { BsArrowRight } from 'react-icons/bs'
 
@@ -29,21 +30,25 @@ export default function Home({ marketingCards, roadmaps, partners, marketingBann
 
         <Subscribe />
 
-        <CardLayout variant="primary">
-          <img
-            src="/images/4.png"
-            className="card-image mx-5 mx-sm-auto mt-5 mt-sm-0"
-          />
-          
-          <div className="d-flex flex-column align-items-start justify-content-center mb-5 mb-sm-0 mx-5">
-            <h2 className="text-white">Dreamloops</h2>
-            <p className="w-100 w-lg-50 text-left">A generative series of audio-visual non-fungible tokens - some redeemable for vinyl or cassette.</p>
-            <LinkTo
-              href={'/'}
-              text={'Explore'}
-              icon={<BsArrowRight />}
+        <CardLayout>
+          <div className="mb-5 pb-5 card-grid justify-content-around">
+            <img
+              src="/images/4.png"
+              className="card-image mx-5 mx-sm-auto mt-5 mt-sm-0"
             />
+            
+            <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
+              <h2 className="text-white">Dreamloops</h2>
+              <p className="w-100 w-lg-50 text-left">A generative series of audio-visual non-fungible tokens - some redeemable for vinyl or cassette.</p>
+              <LinkTo
+                href={'/'}
+                text={'Explore'}
+                icon={<BsArrowRight />}
+              />
+            </div>
           </div>
+
+          <ProgressBar percentage={20} extraClassNames="mt-2 mb-5 mt-lg-5" />
         </CardLayout>
         
         {/* FIRST MARKETING CARD */}
@@ -150,27 +155,7 @@ export default function Home({ marketingCards, roadmaps, partners, marketingBann
         )))}
 
         {/* SOCIALS, LOGO & TERMS OF USE */}
-        <section className="row gx-0" style={{width: '96%', margin: '2vh 2% 2vh 2%'}}>
-          <div className="col-12 col-lg-4 mb-2 mb-lg-0">
-            <Social />
-          </div>
-
-          <div className="col-12 col-lg-4 mb-2 mb-lg-0 px-lg-3">
-            <div className="social d-flex justify-content-center align-items-center">
-              <p className="my-0" style={{fontSize: 'var(--subHeadingMd)', color: 'var(--midGray400)'}}>
-                ©BitlectroLabs 2021
-              </p>
-            </div>
-          </div>
-
-          <div className="col-12 col-lg-4 mb-2 mb-lg-0">
-            <div className="social d-flex justify-content-center align-items-center">
-              <p className="my-0" style={{fontSize: 'var(--subHeadingMd)', color: 'var(--midGray400)'}}>
-                Terms of Use
-              </p>
-            </div>
-          </div>
-        </section>
+        <Footer />
       </main>
     </>
   )

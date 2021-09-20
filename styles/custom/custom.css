@@ -32,6 +32,7 @@
 .custom-button-outline:hover,
 .custom-button-outline-sm:hover {
     background: var(--pureWhite);
+    border-color: var(--pureWhite);
     color: var(--midGray900);
 }
 
@@ -39,6 +40,7 @@
 .custom-button-primary:focus,
 .custom-button-outline-sm:focus {
     box-shadow: none;
+    border-color: var(--pureWhite);
     outline: 0;
 }
 
@@ -199,16 +201,6 @@
 .hamburger:hover, .hamburger:focus {
     fill: var(--purple500);
 }
-
-/* .horizontal-carousel {
-    display: flex;
-    overflow-x: hidden;
-}
-
-.horizontal-carousel > img {
-    width: 114px;
-    height: 114px;
-} */
 
 .horizontal-carousel {
     padding: 0px;
