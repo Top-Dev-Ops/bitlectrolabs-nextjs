@@ -1,6 +1,6 @@
 import Footer from "../../components/footer"
 import styles from '../../styles/terms.module.css'
-import data from './data'
+import data from '../../components/custom/data'
 
 export default function Terms() {
     return (
