@@ -31,9 +31,13 @@ export const ArrowButton = ({ direction, onClick, extraClassNames }) => {
     )
 }
 
-export const TextButton = ({ text, onClick, extraClassNames}) => {
+export const TextButton = ({ text, onClick, extraClassNames, extraStyles }) => {
     return (
-        <button className={`custom-button-text border-0 ${extraClassNames}`} onClick={onClick}>
+        <button
+            className={`custom-button-text border-0 ${extraClassNames}`}
+            style={extraStyles}
+            onClick={onClick}
+        >
             {text}
         </button>
     )

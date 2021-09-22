@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import { TextButton, RadioButton } from "../custom/Button"
 import Search from "../custom/Search"
-import { Close } from "../custom/svgs"
+import { CloseFilter } from "../custom/svgs/Close"
 
 import GalleryElements from "./gallery-elements"
 
@@ -56,12 +56,16 @@ export default function GalleryFilter({ onClose }) {
                         Filter by
                     </h2>
 
-                    <div className="gallery-filter-text-button mr-0 mx-xl-2 my-2">
+                    <div
+                        className="gallery-filter-text-button mr-0 mx-xl-2 my-2"
+                        style={{padding: '4px', background: 'var(--midGray700)'}}
+                    >
                         {items.map(item => (
                             <TextButton
                                 key={item}
                                 text={item}
                                 extraClassNames={`${activeTab === item ? 'active' : undefined} my-1 my-lg-0 mx-2 mx-lg-0 px-3`}
+                                extraStyles={{background: `${activeTab === item ? 'var(--pureWhite)' : 'var(--midGray700)'}`}}
                                 onClick={() => setActiveTab(item)}
                             />
                         ))}
@@ -72,17 +76,35 @@ export default function GalleryFilter({ onClose }) {
             </div>
 
             <div className="gallery-filter-content">
-                {activeTab === 'Elements' && <GalleryElements checkFilters={checkFilters} resetFilters={resetFilters} />}
+                {activeTab === 'Elements' && (
+                    <GalleryElements
+                        checkFilters={checkFilters}
+                        resetFilters={resetFilters}
+                    />
+                )}
                 {activeTab === 'Redeemable' && (
                     <div className="gallery-filter-content-grid">
-                        <RadioButton text={'Redeemable'} onChange={checkFilters} reset={resetFilters} />
-                        <RadioButton text={'Not redeemable'} onChange={checkFilters} reset={resetFilters} />
+                        <RadioButton
+                            text={'Redeemable'}
+                            onChange={checkFilters}
+                            reset={resetFilters}
+                        />
+                        <RadioButton
+                            text={'Not redeemable'}
+                            onChange={checkFilters}
+                            reset={resetFilters}
+                        />
                     </div>
                 )}
                 {activeTab === 'Count' && (
                     <div className="gallery-filter-content-grid">
                         {Array.from(Array(7)).map((e, i) => (
-                            <RadioButton key={`count_${i}`} text={`${i+1}`} onChange={checkFilters} reset={resetFilters} />
+                            <RadioButton
+                                key={`count_${i}`}
+                                text={`${i+1}`}
+                                onChange={checkFilters}
+                                reset={resetFilters}
+                            />
                         ))}
                     </div>
                 )}
@@ -95,9 +117,14 @@ export default function GalleryFilter({ onClose }) {
                             <h2>Filter by</h2>
 
                             {filters.map((filter, index) => (
-                                <div key={`${filter}_${index}`} className="search-box">
+                                <div
+                                    key={`${filter}_${index}`}
+                                    className="search-box"
+                                >
                                     {filter}
-                                    <span onClick={() => removeFilters(index)}>×</span>
+                                    <span onClick={() => removeFilters(index)}>
+                                        ×
+                                    </span>
                                 </div>
                             ))}
                         </div>
@@ -122,7 +149,7 @@ export default function GalleryFilter({ onClose }) {
                 ))}
             </div>
 
-            <Close
+            <CloseFilter
                 extraClassNames="d-block"
                 onClick={onClose}
                 extraStyles={{position: 'absolute', top: '30px', right: '30px', width: '30px', height: '30px'}}

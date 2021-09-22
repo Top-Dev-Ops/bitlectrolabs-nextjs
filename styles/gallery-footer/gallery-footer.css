@@ -16,6 +16,10 @@
     justify-content: left;
 }
 
+.gallery-footer-text-button {
+    padding: 4px;
+}
+
 @media (max-width: 992px) {
     .gallery-footer-text-button {
         background: transparent;
@@ -62,7 +66,7 @@
     padding: 20px;
     padding-right: 50px;
     z-index: 7;
-    background: var(--midGray700);
+    background: var(--midGray750);
     overflow: auto;
     overflow-y: scroll;
     scrollbar-width: none;
@@ -177,6 +181,7 @@
 .gallery-filter-content-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    font-family: Helvetica;
 }
 
 @media (max-width: 992px) {
@@ -208,7 +213,14 @@
 .gallery-filter-scrollbar {
     position: fixed;
     right: 20px;
-    top: 100px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
+    font-family: Helvetica;
+    color: var(--midGray400);
+}
+
+.gallery-filter-scrollbar > a:hover {
+    color: var(--pureWhite);
 }

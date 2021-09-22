@@ -4,10 +4,10 @@ import { useEffect } from 'react'
 const HorizontalCarousel = () => {
 
     const animateCarousel = (targetName, _duration) => {
-        const count = 5
-        const gap = 20
+        const count = 10
+        const gap = 10
 
-        var boxWidth = 200,
+        var boxWidth = 114,
             totalWidth = boxWidth * count + gap * count,  // * n of boxes + diff textBox
             ele = document.querySelectorAll(targetName),
             dirFromLeft = "+=" + totalWidth
@@ -48,10 +48,25 @@ const HorizontalCarousel = () => {
                 <img src='/images/3.png' />
             </div>
             <div className="carousel-image-box">
+                <img src='/images/1.png' />
+            </div>
+            <div className="carousel-image-box">
+                <img src='/images/3.png' />
+            </div>
+            <div className="carousel-image-box">
                 <img src='/images/2.png' />
             </div>
             <div className="carousel-image-box">
                 <img src='/images/3.png' />
+            </div>
+            <div className="carousel-image-box">
+                <img src='/images/1.png' />
+            </div>
+            <div className="carousel-image-box">
+                <img src='/images/3.png' />
+            </div>
+            <div className="carousel-image-box">
+                <img src='/images/1.png' />
             </div>
 
         </section>

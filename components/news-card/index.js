@@ -20,17 +20,21 @@ export default function NewsCard({ news, extraClassNames }) {
 
             {news.data.article_with_subheading.map(articlew => (
                 <div key={`article_w_${articlew.text}`} className="mt-3">
-                    {articlew.article_image !== undefined && articlew.article_image.url !== undefined && <img src={`${articlew.article_image.url}`} />}
-                    <p>{articlew.subheading !== undefined && articlew.subheading[0] !== undefined && articlew.subheading[0].text}</p>
-                    <p>{articlew.body_paragraph !== undefined && articlew.body_paragraph[0] !== undefined && articlew.body_paragraph[0].text}</p>
+                    {articlew.article_image !== undefined && articlew.article_image.url !== undefined && (
+                        <img src={`${articlew.article_image.url}`} className="my-3" />
+                    )}
+                    <p className="my-3">{articlew.subheading !== undefined && articlew.subheading[0] !== undefined && articlew.subheading[0].text}</p>
+                    <p className="my-3">{articlew.body_paragraph !== undefined && articlew.body_paragraph[0] !== undefined && articlew.body_paragraph[0].text}</p>
                 </div>
             ))}
 
             {news.data.article_without_subheading.map(articlewo => (
                 <div key={`article_wo_${articlewo.body_paragraph[0].text}`} className="mt-3">
-                    {articlewo.article_image !== undefined && articlewo.article_image.url !== undefined && <img src={`${articlewo.article_image.url}`} />}
-                    <p>{articlewo.subheading !== undefined && articlewo.subheading[0] !== undefined && articlewo.subheading[0].text}</p>
-                    <p>{articlewo.body_paragraph !== undefined && articlewo.body_paragraph[0] !== undefined && articlewo.body_paragraph[0].text}</p>
+                    {articlewo.article_image !== undefined && articlewo.article_image.url !== undefined && (
+                        <img src={`${articlewo.article_image.url}`} className="my-3" />
+                    )}
+                    <p className="my-3">{articlewo.subheading !== undefined && articlewo.subheading[0] !== undefined && articlewo.subheading[0].text}</p>
+                    <p className="my-3">{articlewo.body_paragraph !== undefined && articlewo.body_paragraph[0] !== undefined && articlewo.body_paragraph[0].text}</p>
                 </div>
             ))}
 

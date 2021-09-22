@@ -38,8 +38,8 @@ export default function Gallery() {
         <section className={`${styles.gallery} ${view ? 'justify-content-between' : undefined}`} ref={containerRef}>
             <div className="text-center">
                 <h3
-                    className="text-white text-center mb-5"
-                    style={{zIndex: `${view ? '3' : undefined}`}}
+                    className="text-white text-center position-relative mb-5"
+                    style={{zIndex: '3'}}
                 >
                     Dreamloops
                 </h3>

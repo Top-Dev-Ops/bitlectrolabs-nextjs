@@ -6,6 +6,7 @@
     flex-direction: column;
     justify-content: center;
     overflow-y: hidden;
+    position: relative;
 }
 
 .hero h1 {

@@ -24,6 +24,7 @@
 .subscribe-container .subscribe-button {
     border-radius: 25px;
     background: var(--midGray900);
+    border: 1px solid var(--midGray900);
     width: 30%;
     height: 50px;
     display: flex;

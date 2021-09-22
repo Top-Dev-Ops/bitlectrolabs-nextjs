@@ -7,9 +7,16 @@ import { Client } from "../../prismic-configuration"
 
 export default function News({ newses }) {
 
+    const onTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
+    }
+
     return (
-        <section className="d-flex flex-column">
-            <section className={styles.news}>
+        <section className={styles.news}>
+            <section className={styles.newsCollection}>
                 {newses.length > 0 && newses.map(news => (
                     <NewsCard
                         key={`news_${news.uid}`}
@@ -21,6 +28,11 @@ export default function News({ newses }) {
 
             {/* SOCIALS, LOGO & TERMS OF USE */}
             <Footer />
+
+            <div
+                className={styles.newsUpButton}
+                onClick={onTop}
+            >Up</div>
         </section>
     )
 }

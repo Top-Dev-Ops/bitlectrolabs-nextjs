@@ -18,7 +18,7 @@ const Hero = () => {
                 />
             </div>
 
-            <div className="d-none d-sm-block col-12 col-sm-3 offset-sm-2">
+            <div className="d-none d-sm-block">
                 <VerticalCarousel />
             </div>
 

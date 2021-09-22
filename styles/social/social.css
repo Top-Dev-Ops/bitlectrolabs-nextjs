@@ -10,6 +10,5 @@
 }
 
 .social > a:hover {
-    opacity: 70%;
     cursor: pointer;
 }

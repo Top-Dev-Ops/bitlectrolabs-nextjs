@@ -3,14 +3,14 @@ import Social from "../social"
 
 export default function Footer() {
     return (
-        <section className="row gx-0" style={{width: '96%', margin: '2vh 2% 2vh 2%'}}>
+        <section className="row gx-0">
             <div className="col-12 col-lg-4 mb-2 mb-lg-0">
                 <Social />
             </div>
 
             <div className="col-12 col-lg-4 mb-2 mb-lg-0 px-lg-3">
                 <div className="social d-flex justify-content-center align-items-center">
-                    <p className="my-0" style={{fontSize: 'var(--subHeadingMd)', color: 'var(--midGray400)'}}>
+                    <p className="my-0">
                         ©BitlectroLabs 2021
                     </p>
                 </div>
@@ -18,7 +18,7 @@ export default function Footer() {
 
             <div className="col-12 col-lg-4 mb-2 mb-lg-0 terms-link">
                 <div className="social d-flex justify-content-center align-items-center">
-                    <p className="my-0" style={{fontSize: 'var(--subHeadingMd)', color: 'var(--midGray400)'}}>
+                    <p className="my-0">
                         <Link href="/terms">
                             <a>Terms of Use</a>
                         </Link>
@@ -27,8 +27,19 @@ export default function Footer() {
             </div>
 
             <style jsx>{`
+                section {
+                    width: 96%;
+                    margin: 2vh 2%;
+                    z-index: 10;
+                }
+                p {
+                    font-family: Platform;
+                    font-size: var(--subHeadingMd);
+                    color: var(--midGray400);
+                }
                 .terms-link a {
                     color: var(--midGray400);
+                    font-family: Platform;
                 }
                 .terms-link a:hover {
                     color: var(--pureWhite);
