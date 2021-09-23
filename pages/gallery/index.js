@@ -7,7 +7,7 @@ import styles from '../../styles/gallery.module.css'
 
 export default function Gallery() {
     const [app, setApp] = useState(null)
-    const [view, setView] = useState(false)
+    const [view, setView] = useState(true)
     const [left, setLeft] = useState(false)
     const [right, setRight] = useState(false)
     const [up, setUp] = useState(false)
@@ -21,7 +21,7 @@ export default function Gallery() {
         const _app = new ThreeApp(containerRef.current)
         _app.start()
         _app.resize()
-        _app.renderer.domElement.style.display = 'none'
+        _app.renderer.domElement.style.display = 'block'
         setApp(_app)
     }, [])
 

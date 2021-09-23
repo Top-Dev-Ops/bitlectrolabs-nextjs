@@ -52,7 +52,7 @@ export default function GalleryList({ extraClassNames, left, right, tokenSelect 
                 onTouchStart={onMouseDown}
                 onTouchEnd={onMouseUp}
             >
-                <div style={{position: 'relative', width: '5.5%', margin: '0 .25%', height: '70%', borderRadius: '16px', border: '4px solid rgb(255 255 255 / 40%)', }}>
+                <div style={{position: 'relative', width: '5.5%', margin: '0 .25% 0 10px', height: '70%', borderRadius: '16px', border: '4px solid rgb(255 255 255 / 40%)', }}>
                     <img
                         src={`/images/${LgImages[0]}`}
                         className="galleryImage"
@@ -153,7 +153,7 @@ export default function GalleryList({ extraClassNames, left, right, tokenSelect 
                         </div>
                     </div>}
                 </div>
-                <div style={{position: 'relative', width: '5.5%', margin: '0 .25%', height: '70%', borderRadius: '16px', border: '4px solid rgb(255 255 255 / 40%)'}}>
+                <div style={{position: 'relative', width: '5.5%', margin: '0 10px 0 .25%', height: '70%', borderRadius: '16px', border: '4px solid rgb(255 255 255 / 40%)'}}>
                     <img
                         src={`/images/${LgImages[6]}`}
                         className="galleryImage"

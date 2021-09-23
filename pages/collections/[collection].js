@@ -29,30 +29,37 @@ export default function Collection({
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="w-100 collection">
-                <CollectionHero hero={hero.data} />
+            <main className={styles.collection}>
+                <div className={styles.collectionCard}>
+                    <CollectionHero hero={hero.data} />
 
-                <CollectionImages images={heroImages.length > 0 ? heroImages[0].data.single_image_group : []} />
+                    <CollectionImages
+                        images={heroImages.length > 0 ? heroImages[0].data.single_image_group : []}
+                    />
 
-                <CollectionSubHeading overview={overview.data} extraClassNames={'my-5 py-5'} />
-
-                {statisticses.length > 0 && statisticses.map(statistics => (
-                    <CollectionCard
-                        key={`collection_statistics_${statistics.uid}`}
-                        heading={statistics.data.statistic_section_title[0].text}
-                        categories={statistics.data.category}
+                    <CollectionSubHeading
+                        overview={overview.data}
                         extraClassNames={'my-5 py-5'}
                     />
-                ))}
-                
-                {paragraph.length > 0 && paragraph.data.additional_information.map((paragraph, index) => (
-                    <CollectionParagraph
-                        key={`collection_paragraph_${index}`}
-                        heading={`${paragraph.additional_information_title[0].text}`}
-                        content={paragraph.additional_information_body.map(item => item.text)}
-                        extraClassNames={'mb-5 pb-5'}
-                    />
-                ))}
+
+                    {statisticses.length > 0 && statisticses.map(statistics => (
+                        <CollectionCard
+                            key={`collection_statistics_${statistics.uid}`}
+                            heading={statistics.data.statistic_section_title[0].text}
+                            categories={statistics.data.category}
+                            extraClassNames={'my-5 py-5'}
+                        />
+                    ))}
+                    
+                    {paragraph.length > 0 && paragraph.data.additional_information.map((paragraph, index) => (
+                        <CollectionParagraph
+                            key={`collection_paragraph_${index}`}
+                            heading={`${paragraph.additional_information_title[0].text}`}
+                            content={paragraph.additional_information_body.map(item => item.text)}
+                            extraClassNames={'mb-5 pb-5'}
+                        />
+                    ))}
+                </div>
 
                 <Link href="/gallery">
                     <section className={styles.collectionGallery}>
@@ -63,6 +70,7 @@ export default function Collection({
                 {/* SOCIALS, LOGO & TERMS OF USE */}
                 <Footer />
             </main>
+
         </>
     )
 }

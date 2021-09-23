@@ -31,8 +31,13 @@ const Hero = () => {
 
 export const CollectionHero = ({ hero }) => {
     return <section className="collection-hero">
+        <img
+            src="/images/dreamloops.png"
+            className="w-100 h-auto mb-5"
+        />
+
         <div className="row gx-0">
-            <div className="col-12 col-xl-8 offset-xl-2 text-center">
+            <div className="col-12 text-center">
                 <h2 className="text-center">
                     {hero.title[0].text}
                 </h2>
