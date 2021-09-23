@@ -57,12 +57,16 @@ export default function Gallery() {
                 />
             )}
 
-            <p
+            {view && (
+                <div className={styles.galleryTopGradientBackground} />
+            )}
+
+            {/* <p
                 className="text-white text-center pt-0 pt-sm-5 pt-md-5 mt-5 pt-xl-0 mt-xl-0"
                 style={{zIndex: `${view ? '3' : undefined}`}}
             >
                 #9361
-            </p>
+            </p> */}
 
             <GalleryFooter
                 view={view}

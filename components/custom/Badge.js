@@ -1,7 +1,14 @@
-const Badge = ({ text }) => {
+const Badge = ({ text, extraClassNames, size }) => {
+    const fontSize = size === 'Lg' ? '18px' : '16px'
+
     return (
-        <div>
-            <span className="custom-badge">{text}</span>
+        <div className={extraClassNames}>
+            <span
+                className="custom-badge"
+                style={{fontSize: fontSize}}
+            >
+                {text}
+            </span>
         </div>
     )
 }

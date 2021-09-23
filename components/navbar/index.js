@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import NavMenu from './navmenu'
-import Button from '../custom/Button'
+import Button, { TextButton } from '../custom/Button'
 import Social from '../social'
 
 import { Logo, Hamburger, Close } from '../custom/svgs'
@@ -10,6 +11,8 @@ const Navbar = () => {
     const [modalOpen, setModalOpen] = useState(false)
 
     const onClick = () => setModalOpen(!modalOpen)
+
+    const router = useRouter()
 
     return (
         <section className={`${modalOpen ? 'modal nav-bar' : undefined}`} style={{zIndex: '7'}}>
@@ -23,10 +26,18 @@ const Navbar = () => {
                 <NavMenu menus={['Collections', 'Gallery', 'News', 'About']} />
 
                 <div className="mobile-button">
-                    <Button
-                        text="Install MetaMask"
-                        variant="outline"
-                    />
+                    {router.pathname === '/my-bitlectro' ? (
+                        <TextButton
+                            text="My Bitlectro"
+                            variant="underlined"
+                        />
+                    ) : (
+                        <Button
+                            text="Install MetaMask"
+                            variant="outline"
+                            onClick={() => router.push('/my-bitlectro')}
+                        />
+                    )}
                 </div>
 
                 {modalOpen ? <Close onClick={onClick} /> : <Hamburger onClick={onClick} />}

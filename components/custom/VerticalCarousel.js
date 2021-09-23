@@ -3,7 +3,6 @@ import gsap from 'gsap'
 
 const VerticalCarousel = () => {
 
-
     const animateCarousel = (targetName, _duration) => {
         const { innerWidth } = window;
         const count = 10
@@ -22,7 +21,6 @@ const VerticalCarousel = () => {
 
 
         const posToHide = document.querySelector(".hero").clientHeight + boxHeight + 110;
-
 
         const totalHeight = boxHeight * count + gap * count
         const ele = document.querySelectorAll(targetName)

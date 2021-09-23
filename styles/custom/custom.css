@@ -99,6 +99,41 @@
     color: var(--midGray900);
 }
 
+.custom-button-text-primary, .custom-button-text-secondary, .custom-button-text-underlined {
+    background: linear-gradient(90deg, #9954F0 0%, #6B11DC 100%);
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    color: var(--pureWhite);
+    font-size: var(--subHeadingMd);
+    font-family: Platform;
+}
+
+.custom-button-text-primary:hover {
+    background: linear-gradient(90deg, #A366F2 0%, #7A2AE0 100%);;
+}
+
+.custom-button-text-secondary {
+    background: var(--midGray700);
+}
+
+.custom-button-text-secondary:hover {
+    background: var(--midGray800);
+}
+
+.custom-button-text-underlined {
+    background: transparent;
+    border-radius: 0;
+    border: 1px solid var(--midGray900) !important;
+    height: 100%;
+}
+
+.custom-button-text-underlined:hover {
+    border-bottom: 1px solid var(--pureWhite) !important;
+}
+
 .custom-badge {
     background: var(--pureWhite);
     border-radius: 15px;

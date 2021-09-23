@@ -37,6 +37,6 @@
 }
 
 .galleryImage:hover {
-    cursor: url('/pointer.svg') 28 32, pointer;
+    cursor: url('/pointer.svg') 0 0, pointer;
     color: var(--pureWhite);
 }
