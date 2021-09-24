@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import NavMenu from './navmenu'
@@ -9,10 +9,17 @@ import { Logo, Hamburger, Close } from '../custom/svgs'
 
 const Navbar = () => {
     const [modalOpen, setModalOpen] = useState(false)
+    const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
 
     const onClick = () => setModalOpen(!modalOpen)
 
     const router = useRouter()
+
+    useEffect(() => {
+        if (window.ethereum !== undefined) {
+            setMetaMaskInstalled(true)
+        }
+    }, [])
 
     return (
         <section className={`${modalOpen ? 'modal nav-bar' : undefined}`} style={{zIndex: '7'}}>
@@ -26,16 +33,17 @@ const Navbar = () => {
                 <NavMenu menus={['Collections', 'Gallery', 'News', 'About']} />
 
                 <div className="mobile-button">
-                    {router.pathname === '/my-bitlectro' ? (
+                    {metaMaskInstalled ? (
                         <TextButton
                             text="My Bitlectro"
                             variant="underlined"
+                            onClick={() => router.push('/my-bitlectro')}
                         />
                     ) : (
                         <Button
                             text="Install MetaMask"
                             variant="outline"
-                            onClick={() => router.push('/my-bitlectro')}
+                            onClick={() => window.open('https://metamask.io/download', '_blank')}
                         />
                     )}
                 </div>
