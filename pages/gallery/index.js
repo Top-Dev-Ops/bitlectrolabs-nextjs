@@ -21,17 +21,12 @@ export default function Gallery({ tokens }) {
         if (!containerRef.current) return
         const _app = new ThreeApp(containerRef.current)
         const threeAppStart = async () => {
-            const fileNames = [
-                '1.gif', '2.png', '2.png', '2.png',
-                '1.png', '2.png', '1.png', '1.png',
-                '2.png', '2.png', '1.png', '2.png',
-                '2.png', '2.png', '2.png', '1.png',
-            ]
-
+            const fileNames = tokens.map(token => token.image_original_url)
+            
             _app.setData(fileNames);
             _app.start()
             _app.resize()
-            _app.renderer.domElement.style.display = 'none'
+            _app.renderer.domElement.style.display = 'block'
             setApp(_app)
         }
         threeAppStart()
@@ -45,6 +40,24 @@ export default function Gallery({ tokens }) {
             app.renderer.domElement.style.display = 'none'
         }
     }, [view])
+
+
+    useEffect(() => {
+        if(!app) return;
+        app.moveCamera.toLeft();
+    }, [left])
+    useEffect(() => {
+        if(!app) return;
+        app.moveCamera.toRight();
+    }, [right])
+    useEffect(() => {
+        if(!app) return;
+        app.moveCamera.toUp();
+    }, [up])
+    useEffect(() => {
+        if(!app) return;
+        app.moveCamera.toDown();
+    }, [down])
 
     return (
         <section className={`${styles.gallery} ${view ? 'justify-content-between' : undefined}`} ref={containerRef}>

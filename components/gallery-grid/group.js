@@ -92,7 +92,6 @@ export default class Group {
                 Math.pow((this.camera.position.y - group.position.y), 2)
             );
             if (d < this.groupWidth) {
-                // console.log(group.name)
                 this.reAlign(group.name);
             }
         });

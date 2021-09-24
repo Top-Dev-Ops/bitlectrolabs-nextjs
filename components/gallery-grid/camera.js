@@ -5,7 +5,7 @@ export default class MoveCamera {
     constructor(camera, orbit) {
         this.camera = camera;
         this.orbit = orbit;
-        this.speed = 5
+        this.speed = 8
     }
 
 

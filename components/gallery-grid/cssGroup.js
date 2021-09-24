@@ -10,21 +10,20 @@ export default class Group {
         this.data = data;
         this.label = label;
 
-        this.offset = 1;
+        this.offset = 1.5;
 
         this.imageWidth = 3.5;
 
-        this.imageGap = 6;  // imageWidth + Gap
+        this.imageGap = 8.4;  // imageWidth + Gap
 
-        this.numOfImages = Math.ceil(Math.sqrt(data.length)) // Number of Images In Group
-
+        this.numOfImages = Math.floor(Math.sqrt(data.length)) // Number of Images In Group
         this.groupWidth = (this.numOfImages - 1) * this.imageGap + this.imageWidth;
 
         this.groupGap = this.groupWidth + (this.imageGap - this.imageWidth); // GroupWidth + Gap
 
         this.totalWidth = 2 * this.groupGap + this.groupWidth;
 
-        this.numOfGroups = 7;
+        this.numOfGroups = 3;
 
         this.buildGroups();
     }
@@ -82,17 +81,15 @@ export default class Group {
     }
 
     createElement(groupName, fileNumber) {
-        const img = document.createElement('div');
-        img.src = `./images/${this.data[fileNumber]}`;
+        const img = document.createElement('img');
+        img.src = this.data[fileNumber];
         img.classList.add('element');
-
         img.addEventListener('click', () => {
-            console.log('awef')
             this.handleClick(groupName, fileNumber);
         })
         const object = new CSS3DObject(img);
         object.name = groupName + '_' + fileNumber;
-        object.scale.multiplyScalar(0.075)
+        object.scale.multiplyScalar(0.09)
         return object;
     }
 
@@ -115,7 +112,6 @@ export default class Group {
                 Math.pow((this.camera.position.y - group.position.y), 2)
             );
             if (d < this.groupWidth) {
-                // console.log(group.name)
                 this.reAlign(group.name);
             }
         });

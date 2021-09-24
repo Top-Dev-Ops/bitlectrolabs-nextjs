@@ -6,7 +6,7 @@ export default class KeyController {
         this.canvas = canvas;
         this.camera = camera;
         this.orbit = orbit;
-        this.keySpeed = 8;
+        this.keySpeed = 1;
         this.movingTimeout = -1;
         this.direction = { x: 0, y: 0 };
         this.FPS = 50;
@@ -24,16 +24,16 @@ export default class KeyController {
         this.direction = { x: 0, y: 0 }
         switch (event.keyCode) {
             case 39:
-                this.direction.x = 1;
-                break;
-            case 37:
                 this.direction.x = -1;
                 break;
+            case 37:
+                this.direction.x = 1;
+                break;
             case 38:
-                this.direction.y = 1;
+                this.direction.y = -1;
                 break;
             case 40:
-                this.direction.y = -1;
+                this.direction.y = 1;
                 break;
             default:
                 this.direction = { x: 0, y: 0 }
@@ -59,10 +59,14 @@ export default class KeyController {
 
     loop() {
 
-        const _x = this.camera.position.x + this.direction.x * this.keySpeed;
-        const _y = this.camera.position.y + this.direction.y * this.keySpeed;
-        gsap.to(this.camera.position, { duration: 1.2, x: _x, y: _y });
-        gsap.to(this.orbit.target, { duration: 1.2, x: _x, y: _y })
+        this.camera.position.x+= this.direction.x * this.keySpeed;
+        this.camera.position.y+= this.direction.y * this.keySpeed;
+        this.orbit.target.set(this.camera.position.x, this.camera.position.y, 0)
+        
+        // const _x = this.camera.position.x + this.direction.x * this.keySpeed;
+        // const _y = this.camera.position.y + this.direction.y * this.keySpeed;
+        // gsap.to(this.camera.position, { duration: 1.2, x: _x, y: _y });
+        // gsap.to(this.orbit.target, { duration: 1.2, x: _x, y: _y })
 
         this.movingTimeout = window.setTimeout(this.loop.bind(this), 1000 / this.FPS, this.direction);
     }

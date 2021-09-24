@@ -25,7 +25,6 @@ export default class Label {
         this.plane.position.x = x;
         this.plane.position.y = y;
         this.plane.position.z = 0.1;
-        console.log(x, y)
     }
 
     setText(text) {

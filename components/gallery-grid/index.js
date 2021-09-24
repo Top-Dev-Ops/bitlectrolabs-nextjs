@@ -32,7 +32,7 @@ export default class ThreeApp {
         this.orbit.mouseButtons.LEFT = THREE.MOUSE.PAN;
         this.orbit.touches.ONE = THREE.TOUCH.PAN;
         this.orbit.enableDamping = true;
-        this.orbit.dampingFactor = 0.03;
+        this.orbit.dampingFactor = 0.05;
         this.orbit.enableRotate = false;
         this.orbit.enableZoom = false;
 
