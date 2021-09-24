@@ -1,11 +1,15 @@
-const VolumeControl = () => {
+const VolumeControl = ({
+    volume,
+    setVolume,
+}) => {
     return (
         <>
             <input
                 type="range"
                 min={0}
                 max={100}
-                step={1}
+                defaultValue={volume}
+                onChange={(e) => setVolume(e.target.value)}
             />
 
             <style jsx>{`

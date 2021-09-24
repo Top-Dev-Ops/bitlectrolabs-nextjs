@@ -3,7 +3,8 @@ import Button from '../custom/Button'
 import VerticalCarousel from '../custom/VerticalCarousel'
 import HorizontalCarousel from '../custom/HorizontalCarousel'
 
-const Hero = () => {
+const Hero = ({ tokens }) => {
+    console.log(tokens)
     return <section className='hero'>
         <div className="row gx-0 flex-column justify-content-between flex-sm-row">
             <div className="col-12 px-5 col-sm-4 px-sm-0 offset-sm-1 d-flex flex-column justify-content-center">
@@ -19,7 +20,7 @@ const Hero = () => {
             </div>
 
             <div className="d-none d-sm-block">
-                <VerticalCarousel />
+                <VerticalCarousel tokens={tokens} />
             </div>
 
             <div className="d-block d-sm-none pt-4 overflow-hidden">

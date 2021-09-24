@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import gsap from 'gsap'
 
-const VerticalCarousel = () => {
+const VerticalCarousel = ({ tokens }) => {
 
     const animateCarousel = (targetName, _duration) => {
         const { innerWidth } = window;
@@ -70,69 +70,19 @@ const VerticalCarousel = () => {
 
     return (<section className="row">
         <div className="custom-carousel-col-1">
-            <div className="carousel-image-box">
-                <img src='/images/1.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/2.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/3.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/1.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/2.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/3.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/2.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/1.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/2.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/3.png' />
-            </div>
+            {tokens.filter((token, index) => index < 10).map((token) => (
+                <div key={token.id} className="carousel-image-box">
+                    <img src={token.image_original_url} />
+                </div>
+            ))}
         </div>
 
         <div className="custom-carousel-col-2">
-            <div className="carousel-image-box">
-                <img src='/images/1.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/2.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/3.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/1.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/2.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/3.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/2.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/1.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/2.png' />
-            </div>
-            <div className="carousel-image-box">
-                <img src='/images/3.png' />
-            </div>
+            {tokens.filter((token, index) => index >= 10).map((token) => (
+                <div key={token.id} className="carousel-image-box">
+                    <img src={token.image_original_url} />
+                </div>
+            ))}
         </div>
     </section>)
 }

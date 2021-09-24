@@ -1,16 +1,18 @@
 import * as THREE from 'three';
 
+import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
 
 export default class Group {
 
-    constructor(scene, camera, data) {
+    constructor(scene, camera, data, label) {
         this.scene = scene;
         this.camera = camera;
-        this.data = data
+        this.data = data;
+        this.label = label;
 
         this.offset = 1;
 
-        this.imageWidth = 4;
+        this.imageWidth = 3.5;
 
         this.imageGap = 6;  // imageWidth + Gap
 
@@ -68,12 +70,8 @@ export default class Group {
 
         for (var i = 0; i < this.numOfImages; ++i) {
             for (let j = 0; j < this.numOfImages; ++j) {
-                const m = plane.clone();
-                m.material = new THREE.MeshBasicMaterial({
-                    map: this.data[i * this.numOfImages + j]
-                });
-                m.material.needsUpdate = true;
-                m.name = `#id_${i * this.numOfImages + j + 1}`
+                const m = this.createElement(groupName, i * this.numOfImages + j);
+                m.userData.info = `#id_${i * this.numOfImages + j + 1}`
                 m.position.x = -(this.groupWidth - this.imageWidth) / 2 + j * this.imageGap;
                 m.position.y = (this.groupWidth - this.imageWidth) / 2 - this.imageGap * i - this.offset * j;
                 _group.add(m);
@@ -81,6 +79,31 @@ export default class Group {
         }
         this.scene.add(_group);
         return _group;
+    }
+
+    createElement(groupName, fileNumber) {
+        const img = document.createElement('div');
+        img.src = `./images/${this.data[fileNumber]}`;
+        img.classList.add('element');
+
+        img.addEventListener('click', () => {
+            console.log('awef')
+            this.handleClick(groupName, fileNumber);
+        })
+        const object = new CSS3DObject(img);
+        object.name = groupName + '_' + fileNumber;
+        object.scale.multiplyScalar(0.075)
+        return object;
+    }
+
+
+    handleClick(groupName, fileNumber) {
+        const object = this.scene.getObjectByName(groupName + '_' + fileNumber)
+        const pos = new THREE.Vector3();
+        object.getWorldPosition(pos);
+        this.label.setPosition(pos.x, pos.y);
+        this.label.setText(object.userData.info)
+        this.label.show();
     }
 
 

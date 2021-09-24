@@ -2,53 +2,45 @@ import Badge from '../custom/Badge'
 import Divider from '../custom/Divider'
 import { TextButton } from '../custom/Button'
 
-export default function GalleryCard({ extraClassNames, extraStyles }) {
-    const data = {
-        'Count': 'One',
-        'Background': 'Abstract Sunset',
-        'Music': 'Donny',
-        'Percussion': 'Beat 14',
-        'Redeemable?': 'Not Redeemable',
-        'Scarcity': 'Common'
-    }
-    
+export default function GalleryCard({
+    extraClassNames,
+    extraStyles,
+    token,
+}) {
+
     return (
         <section
             className={`gallery-card ${extraClassNames}`}
             style={extraStyles}
         >
             <div className="d-flex flex-column">
-                <h3>ID: 9361</h3>
-                <p>Dreamloops</p>
+                <h3>ID: {token.token_id}</h3>
+                <p>{token.collection.name}</p>
 
                 <div>
-                    <Badge
-                        text={'Big Block'}
-                        extraClassNames="mx-1 d-inline-block"
-                        size="Lg"
-                    />
-                    <Badge
-                        text={'Chrome Pyramid'}
-                        extraClassNames="mx-1 d-inline-block"
-                        size="Lg"
-                    />
-                    <Badge
-                        text={'Artemisia Bust'}
-                        extraClassNames="mx-1 d-inline-block"
-                        size="Lg"
-                    />
+                    {token.owner.user !== null && (
+                        <Badge
+                            text={token.owner.user.username}
+                            extraClassNames="mx-1 d-inline-block"
+                            size="Lg"
+                        />
+                    )}
                 </div>
             </div>
 
             <div className="w-100 d-flex flex-column my-5 my-lg-0">
-                {Object.keys(data).map((key, index) => (
-                    <div key={`gallery_card_${key}_${index}`}>
+                {token.traits.map((trait, index) => (
+                    <div key={`gallery_card_${trait.trait_count}_${index}`}>
                         <div className="d-flex justify-content-between">
-                            <p>{key}</p>
-                            <p className="text-white">{data[key]}</p>
+                            <p className="text-capitalize">
+                                {trait.trait_type}
+                            </p>
+                            <p className="text-white">
+                                {trait.value}
+                            </p>
                         </div>
 
-                        {index !== (Object.keys(data).length - 1) && (
+                        {index !== token.traits.length - 1 && (
                             <Divider extraClassNames="mb-3" />
                         )}
                     </div>

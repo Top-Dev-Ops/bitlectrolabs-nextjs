@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from 'react'
 import GalleryFooter from '../../components/gallery-footer'
 import ThreeApp from '../../components/gallery-grid'
 import GalleryList from '../../components/gallery-list'
+import { axiosDreamloops, axiosOpenSea } from '../../services/axios'
 
 import styles from '../../styles/gallery.module.css'
 
-export default function Gallery() {
+export default function Gallery({ tokens }) {
     const [app, setApp] = useState(null)
     const [view, setView] = useState(true)
     const [left, setLeft] = useState(false)
@@ -19,10 +20,21 @@ export default function Gallery() {
         if (app) return
         if (!containerRef.current) return
         const _app = new ThreeApp(containerRef.current)
-        _app.start()
-        _app.resize()
-        _app.renderer.domElement.style.display = 'block'
-        setApp(_app)
+        const threeAppStart = async () => {
+            const fileNames = [
+                '1.gif', '2.png', '2.png', '2.png',
+                '1.png', '2.png', '1.png', '1.png',
+                '2.png', '2.png', '1.png', '2.png',
+                '2.png', '2.png', '2.png', '1.png',
+            ]
+
+            _app.setData(fileNames);
+            _app.start()
+            _app.resize()
+            _app.renderer.domElement.style.display = 'none'
+            setApp(_app)
+        }
+        threeAppStart()
     }, [])
 
     useEffect(() => {
@@ -49,16 +61,16 @@ export default function Gallery() {
                 <p className={styles.galleryResetFilter}>Reset filter</p> */}
             </div>
 
-            {!view && (
+            {view ? (
+                <div className={styles.galleryTopGradientBackground} />
+            ) : (
                 <GalleryList
                     extraClassNames={'my-5'}
                     left={left}
                     right={right}
+                    tokens={tokens}
+                    tokenSelect={() => {}}
                 />
-            )}
-
-            {view && (
-                <div className={styles.galleryTopGradientBackground} />
             )}
 
             {/* <p
@@ -78,4 +90,19 @@ export default function Gallery() {
             />
         </section>
     )
+}
+
+export async function getStaticProps() {
+    const openSeaUrl = await (await axiosDreamloops.get('/random_selection'))
+        .data
+        .slice(0, 20).map(tokenId => `token_ids=${tokenId}`)
+        .join('&')
+
+    const tokens = await axiosOpenSea.get(`/assets?${openSeaUrl}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
+
+    return {
+        props: {
+            tokens: tokens.data.assets
+        }
+    }
 }

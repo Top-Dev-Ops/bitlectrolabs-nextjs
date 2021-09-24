@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 
 export default class MouseController {
-    constructor(scene, camera, canvas) {
+    constructor(scene, camera, canvas, label) {
         this.scene = scene;
         this.camera = camera;
         this.canvas = canvas;
+        this.label = label;
         this.mouse = new THREE.Vector2();
         this.raycaster = new THREE.Raycaster();
 
@@ -35,8 +36,15 @@ export default class MouseController {
         this.raycaster.setFromCamera(this.mouse, this.camera);
         const intersects = this.raycaster.intersectObjects(this.scene.children, true);
         if (intersects.length > 0) {
-            // console.log('name', intersects[0].object.parent.name)
-            // console.log('point', intersects[0].object.position)
+            const name = intersects[0].object.name;
+            if (name === 'plane') return;
+            const pos = new THREE.Vector3();
+            intersects[0].object.getWorldPosition(pos);
+            this.label.setPosition(pos.x, pos.y);
+            this.label.setText(name)
+            this.label.show();
+        } else {
+            // this.label.hide();
         }
     }
 

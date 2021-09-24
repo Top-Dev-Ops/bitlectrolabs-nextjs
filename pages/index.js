@@ -15,7 +15,15 @@ import { BsArrowRight } from 'react-icons/bs'
 import Prismic from 'prismic-javascript'
 import { Client } from '../prismic-configuration'
 
-export default function Home({ marketingCards, roadmaps, partners, marketingBanners }) {
+import { axiosDreamloops, axiosOpenSea } from '../services/axios'
+
+export default function Home({
+  marketingCards,
+  roadmaps,
+  partners,
+  marketingBanners,
+  tokens
+}) {
 
   return (
     <>
@@ -26,7 +34,7 @@ export default function Home({ marketingCards, roadmaps, partners, marketingBann
       </Head>
 
       <main className="w-100">
-        <Hero />
+        <Hero tokens={tokens} />
 
         <Subscribe />
 
@@ -177,6 +185,13 @@ export async function getStaticProps() {
   const marketingBanners = await Client().query(
     Prismic.Predicates.at('document.type', 'marketing_banner')
   )
+  
+  const openSeaUrl = await (await axiosDreamloops.get('/random_selection'))
+    .data
+    .slice(0, 20).map(tokenId => `token_ids=${tokenId}`)
+    .join('&')
+  
+  const tokens = await axiosOpenSea.get(`/assets?${openSeaUrl}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
 
   return {
     props: {
@@ -184,6 +199,7 @@ export async function getStaticProps() {
       roadmaps: roadmaps.results.sort((a, b) => new Date(a.data.date) - new Date(b.data.date)),
       partners: partners.results.sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date)),
       marketingBanners: marketingBanners.results.sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date)),
+      tokens: tokens.data.assets,
     }
   }
 } 

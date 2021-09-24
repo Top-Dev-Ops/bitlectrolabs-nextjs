@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
-
-const SoundSwitch = ({  }) => {
-    const [state, setState] = useState(false)
+const SoundSwitch = ({ onOff, setOnOff }) => {
 
     return (
         <div
             className="d-inline-flex"
-            onClick={() => setState(!state)}
+            onClick={() => setOnOff(!onOff)}
         >
-            {state ? (
+            {onOff ? (
                 <svg
                     width="19"
                     height="20"
@@ -35,14 +32,14 @@ const SoundSwitch = ({  }) => {
             )}
             
             <span className="mx-2" style={{fontSize: 'var(--subHeadingSm)'}}>
-                {state ? 'Sound On' : 'Sound Off'}
+                {onOff ? 'Sound On' : 'Sound Off'}
             </span>
             <style jsx>{`
                 div:hover {
                     cursor: url('/pointer1.svg') 0 0, pointer;
                 }
                 span {
-                    color: ${state ? 'var(--pureWhite)' : 'var(--midGray400)'}
+                    color: ${onOff ? 'var(--pureWhite)' : 'var(--midGray400)'}
                 }
             `}</style>
         </div>
