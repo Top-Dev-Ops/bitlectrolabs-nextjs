@@ -13,6 +13,7 @@ export default function About({
     subtitle,
     contents
 }) {
+
     return (
         <>
             <Head>
@@ -69,7 +70,7 @@ export default function About({
                             </div>
                         </div>
                     ) : (
-                        <>
+                        <div key={`about_content_${index}`}>
                             <div className={styles.gradientSection}></div>
 
                             <div className={styles.aboutGraySection}>
@@ -89,7 +90,7 @@ export default function About({
                                     {content.about_content_group_footer[0].text}
                                 </h4>
                             </div>
-                        </>
+                        </div>
                     )
                 ))}
 
