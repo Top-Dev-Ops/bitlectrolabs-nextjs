@@ -29,8 +29,9 @@ export default function MyBitlectro() {
             const web3 = new Web3(provider)
             const addresses = await web3.eth.getAccounts()
 
-            const tokens = await axiosOpenSea.get(`/assets?owner=${addresses[0]}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
-            // const tokens = await axiosOpenSea.get('/assets?owner=0xdCD0739CA8935f13f1253a6c5C95D406560e5f6E&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff')
+            // const tokens = await axiosOpenSea.get(`/assets?owner=${addresses[0]}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
+            const tokens = await axiosOpenSea.get('/assets?owner=0xdCD0739CA8935f13f1253a6c5C95D406560e5f6E&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff')
+
             setTokens(tokens.data.assets)
         }
         connectWallet()
@@ -65,7 +66,6 @@ export default function MyBitlectro() {
 
                     
                     <GalleryList
-                        extraClassNames={'my-5'}
                         left={left}
                         right={right}
                         tokens={tokens}
@@ -86,18 +86,3 @@ export default function MyBitlectro() {
         </section>
     )
 }
-
-// export async function getStaticProps() {
-//     const openSeaUrl = await (await axiosDreamloops.get('/random_selection'))
-//         .data
-//         .slice(0, 20).map(tokenId => `token_ids=${tokenId}`)
-//         .join('&')
-
-//     const tokens = await axiosOpenSea.get(`/assets?${openSeaUrl}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
-
-//     return {
-//         props: {
-//             tokens: tokens.data.assets,
-//         }
-//     }
-// }

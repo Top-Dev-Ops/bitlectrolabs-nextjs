@@ -1,121 +1,130 @@
 import * as THREE from 'three';
-
 import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
+
+const rows = 7;
+const cols = 9;
+const offset = 1;
+const w = 4;
+const gap = 1.8;
+const N = rows * cols;
+const D = w + gap; // Distance Between Cards
 
 export default class Group {
 
     constructor(scene, camera, data, label) {
         this.scene = scene;
         this.camera = camera;
+        this.center = new THREE.Vector2(0, 0); // Camera Position : [center.x  D - D/2 , center.x  D + D/2]
         this.data = data;
         this.label = label;
-
-        this.offset = 1.5;
-
-        this.imageWidth = 3.5;
-
-        this.imageGap = 8.4;  // imageWidth + Gap
-
-        this.numOfImages = Math.floor(Math.sqrt(data.length)) // Number of Images In Group
-        this.groupWidth = (this.numOfImages - 1) * this.imageGap + this.imageWidth;
-
-        this.groupGap = this.groupWidth + (this.imageGap - this.imageWidth); // GroupWidth + Gap
-
-        this.totalWidth = 2 * this.groupGap + this.groupWidth;
-
-        this.numOfGroups = 3;
-
-        this.buildGroups();
+        this.cards = [];
+        this.gifCounter = 0;
+        this.buildGroup();
     }
 
-    reAlign(activeGroupNumber) {
-        const restGroups = this.groups.filter(group => group.name !== `${activeGroupNumber}`);
-        let count = 0;
-        for (let i = 0; i < this.numOfGroups; ++i) {
-            for (let j = 0; j < this.numOfGroups; ++j) {
-                if (i === Math.floor(this.numOfGroups / 2) && j === Math.floor(this.numOfGroups / 2)) continue;
-                const g = restGroups[count];
 
-                g.position.x = this.groups[activeGroupNumber].position.x - this.groupGap * (Math.ceil(this.numOfGroups / 2) - 1) + j * this.groupGap;
-
-                g.position.y = this.groups[activeGroupNumber].position.y - this.groupGap * (Math.ceil(this.numOfGroups / 2) - 1) + i * this.groupGap;
-                count++;
-            }
-        }
-    }
-
-    buildGroups() {
-        this.groups = [];
-
-        for (let i = 0; i < this.numOfGroups; ++i) {
-            for (let j = 0; j < this.numOfGroups; ++j) {
-                const g = this.createGroup(`${i * this.numOfGroups + j}`);
-                g.position.x = -this.groupGap * (Math.ceil(this.numOfGroups / 2) - 1) + j * this.groupGap;
-                g.position.y = -this.groupGap * (Math.ceil(this.numOfGroups / 2) - 1) + i * this.groupGap;
-                this.groups.push(g);
-            }
-        }
-        // this.reAlign('2');
-    }
-
-    createGroup(groupName) {
-        const _group = new THREE.Group();
-        _group.name = groupName;
-
-        const plane = new THREE.Mesh(
-            new THREE.PlaneGeometry(this.imageWidth, this.imageWidth),
-            new THREE.MeshBasicMaterial({})
-        );
-
-        for (var i = 0; i < this.numOfImages; ++i) {
-            for (let j = 0; j < this.numOfImages; ++j) {
-                const m = this.createElement(groupName, i * this.numOfImages + j);
-                m.userData.info = `#id_${i * this.numOfImages + j + 1}`
-                m.position.x = -(this.groupWidth - this.imageWidth) / 2 + j * this.imageGap;
-                m.position.y = (this.groupWidth - this.imageWidth) / 2 - this.imageGap * i - this.offset * j;
-                _group.add(m);
-            }
-        }
-        this.scene.add(_group);
-        return _group;
-    }
-
-    createElement(groupName, fileNumber) {
+    buildGroup() {
         const img = document.createElement('img');
-        img.src = this.data[fileNumber];
         img.classList.add('element');
-        img.addEventListener('click', () => {
-            this.handleClick(groupName, fileNumber);
-        })
         const object = new CSS3DObject(img);
-        object.name = groupName + '_' + fileNumber;
-        object.scale.multiplyScalar(0.09)
-        return object;
+        object.scale.multiplyScalar(0.075)
+
+        for (let i = 0; i < rows; ++i) {
+            this.cards[i] = [];
+            for (let j = 0; j < cols; ++j) {
+                const card = object.clone();
+                card.name = `card_${i}_${j}`;
+                card.userData.fileNumber = (i * cols + j) % this.data.length;
+                card.element.src = this.data[card.userData.fileNumber].image_original_url;
+                card.element.onmousedown = () => { this.handleClick(card); }
+                card.position.x = (j - Math.floor(cols / 2)) * (w + gap);
+                card.position.y = (i - Math.floor(rows / 2)) * (w + gap) - offset * j;
+                this.scene.add(card);
+                this.cards[i][j] = card;
+            }
+        }
     }
 
 
-    handleClick(groupName, fileNumber) {
-        const object = this.scene.getObjectByName(groupName + '_' + fileNumber)
+    handleClick(card) {
         const pos = new THREE.Vector3();
-        object.getWorldPosition(pos);
+        card.getWorldPosition(pos);
         this.label.setPosition(pos.x, pos.y);
-        this.label.setText(object.userData.info)
+        this.label.setText(this.data[card.userData.fileNumber].token_id)
         this.label.show();
     }
 
+    range(camPos, center) {
+        return (center * D + D / 2 > camPos && camPos > center * D - D / 2) ? true : false;
+    }
 
-
-    tick() {
-        this.groups.forEach(group => {
-            const d = Math.sqrt(
-                Math.pow((this.camera.position.x - group.position.x), 2) +
-                Math.pow((this.camera.position.y - group.position.y), 2)
-            );
-            if (d < this.groupWidth) {
-                this.reAlign(group.name);
-            }
-        });
+    getCameraState() {
+        let state = { x: 0, y: 0 }
+        if (this.range(this.camera.position.x, this.center.x + 1)) { state.x = 1; this.center.x++ }
+        if (this.range(this.camera.position.x, this.center.x - 1)) { state.x = -1; this.center.x-- }
+        if (this.range(this.camera.position.y, this.center.y + 1)) { state.y = 1; this.center.y++ }
+        if (this.range(this.camera.position.y, this.center.y - 1)) { state.y = -1; this.center.y-- }
+        return state;
     }
 
 
+    tick() {
+        // -1 for right and down, 1 for up and left
+        const { x, y } = this.getCameraState();
+        if (x === 0 && y === 0) return;
+
+        if (x === 1) {
+            for (let i = 0; i < rows; ++i) {
+                this.cards[i][0].position.x = this.cards[i][cols - 1].position.x + D;
+                this.updateGif(this.cards[i][0]);
+            }
+        }
+
+        if (x === -1) {
+            for (let i = 0; i < rows; ++i) {
+                this.cards[i][cols - 1].position.x = this.cards[i][0].position.x - D;
+                this.updateGif(this.cards[i][cols - 1]);
+            }
+        }
+
+        if (y === 1) {
+            for (let j = 0; j < cols; ++j) {
+                this.cards[0][j].position.y = this.cards[rows - 1][j].position.y + D;
+                this.updateGif(this.cards[0][j]);
+            }
+        }
+
+        if (y === -1) {
+            for (let j = 0; j < cols; ++j) {
+                this.cards[rows - 1][j].position.y = this.cards[0][j].position.y - D;
+                this.updateGif(this.cards[rows - 1][j]);
+            }
+        }
+
+
+
+        const newCards = [];
+
+        for (let i = 0; i < rows; ++i) {
+            newCards[i] = [];
+            for (let j = 0; j < cols; ++j) {
+
+                const _i = (i + y === -1) ? rows - 1 :
+                    (i + y === rows) ? 0 : i + y;
+
+                const _j = (j + x === -1) ? cols - 1 :
+                    (j + x === cols) ? 0 : j + x;
+
+                newCards[i][j] = this.cards[_i][_j];
+            }
+        }
+        this.cards = newCards;
+    }
+
+    updateGif(card) {
+        if (this.gifCounter === this.data.length) this.gifCounter = 0;
+        card.element.src = this.data[this.gifCounter].image_original_url;
+        card.userData.fileNumber = this.gifCounter;
+        ++this.gifCounter;
+    }
 }

@@ -12,6 +12,7 @@
     "@ramonak/react-progress-bar": "^3.2.1",
     "axios": "^0.21.4",
     "bootstrap": "^5.0.0-beta3",
+    "emotion": "^11.0.0",
     "gsap": "^3.7.1",
     "lottie-web": "^5.7.13",
     "next": "11.1.2",
@@ -21,6 +22,8 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
     "react-lottie": "^1.2.3",
+    "react-scripts": "^4.0.3",
+    "react-spring": "^9.2.4",
     "three": "^0.132.2",
     "web3": "^1.5.3",
     "web3modal": "^1.9.4"

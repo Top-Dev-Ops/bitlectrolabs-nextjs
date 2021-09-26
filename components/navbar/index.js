@@ -22,7 +22,7 @@ const Navbar = () => {
     }, [])
 
     return (
-        <section className={`${modalOpen ? 'modal nav-bar' : undefined}`} style={{zIndex: '7'}}>
+        <section className={`${modalOpen ? 'modal nav-bar' : undefined}`} style={{zIndex: '9'}}>
             <div className="top-nav-bar">
                 <Link href="/">
                     <a onClick={() => setModalOpen(false)}>

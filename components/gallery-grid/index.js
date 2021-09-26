@@ -46,15 +46,6 @@ export default class ThreeApp {
     }
 
     async start() {
-        // const envTexture = await new RGBELoader().setDataType(THREE.UnsignedByteType).loadAsync('./env.hdr');
-        // var pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-        // pmremGenerator.compileEquirectangularShader();
-        // this.scene.environment = pmremGenerator.fromEquirectangular(envTexture).texture;
-        // envTexture.dispose();
-        // pmremGenerator.dispose();
-
-        // this.scene.add(new THREE.AxesHelper(3))
-
         this.group = new Group(this.scene, this.camera, this.data, this.label);
 
         this.animate()
@@ -72,8 +63,8 @@ export default class ThreeApp {
         this.renderer.setSize(width, height);
     }
 
-    setData(fileNames) {
-        this.data = fileNames;
+    setData(tokens) {
+        this.data = tokens;
     }
 
     animate() {

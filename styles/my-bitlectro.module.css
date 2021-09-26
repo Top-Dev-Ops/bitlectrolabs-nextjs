@@ -1,5 +1,6 @@
 .gallery {
     height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,6 +17,7 @@
 
 .myBitlectro {
     height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 109px 40px 40px 40px;

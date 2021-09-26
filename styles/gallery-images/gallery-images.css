@@ -30,5 +30,6 @@
     width:132px;
     padding:1px;
     text-align: center;
+    font: 20px platform bold;
     background-color: #ffffff;
 }
