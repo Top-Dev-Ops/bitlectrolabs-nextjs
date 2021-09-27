@@ -3,12 +3,12 @@ import gsap from 'gsap'
 
 const VerticalCarousel = ({ tokens }) => {
 
-    let scatter = false;
+    let scatter = false
 
-    let scatterLimit; 
+    let scatterLimit 
 
     const animateCarousel = (targetName, _duration) => {
-        const { innerWidth } = window;
+        const { innerWidth } = window
         const count = 10
 
         const gap = innerWidth > 1600 ? 20 :
@@ -21,14 +21,14 @@ const VerticalCarousel = ({ tokens }) => {
             innerWidth > 1160 ? 160 :
                 innerWidth > 1024 ? 114 :
                     innerWidth > 768 ? 100 :
-                        innerWidth > 576 ? 90 : 114;
+                        innerWidth > 576 ? 90 : 114
 
         scatterLimit =  innerWidth > 1600 ? 1200 :
             innerWidth > 1160 ? 900 :
                 innerWidth > 1024 ? 700 :
                     innerWidth > 768 ? 400 : 300
 
-        const posToHide = document.querySelector(".hero").clientHeight + boxHeight + 110;
+        const posToHide = document.querySelector(".hero").clientHeight + boxHeight + 110
 
         const totalHeight = boxHeight * count + gap * count
         const ele = document.querySelectorAll(targetName)
@@ -42,11 +42,10 @@ const VerticalCarousel = ({ tokens }) => {
             }
         })
 
-        const diffs = [];
-        for (var i = 0; i < ele.length; ++i) {
+        const diffs = []
+        for (let i = 0; i < ele.length; ++i) {
             diffs[i] = -Math.random() * 500
         }
-
 
         const _timeline = gsap.timeline()
         _timeline.to(ele, {
@@ -62,35 +61,43 @@ const VerticalCarousel = ({ tokens }) => {
                     } else {
                         gsap.to(e, { duration: 1, left: 0 })
                     }
-                    const values = e.style.transform.split(/\w+\(|\);?/);
-                    const pxY = values[1].split(/,\s?/g)[1];
+                    const values = e.style.transform.split(/\w+\(|\);?/)
+                    const pxY = values[1].split(/,\s?/g)[1]
                     const y = parseInt(pxY.split('px')[0])
                     e.style.display = y > posToHide ? 'none' : 'block'
                 })
             },
             repeat: -1,
-        });
-        return _timeline;
+        })
+        return _timeline
     }
 
     useEffect(() => {
         let t1 = animateCarousel(".custom-carousel-col-1 .carousel-image-box", 23)
         let t2 = animateCarousel(".custom-carousel-col-2 .carousel-image-box", 23)
 
-        window.addEventListener('resize', () => {
+        const resize = () => {
             t1.kill()
             t2.kill()
             t1 = animateCarousel(".custom-carousel-col-1 .carousel-image-box", 23)
             t2 = animateCarousel(".custom-carousel-col-2 .carousel-image-box", 23)
-        });
+        }
 
-        window.addEventListener('mousemove', e=>{
+        const mousemove = (e) => {
             if(e.clientX < scatterLimit){
-             scatter = false;
-                return;
+                scatter = false
+                return
             }
-            scatter = true;
-        })
+            scatter = true
+        }
+
+        window.addEventListener('resize', resize)
+        window.addEventListener('mousemove', mousemove)
+
+        return () => {
+            window.removeEventListener('resize', resize)
+            window.removeEventListener('mousemove', mousemove)
+        }
     }, [])
 
     return (<section className="row">
