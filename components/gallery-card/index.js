@@ -57,6 +57,7 @@ export default function GalleryCard({
                     text={'View on OpenSea'}
                     variant={'primary'}
                     extraClassNames="w-100"
+                    onClick={() => window.open(token.permalink, '_blank')}
                 />
             </div>
         </section>

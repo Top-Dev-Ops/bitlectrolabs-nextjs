@@ -27,9 +27,28 @@
 }
 
 .labelElement{
+    pointer-events: none;
     width:132px;
-    padding:1px;
-    text-align: center;
-    font: 20px platform bold;
     background-color: #ffffff;
+    overflow: hidden;
+    border: 2px inset rgba(37,164,29,0.04);
+    /* animation: 3s linear 0s infinite alternate move; */
 }
+
+.labelElement p {
+    pointer-events: none;
+    padding:0;
+    margin:0;
+    animation: 6s linear infinite move;
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(90%);
+    }
+
+    100% {
+        transform: translateX(-90%);
+    }
+}
+

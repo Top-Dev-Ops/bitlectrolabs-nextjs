@@ -20,10 +20,12 @@ export default function Button({ icon, text, variant, onClick }) {
     )
 }
 
-export const ArrowButton = ({ direction, onClick, extraClassNames }) => {
+export const ArrowButton = ({ direction, onClick, onMouseDown, onMouseUp, extraClassNames }) => {
     return (
         <button
             className={`border-0 outline-0 custom-button-arrow ${extraClassNames}`}
+            onMouseDown={() => onMouseDown(direction)}
+            onMouseUp={() => onMouseUp(direction)}
             onClick={onClick}
         >
             <Arrow direction={direction} />
@@ -39,11 +41,11 @@ export const TextButton = ({ text, onClick, variant, extraClassNames, extraStyle
 
     return (
         <button
-            className={`${classNames} border-0 ${extraClassNames}`}
+            className={`${classNames} text-capitalize border-0 ${extraClassNames}`}
             style={extraStyles}
             onClick={onClick}
         >
-            {text}
+            {text.includes('_') ? text.split('_')[0] : text}
         </button>
     )
 }
@@ -63,7 +65,7 @@ export const SVGButton = ({ icon, badge, onClick, extraClassNames, onMouseEnter,
     )
 }
 
-export const RadioButton = ({ text, onChange, reset }) => {
+export const RadioButton = ({ text, onChange, reset, extraClassNames }) => {
     const [checked, setChecked] = useState(false)
 
     const onClick = () => {
@@ -74,7 +76,7 @@ export const RadioButton = ({ text, onChange, reset }) => {
     useEffect(() => setChecked(false), [reset])
 
     return (
-        <section>
+        <section className={extraClassNames}>
             <div className="radio-button" onClick={onClick}>
                 <div className={checked && 'checked'} />
 

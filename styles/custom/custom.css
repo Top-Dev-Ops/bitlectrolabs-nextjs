@@ -59,7 +59,7 @@
 }
 
 .custom-button-arrow:hover {
-    opacity: .8;
+    background: var(--midGray600);
 }
 
 .custom-button-svg {

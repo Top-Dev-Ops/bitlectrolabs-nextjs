@@ -28,9 +28,9 @@
     color: var(--pureWhite);
 }
 
-@media (min-width: 360px) {
+@media (min-width: 320px) {
     .termsContent {
-        width: 320px;
+        width: 90%;
     }
 }
 
@@ -43,11 +43,5 @@
 @media (min-width: 768px) {
     .termsContent {
         width: 688px;
-    }
-}
-
-@media (max-width: 359px) {
-    .termsContent {
-        width: 90%;
     }
 }

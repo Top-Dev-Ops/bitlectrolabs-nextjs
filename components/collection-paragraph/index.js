@@ -8,7 +8,7 @@ export default function CollectionParagraph({
         <section className={`collection-paragraph ${extraClassNames}`}>
             <div className="row gx-0">
                 <div className="col-12 col-md-3">
-                    <h4>{heading}</h4>
+                    <h4 className="mt-3">{heading}</h4>
                 </div>
 
                 <div className="col-12 col-md-9 col-xl-8 offset-xl-1">

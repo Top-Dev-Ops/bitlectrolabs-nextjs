@@ -9,11 +9,12 @@ import GalleryFilter from './gallery-filter'
 
 const GalleryFooter = ({
     view,
+    attributes,
     changeView,
     onClickLeft,
     onClickRight,
-    onClickUp,
-    onClickDown,
+    onMouseDown,
+    onMouseUp,
 }) => {
     const [activeTab, setActiveTab] = useState('Dreamloops')
     const [modalOpen, setModalOpen] = useState(false)
@@ -22,10 +23,21 @@ const GalleryFooter = ({
 
     const router = useRouter()
 
+    const filters = {}
+    attributes.forEach(attribute => {
+        if (Object.keys(filters).includes(attribute.trait_type)) {
+            filters[attribute.trait_type] = [...filters[attribute.trait_type], attribute.value]
+        } else {
+            filters[attribute.trait_type] = []
+        }
+    })
+
     return (
         <>
             {modalOpen ?
-                <GalleryFilter onClose={() => {
+                <GalleryFilter
+                    attributes={filters}
+                    onClose={() => {
                         setHoverGridList(false);
                         setHoverSettings(false);
                         setModalOpen(false)
@@ -125,12 +137,34 @@ const GalleryFooter = ({
                         className="gallery-footer-arrow w-100 d-inline-flex justify-content-center align-items-end"
                         style={{top: view ? '-50%' : '0'}}
                     >
-                        <ArrowButton direction="left" extraClassNames={'mx-1'} onClick={onClickLeft} />
+                        <ArrowButton
+                            direction="left"
+                            extraClassNames={'mx-1'}
+                            onMouseDown={onMouseDown}
+                            onMouseUp={onMouseUp}
+                            onClick={onClickLeft}
+                        />
                         {view && <div className="d-inline-flex flex-column mr-2">
-                            <ArrowButton direction="up" extraClassNames={'mx-1 mb-1'} onClick={onClickUp} />
-                            <ArrowButton direction="down" extraClassNames={'mx-1 mt-1'} onClick={onClickDown} />
+                            <ArrowButton
+                                direction="up"
+                                extraClassNames={'mx-1 mb-1'}
+                                onMouseDown={onMouseDown}
+                                onMouseUp={onMouseUp}
+                            />
+                            <ArrowButton
+                                direction="down"
+                                extraClassNames={'mx-1 mt-1'}
+                                onMouseDown={onMouseDown}
+                                onMouseUp={onMouseUp}
+                            />
                         </div>}
-                        <ArrowButton direction="right" extraClassNames="mx-1" onClick={onClickRight} />
+                        <ArrowButton
+                            direction="right"
+                            extraClassNames="mx-1"
+                            onClick={onClickRight}
+                            onMouseDown={onMouseDown}
+                            onMouseUp={onMouseUp}
+                        />
                     </div>
                 </section>
             }

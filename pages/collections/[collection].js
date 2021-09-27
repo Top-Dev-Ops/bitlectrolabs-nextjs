@@ -13,14 +13,15 @@ import styles from '../../styles/collection.module.css'
 import { Client } from '../../prismic-configuration'
 import Prismic from 'prismic-javascript'
 
+import { axiosDreamloops, axiosOpenSea } from '../../services/axios'
+
 export default function Collection({
     hero,
-    heroImages,
     overview,
     paragraph,
-    statisticses
+    statisticses,
+    tokens
 }) {
-
     return (
         <>
             <Head>
@@ -34,7 +35,8 @@ export default function Collection({
                     <CollectionHero hero={hero.data} />
 
                     <CollectionImages
-                        images={heroImages.length > 0 ? heroImages[0].data.single_image_group : []}
+                        images={tokens.length > 0 ? tokens.map(token => token.image_original_url) : []}
+                        // images={heroImages.length > 0 ? heroImages[0].data.single_image_group : []}
                     />
 
                     <CollectionSubHeading
@@ -51,7 +53,7 @@ export default function Collection({
                         />
                     ))}
                     
-                    {paragraph.length > 0 && paragraph.data.additional_information.map((paragraph, index) => (
+                    {paragraph.data !== undefined && paragraph.data.additional_information.map((paragraph, index) => (
                         <CollectionParagraph
                             key={`collection_paragraph_${index}`}
                             heading={`${paragraph.additional_information_title[0].text}`}
@@ -114,6 +116,13 @@ export async function getStaticProps({ params }) {
     const overview = overviews.results.filter(item => item.data.collection_name[0].text === params.collection)
     const paragraph = paragraphs.results.filter(item => item.data.collection_name[0].text === params.collection)
     const statisticses = statisticss.results.filter(item => item.data.collection_name[0].text === params.collection)
+
+    const openSeaUrl = await (await axiosDreamloops.get('/random_selection'))
+        .data
+        .slice(0, 20).map(tokenId => `token_ids=${tokenId}`)
+        .join('&')
+
+    const tokens = await axiosOpenSea.get(`/assets?${openSeaUrl}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
     
     return {
         props: {
@@ -122,6 +131,7 @@ export async function getStaticProps({ params }) {
             paragraph: paragraph.length > 0 ? paragraph[0] : [],
             heroImages,
             statisticses,
+            tokens: tokens.data.assets,
         }
     }
 }

@@ -4,8 +4,8 @@ const CollectionImages = ({ images }) => {
             {Array.from(Array(6).keys()).map(index => images[index] === undefined ?
                 undefined :
                 <img
-                    key={`collection_image_${images[index].single_image.url}${index}`}
-                    src={images[index].single_image.url}
+                    key={`collection_image_${index}`}
+                    src={images[index]}
                 />
             )}
         </section>

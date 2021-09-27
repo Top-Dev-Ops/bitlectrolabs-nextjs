@@ -45,6 +45,14 @@
     left: calc(50% - 100px);
     z-index: 5;
 }
+.collection-images img:first-child:hover,
+.collection-images img:nth-child(2):hover,
+.collection-images img:nth-child(3):hover,
+.collection-images img:nth-child(4):hover,
+.collection-images img:nth-child(5):hover,
+.collection-images img:nth-child(6):hover {
+    z-index: 6;
+}
 
 @media (max-width: 1200px) {
     .collection-images {

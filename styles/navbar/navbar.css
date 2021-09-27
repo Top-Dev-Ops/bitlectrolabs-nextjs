@@ -94,3 +94,7 @@
 .top-nav-bar .nav-menu .nav-menu-item a:hover {
     color: var(--midGray200);
 }
+
+.modal.nav-bar h2:hover {
+    cursor: pointer;
+}

@@ -9,16 +9,23 @@ export default function GalleryList({
     tokens,
     tokenSelect
 }) {
+
+    const passTokens = tokens.length > 0 && tokens.length > 6 ? (
+        tokens
+     ) : tokens.length > 0 ? (
+        tokens.concat([...Array(7 - tokens.length).keys()].map(index => tokens[index % tokens.length]))
+     ) : []
+
     return (
         <>
-            {tokens.length > 0 && (
+            {passTokens.length > 0 && (
                 <>
                     <section className="gallery-list">
                         <div className="d-none d-xl-block w-100 h-100">
                             <XlGalleryList
                                 left={left}
                                 right={right}
-                                tokens={tokens}
+                                tokens={passTokens}
                                 tokenSelect={tokenSelect}
                             />
                         </div>
@@ -26,7 +33,7 @@ export default function GalleryList({
                             <LgGalleryList
                                 left={left}
                                 right={right}
-                                tokens={tokens}
+                                tokens={passTokens}
                                 tokenSelect={tokenSelect}
                             />
                         </div>
@@ -34,7 +41,7 @@ export default function GalleryList({
                             <MdGalleryList
                                 left={left}
                                 right={right}
-                                tokens={tokens}
+                                tokens={passTokens}
                                 tokenSelect={tokenSelect}
                             />
                         </div>
@@ -42,7 +49,7 @@ export default function GalleryList({
                             <SmGalleryList
                                 left={left}
                                 right={right}
-                                tokens={tokens}
+                                tokens={passTokens}
                                 tokenSelect={tokenSelect}
                             />
                         </div>

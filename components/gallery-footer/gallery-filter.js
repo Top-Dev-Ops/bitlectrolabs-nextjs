@@ -1,4 +1,4 @@
-import { useState } from "react"
+import react, { useState } from "react"
 
 import { TextButton, RadioButton } from "../custom/Button"
 import Search from "../custom/Search"
@@ -6,12 +6,12 @@ import { CloseFilter } from "../custom/svgs/Close"
 
 import GalleryElements from "./gallery-elements"
 
-export default function GalleryFilter({ onClose }) {
-    const [activeTab, setActiveTab] = useState('Elements')
+export default function GalleryFilter({ attributes, onClose }) {
+    const [activeTab, setActiveTab] = useState(Object.keys(attributes).length > 0 ? Object.keys(attributes)[0] : '')
     const [filters, setFilters] = useState([])
     const [resetFilters, setResetFilters] = useState(false)
 
-    const items = ['Elements', 'Background', 'Music', 'Scarcity', 'Redeemable', 'Count']
+    const headers = Object.keys(attributes)
     
     const alphabets = Array.from(Array(26)).map((e, i) => String.fromCharCode(i + 65))
 
@@ -46,6 +46,7 @@ export default function GalleryFilter({ onClose }) {
 
     return (
         <section className={`gallery-filter ${(activeTab === 'Redeemable' || activeTab === 'Count') && 'justify-content-start'}`}>
+            {/* FILTER HEADERS */}
             <div className="w-100 row gx-0 flex-row-reverse">
                 <div className="gallery-filter-header">
                     <h2 className="d-block d-lg-none">Filter by</h2>
@@ -60,13 +61,13 @@ export default function GalleryFilter({ onClose }) {
                         className="gallery-filter-text-button mr-0 mx-xl-2 my-2"
                         style={{padding: '4px', background: 'var(--midGray700)'}}
                     >
-                        {items.map(item => (
+                        {headers.map(header => (
                             <TextButton
-                                key={item}
-                                text={item}
-                                extraClassNames={`${activeTab === item ? 'active' : undefined} my-1 my-lg-0 mx-2 mx-lg-0 px-3`}
-                                extraStyles={{background: `${activeTab === item ? 'var(--pureWhite)' : 'var(--midGray700)'}`}}
-                                onClick={() => setActiveTab(item)}
+                                key={header}
+                                text={header}
+                                extraClassNames={`${activeTab === header ? 'active' : undefined} my-1 my-lg-0 mx-2 mx-lg-0 px-3`}
+                                extraStyles={{background: `${activeTab === header ? 'var(--pureWhite)' : 'var(--midGray700)'}`}}
+                                onClick={() => setActiveTab(header)}
                             />
                         ))}
                     </div>
@@ -76,40 +77,14 @@ export default function GalleryFilter({ onClose }) {
             </div>
 
             <div className="gallery-filter-content">
-                {activeTab === 'Elements' && (
-                    <GalleryElements
-                        checkFilters={checkFilters}
-                        resetFilters={resetFilters}
-                    />
-                )}
-                {activeTab === 'Redeemable' && (
-                    <div className="gallery-filter-content-grid">
-                        <RadioButton
-                            text={'Redeemable'}
-                            onChange={checkFilters}
-                            reset={resetFilters}
-                        />
-                        <RadioButton
-                            text={'Not redeemable'}
-                            onChange={checkFilters}
-                            reset={resetFilters}
-                        />
-                    </div>
-                )}
-                {activeTab === 'Count' && (
-                    <div className="gallery-filter-content-grid">
-                        {Array.from(Array(7)).map((e, i) => (
-                            <RadioButton
-                                key={`count_${i}`}
-                                text={`${i+1}`}
-                                onChange={checkFilters}
-                                reset={resetFilters}
-                            />
-                        ))}
-                    </div>
-                )}
+                <GalleryElements
+                    filters={attributes[activeTab]}
+                    checkFilters={checkFilters}
+                    resetFilters={resetFilters}
+                />
             </div>
-            
+
+            {/* SELECTED FILTERS AT LEFT HANDSIDE */}
             {filters.length > 0 && (
                 <>
                     <div className="gallery-filter-search">
@@ -137,6 +112,7 @@ export default function GalleryFilter({ onClose }) {
                 </>
             )}
 
+            {/* SCROLLBAR A-Z AT THE VERY RIGHT HANDSIDE */}
             <div className="gallery-filter-scrollbar">
                 {alphabets.map(alphabet => (
                     <a
@@ -147,8 +123,14 @@ export default function GalleryFilter({ onClose }) {
                         {alphabet}
                     </a>
                 ))}
+                <a
+                    className="text-white"
+                    href={`#col_0-9`}
+                    key={`search_0-9`}
+                >0-9</a>
             </div>
 
+            {/* CLOSE BUTTON */}
             <CloseFilter
                 extraClassNames="d-block"
                 onClick={onClose}

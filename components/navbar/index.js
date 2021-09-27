@@ -22,7 +22,7 @@ const Navbar = () => {
     }, [])
 
     return (
-        <section className={`${modalOpen ? 'modal nav-bar' : undefined}`} style={{zIndex: '9'}}>
+        <section className={`${modalOpen ? 'modal nav-bar' : undefined}`} style={{zIndex: '12'}}>
             <div className="top-nav-bar">
                 <Link href="/">
                     <a onClick={() => setModalOpen(false)}>
@@ -53,25 +53,38 @@ const Navbar = () => {
 
             {modalOpen && <div className="p-3">
                 <h2 style={{color: 'var(--midGray700)'}}>Sale</h2>
-                <Link href="/collections">
-                    <h2 onClick={onClick}>Collections</h2>
-                </Link>
-                <Link href="/gallery">
-                    <h2 onClick={onClick}>Gallery</h2>
-                </Link>
-                <Link href="/news">
-                    <h2 onClick={onClick}>News</h2>
-                </Link>
-                <Link href="/about">
-                    <h2 onClick={onClick}>About</h2>
-                </Link>
+
+                <h2 onClick={() => {
+                        router.push('/collections')
+                        onClick()
+                }}>
+                    Collections
+                </h2>
+                <h2 onClick={() => {
+                        router.push('/gallery')
+                        onClick()
+                }}>
+                    Gallery
+                    </h2>
+                <h2 onClick={() => {
+                        router.push('/news')
+                        onClick()
+                }}>
+                    News
+                </h2>
+                <h2 onClick={() => {
+                        router.push('/about')
+                        onClick()
+                }}>
+                    About
+                </h2>
 
                 <p className="mt-5">Visit on desktop for better</p>
-                <p className="text-white mb-5">NFT experience</p>
+                <p className="text-white mb-2">NFT experience</p>
 
                 <div className="row gx-0">
-                    <div className="col-12 col-sm-6 mb-5">
-                        <Social extraClassNames={'bg-transparent'} />
+                    <div className="col-12 col-sm-6 mb-2">
+                        <Social extraClassNames={'bg-transparent justify-items-start'} />
                     </div>
                     <div className="col-12 d-flex flex-row justify-content-between">
                         <p>©BitlectroLabs 2021</p>

@@ -9,14 +9,14 @@ import { axiosDreamloops, axiosOpenSea } from '../../services/axios'
 
 import styles from '../../styles/gallery.module.css'
 
-export default function Gallery({ tokens }) {
+export default function Gallery({ tokens, attributes }) {
     const [app, setApp] = useState(null)
-    const [view, setView] = useState(false)
+    const [view, setView] = useState(true)
     const [left, setLeft] = useState(false)
     const [right, setRight] = useState(false)
-    const [up, setUp] = useState(false)
-    const [down, setDown] = useState(false)
-
+    const [up, setUp] = useState('')
+    const [down, setDown] = useState('')
+    
     const containerRef = useRef(null)
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function Gallery({ tokens }) {
             _app.setData(tokens);
             _app.start()
             _app.resize()
-            _app.renderer.domElement.style.display = 'none'
+            _app.renderer.domElement.style.display = 'block'
             setApp(_app)
         }
         threeAppStart()
@@ -42,22 +42,16 @@ export default function Gallery({ tokens }) {
         }
     }, [view])
 
+    useEffect(() => {
+        if(!app) return;
+        app.keyController.mouseUp();
+        setDown('')
+    }, [up])
 
     useEffect(() => {
         if(!app) return;
-        app.moveCamera.toLeft();
-    }, [left])
-    useEffect(() => {
-        if(!app) return;
-        app.moveCamera.toRight();
-    }, [right])
-    useEffect(() => {
-        if(!app) return;
-        app.moveCamera.toUp();
-    }, [up])
-    useEffect(() => {
-        if(!app) return;
-        app.moveCamera.toDown();
+        app.keyController.mouseDown(down)
+        setUp('')
     }, [down])
 
     return (
@@ -102,11 +96,12 @@ export default function Gallery({ tokens }) {
 
                 <GalleryFooter
                     view={view}
+                    attributes={attributes}
                     changeView={() => setView(!view)}
                     onClickLeft={() => setLeft(!left)}
                     onClickRight={() => setRight(!right)}
-                    onClickUp={() => setUp(!up)}
-                    onClickDown={() => setDown(!down)}
+                    onMouseDown={(arrow) => setDown(arrow)}
+                    onMouseUp={(arrow) => setUp(arrow)}
                 />
             </section>
         </>
@@ -114,6 +109,8 @@ export default function Gallery({ tokens }) {
 }
 
 export async function getStaticProps() {
+    const attributes = await axiosDreamloops.get('/attributes')
+
     const openSeaUrl = await (await axiosDreamloops.get('/random_selection'))
         .data
         .slice(0, 20).map(tokenId => `token_ids=${tokenId}`)
@@ -123,7 +120,8 @@ export async function getStaticProps() {
 
     return {
         props: {
-            tokens: tokens.data.assets
+            tokens: tokens.data.assets,
+            attributes: attributes.data
         }
     }
 }

@@ -4,14 +4,14 @@ import GalleryList from '../../components/gallery-list'
 import GalleryCollection from '../../components/gallery-collection'
 import GalleryCard from '../../components/gallery-card'
 
-import { axiosOpenSea } from '../../services/axios'
+import { axiosDreamloops, axiosOpenSea } from '../../services/axios'
 
 import styles from '../../styles/my-bitlectro.module.css'
 
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
 
-export default function MyBitlectro() {
+export default function MyBitlectro({ attributes }) {
     const [left, setLeft] = useState(false)
     const [right, setRight] = useState(false)
     const [tokens, setTokens] = useState([])
@@ -52,7 +52,7 @@ export default function MyBitlectro() {
                 </>
             ) : (
                 <>
-                    <div className="text-center">
+                    <div className="text-center mb-4">
                         <h3
                             className="text-white text-center position-relative"
                             style={{zIndex: '3'}}
@@ -72,17 +72,27 @@ export default function MyBitlectro() {
                         tokenSelect={setTokenSelected}
                     />
 
-                    <p className="text-white text-center pt-0 pt-sm-5 pt-md-5 mt-5 pt-xl-0 mt-xl-0">
+                    <p className="text-white text-center mt-0 mt-lg-5">
                         Dreamloops #9361
                     </p>
 
                     <GalleryFooter
+                        attributes={attributes}
                         onClickLeft={() => setLeft(!left)}
                         onClickRight={() => setRight(!right)}
                     />
                 </>
-            )}
-            
+            )}            
         </section>
     )
+}
+
+export async function getStaticProps() {
+    const attributes = await axiosDreamloops.get('/attributes')
+
+    return {
+        props: {
+            attributes: attributes.data
+        }
+    }
 }

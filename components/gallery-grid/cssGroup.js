@@ -20,6 +20,7 @@ export default class Group {
         this.cards = [];
         this.gifCounter = 0;
         this.buildGroup();
+        this.marqueeShow = false;
     }
 
 
@@ -36,7 +37,13 @@ export default class Group {
                 card.name = `card_${i}_${j}`;
                 card.userData.fileNumber = (i * cols + j) % this.data.length;
                 card.element.src = this.data[card.userData.fileNumber].image_original_url;
+                
                 card.element.onmousedown = () => { this.handleClick(card); }
+                card.element.onmouseenter = () =>{
+                    this.showLabel(card)
+                }
+                // card.element.onmouseleave = () =>{this.label.hide()}
+
                 card.position.x = (j - Math.floor(cols / 2)) * (w + gap);
                 card.position.y = (i - Math.floor(rows / 2)) * (w + gap) - offset * j;
                 this.scene.add(card);
@@ -47,10 +54,20 @@ export default class Group {
 
 
     handleClick(card) {
+        /* Handle Image Click Event */
+        console.log(card.element.src)
+    }
+
+    showLabel(card){
+        this.marqueeShow = true;
         const pos = new THREE.Vector3();
         card.getWorldPosition(pos);
         this.label.setPosition(pos.x, pos.y);
-        this.label.setText(this.data[card.userData.fileNumber].token_id)
+        if (this.data[card.userData.fileNumber].owner.user !== null) {
+            this.label.setText(`${this.data[card.userData.fileNumber].token_id} ${this.data[card.userData.fileNumber].owner.user.username}`)
+        } else {
+            this.label.setText(this.data[card.userData.fileNumber].token_id)
+        }
         this.label.show();
     }
 

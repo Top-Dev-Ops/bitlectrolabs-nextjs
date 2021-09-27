@@ -20,7 +20,7 @@ export default function MdGalleryList({ left, right, tokenSelect, tokens }) {
             width: '25%',
             height: '50%',
             border: '4px solid rgb(255 255 255 / 60%)',
-            top: 0,
+            top: '10%',
             left: '-0.5%',
             transform: 'scale(1.0)',
             opacity: .6,
@@ -32,7 +32,7 @@ export default function MdGalleryList({ left, right, tokenSelect, tokens }) {
             width: '47%',
             height: '70%',
             border: '4px solid rgb(255 255 255 / 100%)',
-            top: 0,
+            top: '10%',
             left: '26.25%',
             transform: 'scale(1.0)',
             opacity: 1,
@@ -44,7 +44,7 @@ export default function MdGalleryList({ left, right, tokenSelect, tokens }) {
             width: '26%',
             height: '50%',
             border: '4px solid rgb(255 255 255 / 60%)',
-            top: 0,
+            top: '10%',
             left: '75%',
             transform: 'scale(1.0)',
             opacity: .6,
@@ -99,10 +99,10 @@ export default function MdGalleryList({ left, right, tokenSelect, tokens }) {
                             overflow: 'hidden',
                             display: 'flex'
                         }}
-                        onClick={() => tokenSelect(tokens[index] === undefined ? tokens[index % tokens.length] : tokens[index])}
+                        onClick={() => tokenSelect(tokens[index])}
                     >
                         <animated.img
-                            src={images[index] === undefined ? images[index % tokens.length]: images[index]}
+                            src={images[index]}
                             style={{
                                 transform,
                                 height: '100%',
@@ -116,12 +116,10 @@ export default function MdGalleryList({ left, right, tokenSelect, tokens }) {
                         {hover === index && (
                             <marquee className="marquee" onMouseEnter={() => setHover(index)}>
                                 <span className="mx-1">
-                                {tokens[index] === undefined ? tokens[index % tokens.length].token_id : tokens[index].token_id}
+                                {tokens[index].token_id}
                                 </span>
                                 <span className="mx-1">
-                                    {tokens[index] === undefined ? (
-                                        tokens[index % tokens.length].owner.user !== null && tokens[index % tokens.length].owner.user.name
-                                    ) : tokens[index].owner.user !== null && tokens[index].owner.user.username}
+                                    {tokens[index].owner.user !== null && tokens[index].owner.user.username}
                                 </span>
                             </marquee>
                         )}

@@ -7,11 +7,14 @@ export default class Label {
 
         const label = document.createElement('div');
         label.classList.add('labelElement')
+        const p = document.createElement('p');
+        label.appendChild(p);
 
-        this.posX = 0;
         this.plane = new CSS3DObject(label);
         this.plane.scale.multiplyScalar(0.028)
         scene.add(this.plane);
+        this.element = label;
+        this.element.setAttribute('pointer_events', 'none');
     }
 
     show() { this.plane.visible = true };
@@ -24,11 +27,11 @@ export default class Label {
     setPosition(x, y) {
         this.plane.position.x = x;
         this.plane.position.y = y;
-        this.plane.position.z = 0.1;
+        this.plane.position.z = 0.001;
     }
 
     setText(text) {
-        this.plane.element.innerHTML = `${text}`;
+        this.plane.element.childNodes[0].innerHTML = `${text}`;
     }
 
     update() {

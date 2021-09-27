@@ -47,7 +47,6 @@
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
-    z-index: 2;
 }
 
 @media (max-width: 1200px) {
@@ -65,7 +64,7 @@
     top: 0;
     padding: 20px;
     padding-right: 50px;
-    z-index: 7;
+    z-index: 9;
     background: var(--midGray750);
     overflow: auto;
     overflow-y: scroll;

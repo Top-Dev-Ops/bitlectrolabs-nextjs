@@ -3,6 +3,10 @@ import gsap from 'gsap'
 
 const VerticalCarousel = ({ tokens }) => {
 
+    let scatter = false;
+
+    let scatterLimit; 
+
     const animateCarousel = (targetName, _duration) => {
         const { innerWidth } = window;
         const count = 10
@@ -17,8 +21,12 @@ const VerticalCarousel = ({ tokens }) => {
             innerWidth > 1160 ? 160 :
                 innerWidth > 1024 ? 114 :
                     innerWidth > 768 ? 100 :
-                        innerWidth > 576 ? 90 : 114
+                        innerWidth > 576 ? 90 : 114;
 
+        scatterLimit =  innerWidth > 1600 ? 1200 :
+            innerWidth > 1160 ? 900 :
+                innerWidth > 1024 ? 700 :
+                    innerWidth > 768 ? 400 : 300
 
         const posToHide = document.querySelector(".hero").clientHeight + boxHeight + 110;
 
@@ -34,6 +42,11 @@ const VerticalCarousel = ({ tokens }) => {
             }
         })
 
+        const diffs = [];
+        for (var i = 0; i < ele.length; ++i) {
+            diffs[i] = -Math.random() * 500
+        }
+
 
         const _timeline = gsap.timeline()
         _timeline.to(ele, {
@@ -43,7 +56,12 @@ const VerticalCarousel = ({ tokens }) => {
             },
             duration: _duration, ease: 'none',
             onUpdate: () => {
-                ele.forEach(e => {
+                ele.forEach((e, i) => {
+                    if (scatter) {
+                        gsap.to(e, { duration: 1.5, left: diffs[i] })
+                    } else {
+                        gsap.to(e, { duration: 1, left: 0 })
+                    }
                     const values = e.style.transform.split(/\w+\(|\);?/);
                     const pxY = values[1].split(/,\s?/g)[1];
                     const y = parseInt(pxY.split('px')[0])
@@ -66,6 +84,13 @@ const VerticalCarousel = ({ tokens }) => {
             t2 = animateCarousel(".custom-carousel-col-2 .carousel-image-box", 23)
         });
 
+        window.addEventListener('mousemove', e=>{
+            if(e.clientX < scatterLimit){
+             scatter = false;
+                return;
+            }
+            scatter = true;
+        })
     }, [])
 
     return (<section className="row">
