@@ -6,10 +6,10 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 
 export default function Roadmap({ roadmaps }) {
     const roadmap = useRef()
-    
-    const onClickLeft = () => roadmap.current.scrollLeft -= 50
 
-    const onClickRight = () => roadmap.current.scrollLeft += 50
+    const onClickLeft = () => roadmap.current.scrollLeft -= 380
+
+    const onClickRight = () => roadmap.current.scrollLeft += 380
 
     return <section className="roadmap">
         <div className="roadmap-header">

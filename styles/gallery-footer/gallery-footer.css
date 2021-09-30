@@ -64,7 +64,7 @@
     top: 0;
     padding: 20px;
     padding-right: 50px;
-    z-index: 9;
+    z-index: 12;
     background: var(--midGray750);
     overflow: auto;
     overflow-y: scroll;

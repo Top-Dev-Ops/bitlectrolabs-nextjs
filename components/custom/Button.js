@@ -24,8 +24,8 @@ export const ArrowButton = ({ direction, onClick, onMouseDown, onMouseUp, extraC
     return (
         <button
             className={`border-0 outline-0 custom-button-arrow ${extraClassNames}`}
-            onMouseDown={() => onMouseDown(direction)}
-            onMouseUp={() => onMouseUp(direction)}
+            onMouseDown={() => { onMouseDown !== undefined && onMouseDown(direction) }}
+            onMouseUp={() => { onMouseUp !== undefined && onMouseUp(direction) }}
             onClick={onClick}
         >
             <Arrow direction={direction} />
@@ -37,7 +37,8 @@ export const TextButton = ({ text, onClick, variant, extraClassNames, extraStyle
     const classNames = variant === 'primary' ?
     'custom-button-text-primary' : variant === 'secondary' ?
     'custom-button-text-secondary' : variant === 'underlined' ?
-    'custom-button-text-underlined' : 'custom-button-text'
+    'custom-button-text-underlined' : variant === 'tertiary' ?
+    'custom-button-text-tertiary' : 'custom-button-text'
 
     return (
         <button
@@ -50,10 +51,11 @@ export const TextButton = ({ text, onClick, variant, extraClassNames, extraStyle
     )
 }
 
-export const SVGButton = ({ icon, badge, onClick, extraClassNames, onMouseEnter, onMouseLeave }) => {
+export const SVGButton = ({ icon, badge, onClick, extraClassNames, extraStyles, onMouseEnter, onMouseLeave }) => {
     return (
         <button
             className={`custom-button-svg position-relative border-0 ${extraClassNames}`}
+            style={extraStyles}
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}

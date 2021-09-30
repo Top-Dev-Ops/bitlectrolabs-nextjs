@@ -24,6 +24,7 @@ export default function Collections({ collections }) {
         } else {                        // desktop
             setHeight(`${parseInt(100 / Math.round(collections.length / 2))}%`)
         }
+        
     }, [])
 
     return (
@@ -70,7 +71,6 @@ export async function getStaticProps() {
         props: {
             collections: collections.results
                 .sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date))
-                .filter((item, index) => index < 3)
         }
     }
 }

@@ -94,7 +94,12 @@ export default function About({
                     )
                 ))}
 
-                <div className={styles.aboutEmailSection}>
+                <div
+                    className={styles.aboutEmailSection}
+                    onClick={() => {
+                        window.location.href = "mailto:admin@bitlectrolabs.com?subject=Contact us";
+                    }}
+                >
                     <h3 className="text-white">admin@bitlectrolabs.com</h3>
                 </div>
 

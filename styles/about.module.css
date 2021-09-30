@@ -103,6 +103,10 @@
     margin: 2%;
 }
 
+.aboutEmailSection:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 1200px) {
     .aboutEmailSection {
         height: 646px;

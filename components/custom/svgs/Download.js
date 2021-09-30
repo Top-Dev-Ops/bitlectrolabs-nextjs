@@ -1,6 +1,6 @@
 export default function Download() {
     return (
-        <div className="d-inline-flex">
+        <div className="d-none d-sm-inline-flex">
             <svg
                 width="24"
                 height="24"

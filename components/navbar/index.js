@@ -52,7 +52,13 @@ const Navbar = () => {
             </div>
 
             {modalOpen && <div className="p-3">
-                <h2 style={{color: 'var(--midGray700)'}}>Sale</h2>
+                <h2
+                    style={{color: 'var(--midGray700)'}}
+                    onClick={() => {
+                        router.push('/sale')
+                        onClick()
+                    }}
+                >Sale</h2>
 
                 <h2 onClick={() => {
                         router.push('/collections')

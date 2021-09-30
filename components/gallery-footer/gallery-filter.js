@@ -44,8 +44,16 @@ export default function GalleryFilter({ attributes, onClose }) {
         setFilters(temp)
     }
 
+    // console.log(attributes)
+    console.log(activeTab)
+
     return (
-        <section className={`gallery-filter ${(activeTab === 'Redeemable' || activeTab === 'Count') && 'justify-content-start'}`}>
+        <section
+            className={`
+                gallery-filter
+                ${['percussion', 'song_title', 'scarcity', 'element_count', 'redeemable'].includes(activeTab) && 'justify-content-start'}
+            `}
+        >
             {/* FILTER HEADERS */}
             <div className="w-100 row gx-0 flex-row-reverse">
                 <div className="gallery-filter-header">
@@ -64,7 +72,7 @@ export default function GalleryFilter({ attributes, onClose }) {
                         {headers.map(header => (
                             <TextButton
                                 key={header}
-                                text={header}
+                                text={header.includes('count') ? 'count' : header.includes('_') ? header.split('_')[0] : header}
                                 extraClassNames={`${activeTab === header ? 'active' : undefined} my-1 my-lg-0 mx-2 mx-lg-0 px-3`}
                                 extraStyles={{background: `${activeTab === header ? 'var(--pureWhite)' : 'var(--midGray700)'}`}}
                                 onClick={() => setActiveTab(header)}
@@ -78,6 +86,7 @@ export default function GalleryFilter({ attributes, onClose }) {
 
             <div className="gallery-filter-content">
                 <GalleryElements
+                    header={activeTab}
                     filters={attributes[activeTab]}
                     checkFilters={checkFilters}
                     resetFilters={resetFilters}

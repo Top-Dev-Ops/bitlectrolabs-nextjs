@@ -39,6 +39,11 @@ const VolumeControl = ({
                     height: 13px;
                     background: var(--midGray600);
                 }
+                @media (max-width: 576px) {
+                    input {
+                        display: none;
+                    }
+                }
             `}</style>
         </>
     )
