@@ -5,11 +5,23 @@ const VerticalCarousel = ({ tokens }) => {
 
     let scatter = false
 
-    let scatterLimit 
+    let scatterLimit
+
+    const shuffle = (array) => {
+        let currentIndex = array.length
+        let randomIndex
+
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex)
+            currentIndex--
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+        }
+        return array
+    }
 
     const animateCarousel = (targetName, _duration) => {
         const { innerWidth } = window
-        const count = 10
+        const count = 24
 
         const gap = innerWidth > 1600 ? 20 :
             innerWidth > 1160 ? 15 :
@@ -102,17 +114,27 @@ const VerticalCarousel = ({ tokens }) => {
 
     return (<section className="row">
         <div className="custom-carousel-col-1">
-            {tokens.filter((token, index) => index < 10).map((token) => (
+            {/* {tokens.filter((token, index) => index < 10).map((token) => (
                 <div key={token.id} className="carousel-image-box">
                     <img src={token.image_original_url} />
+                </div>
+            ))} */}
+            {shuffle([...Array(25).keys()].slice(1)).map(index => (
+                <div key={`vertical_carousel_1_${index}`} className="carousel-image-box">
+                    <img src={`/images/gifs/${index}.gif`} />
                 </div>
             ))}
         </div>
 
         <div className="custom-carousel-col-2">
-            {tokens.filter((token, index) => index >= 10).map((token) => (
+            {/* {tokens.filter((token, index) => index >= 10).map((token) => (
                 <div key={token.id} className="carousel-image-box">
                     <img src={token.image_original_url} />
+                </div>
+            ))} */}
+            {shuffle([...Array(25).keys()].slice(1)).map(index => (
+                <div key={`vertical_carousel_2_${index}`} className="carousel-image-box">
+                    <img src={`/images/gifs/${index}.gif`} />
                 </div>
             ))}
         </div>

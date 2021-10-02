@@ -11,7 +11,7 @@ const D = w + gap; // Distance Between Cards
 
 export default class Group {
 
-    constructor(scene, camera, data, label) {
+    constructor(scene, camera, data, label, callback1, callback2) {
         this.scene = scene;
         this.camera = camera;
         this.center = new THREE.Vector2(0, 0); // Camera Position : [center.x  D - D/2 , center.x  D + D/2]
@@ -21,6 +21,8 @@ export default class Group {
         this.gifCounter = 0;
         this.buildGroup();
         this.marqueeShow = false;
+        this.callback1 = callback1;
+        this.callback2 = callback2;
     }
 
 
@@ -55,7 +57,8 @@ export default class Group {
 
     handleClick(card) {
         /* Handle Image Click Event */
-        console.log(card.element.src)
+        this.callback1(false)
+        this.callback2(this.data[card.userData.fileNumber])
     }
 
     showLabel(card){

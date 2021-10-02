@@ -15,61 +15,63 @@ export default function XlGalleryList({ left, right, tokenSelect, tokens }) {
 
     const images = tokens.map(token => token.image_original_url)
 
+    const { innerWidth } = window
+    
     const styles = [
         {
-            width: '5.5%',
-            height: '70%',
+            width: `${0.097 * innerWidth - 32}px`,
+            height: '260px',
             border: '4px solid rgb(255 255 255 / 40%)',
             top: 0,
-            left: '0.375%',
+            left: `${0.375 * innerWidth / 100}px`,
             transform: 'scale(1.0)',
             opacity: .4,
         }, {
-            width: '11.5%',
-            height: '80%',
+            width: `${0.1746 * innerWidth - 57.6}px`,
+            height: '280px',
             border: '4px solid rgb(255 255 255 / 60%)',
             top: 0,
-            left: '6.25%',
+            left: `${0.1045 * innerWidth - 32}px`,
             transform: 'scale(1.0)',
             opacity: .6,
         }, {
-            width: '17.5%',
-            height: '90%',
+            width: `${0.2134 * innerWidth - 70.4}px`,
+            height: '300px',
             border: '4px solid rgb(255 255 255 / 80%)',
             top: 0,
-            left: '18.125%',
+            left: `${0.28285 * innerWidth - 89.6}px`,
             transform: 'scale(1.0)',
             opacity: .8,
         }, {
-            width: '28%',
-            height: '100%',
+            width: '320px',
+            height: '320px',
             border: '4px solid rgb(255 255 255 / 100%)',
             top: 0,
-            left: '36%',
+            left: `${innerWidth / 2 - 160}px`,
             transform: 'scale(1.0)',
             opacity: 1,
         }, {
-            width: '17.5%',
-            height: '90%',
+            width: `${0.2134 * innerWidth - 70.4}px`,
+            height: '300px',
             border: '4px solid rgb(255 255 255 / 80%)',
             top: 0,
-            left: '64.375%',
+            left: `${0.50375 * innerWidth + 160}px`,
             transform: 'scale(1.0)',
             opacity: .8,
         }, {
-            width: '11.5%',
-            height: '80%',
+            width: `${0.1746 * innerWidth - 57.6}px`,
+            height: '280px',
             border: '4px solid rgb(255 255 255 / 60%)',
             top: 0,
-            left: '82.25%',
+            left: `${0.7209 * innerWidth + 89.6}px`,
             transform: 'scale(1.0)',
             opacity: .6,
         }, {
-            width: '5.5%',
-            height: '70%',
+            width: `${0.097 * innerWidth - 32}px`,
+            height: '260px',
             border: '4px solid rgb(255 255 255 / 40%)',
             top: 0,
-            left: '94.125%',
+            left: `${0.89925 * innerWidth + 32}px`,
             transform: 'scale(1.0)',
             opacity: .4,
         },
@@ -121,7 +123,7 @@ export default function XlGalleryList({ left, right, tokenSelect, tokens }) {
                             borderRadius: '16px',
                             zIndex: 7,
                             overflow: 'hidden',
-                            display: 'flex'
+                            display: 'flex',
                         }}
                         onClick={() => tokenSelect(tokens[index])}
                     >

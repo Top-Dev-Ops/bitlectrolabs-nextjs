@@ -22,6 +22,7 @@ export default function News({ newses }) {
                         key={`news_${news.uid}`}
                         news={news}
                         extraClassNames="mb-5"
+                        extraStyles={{overflow: 'hidden', maxHeight: '1200px'}}
                     />
                 ))}
             </section>

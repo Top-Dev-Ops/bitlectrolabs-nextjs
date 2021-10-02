@@ -7,6 +7,8 @@ import { Grid, List, Settings, CircleBadge } from "../custom/svgs"
 
 import GalleryFilter from './gallery-filter'
 
+import useKeyPress from '../../hooks/useKeyPress'
+
 const GalleryFooter = ({
     view,
     attributes,
@@ -31,6 +33,9 @@ const GalleryFooter = ({
             filters[attribute.trait_type] = []
         }
     })
+
+    useKeyPress('ArrowLeft', () => onClickRight())
+    useKeyPress('ArrowRight', () => onClickLeft())
 
     return (
         <>

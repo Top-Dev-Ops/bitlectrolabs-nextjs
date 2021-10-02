@@ -4,8 +4,6 @@ export default function GalleryElements({ header, filters, checkFilters, resetFi
 
     const alphabets = Array.from(Array(26)).map((e, i) => String.fromCharCode(i + 65))
 
-    console.log(header)
-
     return (
         <>
             {(header === 'percussion' || header === 'song_title' || header === 'scarcity' || header === 'element_count' || header === 'redeemable') ? (

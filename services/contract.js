@@ -6,9 +6,7 @@ const CONTRACT_ABI = require('./pre_audit_abi.json')
 
 export function UNWRAP_TOKEN(tokenId) {
     const W3 = new Web3(window.ethereum)
-    W3.eth.net.getId().then((netId) => {
-        console.log(netId)
-    })
+    
     const CONTRACT = new W3.eth.Contract(CONTRACT_ABI, '0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff')
 
     const owner = W3.currentProvider.selectedAddress
@@ -23,4 +21,21 @@ export function UNWRAP_TOKEN(tokenId) {
             return res
         })
     }).catch(error => console.log(error))
+}
+
+export async function MINT_PURCHASE_TOKEN(token_count) {
+    const owner = W3.currentProvider.selectedAddress
+
+    await CONTRACT.methods.calculatePrice().call().then(price => {
+        purchase(price)
+    })
+
+    function purchase(total_price) {
+        CONTRACT.methods.mint().send({
+            from: owner,
+            value: total_price
+        }).then(result => {
+            console.log(result)
+        }).catch(error => console.log(error))
+    }
 }

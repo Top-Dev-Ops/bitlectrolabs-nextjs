@@ -44,9 +44,6 @@ export default function GalleryFilter({ attributes, onClose }) {
         setFilters(temp)
     }
 
-    // console.log(attributes)
-    console.log(activeTab)
-
     return (
         <section
             className={`

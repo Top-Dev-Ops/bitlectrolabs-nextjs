@@ -19,6 +19,7 @@ export default function GalleryCard({
     const router = useRouter()
 
     const unwrapToken = () => {
+        console.log(token)
         UNWRAP_TOKEN(token.token_id)
     }
 

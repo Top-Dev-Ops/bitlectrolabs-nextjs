@@ -8,6 +8,9 @@ import GalleryList from '../../components/gallery-list'
 import { axiosDreamloops, axiosOpenSea } from '../../services/axios'
 
 import styles from '../../styles/gallery.module.css'
+import stylesBitlectro from '../../styles/my-bitlectro.module.css'
+import GalleryCollection from '../../components/gallery-collection'
+import GalleryCard from '../../components/gallery-card'
 
 export default function Gallery({ tokens, attributes }) {
     const [app, setApp] = useState(null)
@@ -16,6 +19,7 @@ export default function Gallery({ tokens, attributes }) {
     const [right, setRight] = useState(false)
     const [up, setUp] = useState('')
     const [down, setDown] = useState('')
+    const [tokenSelected, setTokenSelected] = useState(null)
     
     const containerRef = useRef(null)
 
@@ -25,7 +29,7 @@ export default function Gallery({ tokens, attributes }) {
         const _app = new ThreeApp(containerRef.current)
         const threeAppStart = async () => {
             _app.setData(tokens);
-            _app.start()
+            _app.start(setView, setTokenSelected)
             _app.resize()
             _app.renderer.domElement.style.display = 'block'
             setApp(_app)
@@ -62,48 +66,59 @@ export default function Gallery({ tokens, attributes }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <section className={`${styles.gallery} ${view ? 'justify-content-between' : undefined}`} ref={containerRef}>
-                <div className="text-center">
-                    <h3
-                        className="text-white text-center position-relative mb-5"
-                        style={{zIndex: '3'}}
-                    >
-                        Dreamloops
-                    </h3>
-
-                    {/* <h4 className={styles.galleryNotFound}>We couldn't find anything</h4>
-
-                    <p className={styles.galleryResetFilter}>Reset filter</p> */}
-                </div>
-
-                {view ? (
-                    <div className={styles.galleryTopGradientBackground} />
-                ) : (
-                    <GalleryList
-                        left={left}
-                        right={right}
-                        tokens={tokens}
-                        tokenSelect={() => {}}
+            {tokenSelected ? (
+                <section className={stylesBitlectro.myBitlectro}>
+                    <GalleryCollection
+                        extraClassNames="mb-5 mb-lg-0"
+                        onClose={setTokenSelected}
+                        token={tokenSelected}
                     />
-                )}
+                    <GalleryCard token={tokenSelected} />
+                </section>
+            ) : (
+                <section className={`${styles.gallery} ${view ? 'justify-content-between' : undefined}`} ref={containerRef}>
+                    <div className="text-center">
+                        <h3
+                            className="text-white text-center position-relative mb-5"
+                            style={{zIndex: '3'}}
+                        >
+                            Dreamloops
+                        </h3>
 
-                {/* <p
-                    className="text-white text-center pt-0 pt-sm-5 pt-md-5 mt-5 pt-xl-0 mt-xl-0"
-                    style={{zIndex: `${view ? '3' : undefined}`}}
-                >
-                    #9361
-                </p> */}
+                        {/* <h4 className={styles.galleryNotFound}>We couldn't find anything</h4>
 
-                <GalleryFooter
-                    view={view}
-                    attributes={attributes}
-                    changeView={() => setView(!view)}
-                    onClickLeft={() => setLeft(!left)}
-                    onClickRight={() => setRight(!right)}
-                    onMouseDown={(arrow) => setDown(arrow)}
-                    onMouseUp={(arrow) => setUp(arrow)}
-                />
-            </section>
+                        <p className={styles.galleryResetFilter}>Reset filter</p> */}
+                    </div>
+
+                    {view ? (
+                        <div className={styles.galleryTopGradientBackground} />
+                    ) : (
+                        <GalleryList
+                            left={left}
+                            right={right}
+                            tokens={tokens}
+                            tokenSelect={setTokenSelected}
+                        />
+                    )}
+
+                    {/* <p
+                        className="text-white text-center pt-0 pt-sm-5 pt-md-5 mt-5 pt-xl-0 mt-xl-0"
+                        style={{zIndex: `${view ? '3' : undefined}`}}
+                    >
+                        #9361
+                    </p> */}
+
+                    <GalleryFooter
+                        view={view}
+                        attributes={attributes}
+                        changeView={() => setView(!view)}
+                        onClickLeft={() => setLeft(!left)}
+                        onClickRight={() => setRight(!right)}
+                        onMouseDown={(arrow) => setDown(arrow)}
+                        onMouseUp={(arrow) => setUp(arrow)}
+                    />
+                </section>                
+            )}
         </>
     )
 }

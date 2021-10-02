@@ -45,8 +45,8 @@ export default class ThreeApp {
         this.keyController = new keyController(this.renderer.domElement, this.camera, this.orbit);
     }
 
-    async start() {
-        this.group = new Group(this.scene, this.camera, this.data, this.label);
+    async start(callback1, callback2) {
+        this.group = new Group(this.scene, this.camera, this.data, this.label, callback1, callback2);
 
         this.animate()
         window.addEventListener('resize', this.resize.bind(this), false);

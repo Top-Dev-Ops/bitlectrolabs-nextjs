@@ -31,10 +31,12 @@ const Hero = ({ tokens }) => {
 
 export const CollectionHero = ({ hero }) => {
     return <section className="collection-hero">
-        <img
-            src="/images/dreamloops.png"
-            className="w-100 h-auto mb-5"
-        />
+        {hero.banner.url !== null && hero.banner.url !== '' && (
+            <img
+                src={hero.banner.url}
+                className="w-100 h-auto mb-5"
+            />
+        )}
 
         <div className="row gx-0">
             <div className="col-12 text-center">
