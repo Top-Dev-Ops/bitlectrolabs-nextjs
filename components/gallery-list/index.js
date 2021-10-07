@@ -7,8 +7,11 @@ export default function GalleryList({
     left,
     right,
     tokens,
-    tokenSelect
+    tokenSelect,
+    setLastView,
 }) {
+
+    const { innerWidth } = window
 
     const passTokens = tokens.length > 0 && tokens.length > 6 ? (
         tokens
@@ -21,38 +24,47 @@ export default function GalleryList({
             {passTokens.length > 0 && (
                 <>
                     <section className="gallery-list">
-                        <div className="d-none d-xl-block w-100 h-100">
-                            <XlGalleryList
-                                left={left}
-                                right={right}
-                                tokens={passTokens}
-                                tokenSelect={tokenSelect}
-                            />
-                        </div>
-                        <div className="d-none d-lg-block d-xl-none w-100 h-100">
-                            <LgGalleryList
-                                left={left}
-                                right={right}
-                                tokens={passTokens}
-                                tokenSelect={tokenSelect}
-                            />
-                        </div>
-                        <div className="d-none d-md-block d-lg-none w-100 h-100">
-                            <MdGalleryList
-                                left={left}
-                                right={right}
-                                tokens={passTokens}
-                                tokenSelect={tokenSelect}
-                            />
-                        </div>
-                        <div className="d-block d-md-none w-100 h-100">
-                            <SmGalleryList
-                                left={left}
-                                right={right}
-                                tokens={passTokens}
-                                tokenSelect={tokenSelect}
-                            />
-                        </div>
+                        {innerWidth >= 1200 ? (
+                            <div className="w-100 h-100">
+                                <XlGalleryList
+                                    left={left}
+                                    right={right}
+                                    tokens={passTokens}
+                                    tokenSelect={tokenSelect}
+                                    setLastView={setLastView}
+                                />
+                            </div>
+                        ) : innerWidth >= 992 ? (
+                            <div className="w-100 h-100">
+                                <LgGalleryList
+                                    left={left}
+                                    right={right}
+                                    tokens={passTokens}
+                                    tokenSelect={tokenSelect}
+                                    setLastView={setLastView}
+                                />
+                            </div>
+                        ) : innerWidth >= 768 ? (
+                            <div className="w-100 h-100">
+                                <MdGalleryList
+                                    left={left}
+                                    right={right}
+                                    tokens={passTokens}
+                                    tokenSelect={tokenSelect}
+                                    setLastView={setLastView}
+                                />
+                            </div>
+                        ) : innerWidth > 0 ? (
+                            <div className="w-100 h-100">
+                                <SmGalleryList
+                                    left={left}
+                                    right={right}
+                                    tokens={passTokens}
+                                    tokenSelect={tokenSelect}
+                                    setLastView={setLastView}
+                                />
+                            </div>
+                        ) : undefined}
                     </section>
                 </>
             )}

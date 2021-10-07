@@ -15,43 +15,72 @@ import GalleryCard from '../../components/gallery-card'
 export default function Gallery({ tokens, attributes }) {
     const [app, setApp] = useState(null)
     const [view, setView] = useState(true)
+    const [lastView, setLastView] = useState(false)
     const [left, setLeft] = useState(false)
     const [right, setRight] = useState(false)
     const [up, setUp] = useState('')
     const [down, setDown] = useState('')
     const [tokenSelected, setTokenSelected] = useState(null)
+    const [filters, setFilters] = useState([])
+    const [filteredTokens, setFilteredTokens] = useState(tokens)
     
     const containerRef = useRef(null)
 
+    // FILTER TOKENS BY SELECTED ATTRIBUTES
+    useEffect(() => {
+        if (filters.length === 0) {
+            setFilteredTokens(tokens)
+        } else {
+            setFilteredTokens(tokens.filter(token => {
+                for (let i = 0; i < token.traits.length; i += 1) {
+                    if (filters.includes(token.traits[i].value)) {
+                        return true
+                    }
+                }
+                return false
+            }))
+        }
+    }, [filters])
+
+    // CHANGE FILTERED TOKENS FOR 3D(GRID) VIEW OF GALLERY
+    useEffect(() => {
+        if (!app) return
+        app.group.reBuild(filteredTokens)
+
+    }, [filteredTokens])
+
+    // START 3D(GRID) VIEW OF GALLERY
     useEffect(() => {
         if (app) return
         if (!containerRef.current) return
         const _app = new ThreeApp(containerRef.current)
         const threeAppStart = async () => {
             _app.setData(tokens);
-            _app.start(setView, setTokenSelected)
+            _app.start(() => { setLastView(view); setView(false) }, setTokenSelected)
             _app.resize()
-            _app.renderer.domElement.style.display = 'block'
             setApp(_app)
         }
         threeAppStart()
     }, [])
 
+    // TOGGLE 3D(GRID) OR LIST VIEW
     useEffect(() => {
         if (!app) return
         if (view) {
-            app.renderer.domElement.style.display = 'block'
+            app.renderer.domElement.style.visibility = 'visible'
         } else {
-            app.renderer.domElement.style.display = 'none'
+            app.renderer.domElement.style.visibility = 'hidden'
         }
     }, [view])
 
+    // SCROLL UP 3D(GRID) VIEW
     useEffect(() => {
         if(!app) return;
         app.keyController.mouseUp();
         setDown('')
     }, [up])
 
+    // SCROLL DOWN 3D(GRID) VIEW
     useEffect(() => {
         if(!app) return;
         app.keyController.mouseDown(down)
@@ -70,7 +99,10 @@ export default function Gallery({ tokens, attributes }) {
                 <section className={stylesBitlectro.myBitlectro}>
                     <GalleryCollection
                         extraClassNames="mb-5 mb-lg-0"
-                        onClose={setTokenSelected}
+                        onClose={() => {
+                            setView(lastView)
+                            setTokenSelected(null)
+                        }}
                         token={tokenSelected}
                     />
                     <GalleryCard token={tokenSelected} />
@@ -85,9 +117,13 @@ export default function Gallery({ tokens, attributes }) {
                             Dreamloops
                         </h3>
 
-                        {/* <h4 className={styles.galleryNotFound}>We couldn't find anything</h4>
-
-                        <p className={styles.galleryResetFilter}>Reset filter</p> */}
+                        {filteredTokens.length === 0 && <>
+                            <h4 className={styles.galleryNotFound}>We could not find anything</h4>
+                            <p
+                                className={styles.galleryResetFilter}
+                                onClick={() => setFilters([])}
+                            >Reset filter</p>
+                        </>}
                     </div>
 
                     {view ? (
@@ -96,8 +132,9 @@ export default function Gallery({ tokens, attributes }) {
                         <GalleryList
                             left={left}
                             right={right}
-                            tokens={tokens}
+                            tokens={filteredTokens}
                             tokenSelect={setTokenSelected}
+                            setLastView={() => setLastView(view)}
                         />
                     )}
 
@@ -116,8 +153,10 @@ export default function Gallery({ tokens, attributes }) {
                         onClickRight={() => setRight(!right)}
                         onMouseDown={(arrow) => setDown(arrow)}
                         onMouseUp={(arrow) => setUp(arrow)}
+                        filters={filters}
+                        applyFilter={setFilters}
                     />
-                </section>                
+                </section>
             )}
         </>
     )

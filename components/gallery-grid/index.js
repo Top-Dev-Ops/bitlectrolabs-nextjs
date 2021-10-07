@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import MouseController from './mouse';
 import keyController from './keys';
 import Group from './cssGroup';
@@ -46,7 +45,7 @@ export default class ThreeApp {
     }
 
     async start(callback1, callback2) {
-        this.group = new Group(this.scene, this.camera, this.data, this.label, callback1, callback2);
+        this.group = new Group(this.scene, this.renderer.domElement, this.camera, this.data, this.label, callback1, callback2);
 
         this.animate()
         window.addEventListener('resize', this.resize.bind(this), false);

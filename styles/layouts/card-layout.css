@@ -1,7 +1,9 @@
 .card {
     height: 839px;
     width: 96%;
+    min-width: 96%;
     margin-left: 2%;
+    margin-right: 2%;
     margin-bottom: 2vh;;
     background: var(--midGray750);
     border-radius: 30px;
@@ -11,6 +13,34 @@
     text-align: center;
     align-items: center;
     overflow-y: hidden;
+}
+
+.card-collection {
+    height: 839px;
+    width: 96%;
+    min-width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2vh;;
+    background: var(--midGray750);
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.card-collection .card-collections {
+    width: 300%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.card-collection:hover {
+    cursor: pointer;
 }
 
 .card-grid {
@@ -25,7 +55,7 @@
     }
 }
 
-.card .card-image {
+.card .card-image, .card-collection .card-image {
     width: 513px;
     height: 513px;
 }
@@ -35,17 +65,17 @@
     height: 100%;
 }
 
-.card h2 {
+.card h2, .card-collection h2 {
     line-height: 90%;
     text-align: left;
 }
 
-.card h3 {
+.card h3, .card-collection h3 {
     text-align: left;
     line-height: 90%;
 }
 
-.card p {
+.card p, .card-collection p {
     color: var(--midGray400);
     font-size: var(--textLg);
     font-family: sans-serif;
@@ -54,77 +84,77 @@
 }
 
 @media (max-width: 1600px) {
-    .card {
+    .card, .card-collection {
         height: 619px;
     }
-    .card .card-image {
+    .card .card-image, .card-collection .card-image {
         width: 393px;
         height: 393px;
     }
 }
 
 @media (max-width: 1160px) {
-    .card {
+    .card, .card-collection {
         height: 481px;
     }
-    .card .card-image {
+    .card .card-image, .card-collection .card-image {
         width: 255px;
         height: 255px;
     }
-    .card h2 {
+    .card h2, .card-collection h2 {
         font-size: 58px;
     }
-    .card h3 {
+    .card h3, .card-collection h3 {
         font-size: 32px;
     }
-    .card p {
+    .card p, .card-collection p {
         font-size: 18px;
     }
 }
 
 @media (max-width: 1024px) {
-    .card {
+    .card, .card-collection {
         height: 476px;
         width: 100%;
         margin-left: 0;
     }
-    .card .card-image {
+    .card .card-image, .card-collection .card-image {
         width: 330px;
         height: 330px;
     }
 }
 
 @media (max-width: 992px) {
-    .card .card-image {
+    .card .card-image, .card-collection .card-image {
         width: 230px;
         height: 230px;
     }
 }
 
 @media (max-width: 768px) {
-    .card {
+    .card, .card-collection {
         height: 346px;
         grid-template-columns: 30% 70%;
     }
 }
 
 @media (max-width: 576px) {
-    .card {
+    .card, .card-collection {
         height: 560px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
     }
-    .card .card-full-image {
+    .card .card-full-image, .card-collection .card-full-image {
         height: 230px;
         width: 100%;
     }
-    .card .card-image {
+    .card .card-image, .card-collection .card-image {
         width: 150px;
         height: 150px;
     }
-    .card h2 {
+    .card h2, .card-collection h2 {
         font-size: 40px;
     }
 }

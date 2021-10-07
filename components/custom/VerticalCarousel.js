@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import gsap from 'gsap'
 
 const VerticalCarousel = ({ tokens }) => {
 
     let scatter = false
-
     let scatterLimit
+
+    const [isLoaded, setIsLoaded] = useState(false)
 
     const shuffle = (array) => {
         let currentIndex = array.length
@@ -84,7 +85,25 @@ const VerticalCarousel = ({ tokens }) => {
         return _timeline
     }
 
+    // const animateSkeleton = () => {
+    //     const ele = document.querySelectorAll('.skeleton-gradient')
+    //     let dirFromLeft = "+=" + totalWidth
+
+    //     const mod = gsap.utils.wrap(0, totalWidth)
+    //     const t1 = gsap.timeline()
+    //     t1.to(ele, {
+    //         x: dirFromLeft,
+    //         modifiers: {
+    //             x: x => mod(parseFloat(x)) + 'px'
+    //         },
+    //         duration: 2,
+    //         ease: 'none',
+    //         repeat: -1
+    //     })
+    // }
+
     useEffect(() => {
+        // animateSkeleton()
         let t1 = animateCarousel(".custom-carousel-col-1 .carousel-image-box", 23)
         let t2 = animateCarousel(".custom-carousel-col-2 .carousel-image-box", 23)
 
@@ -106,35 +125,49 @@ const VerticalCarousel = ({ tokens }) => {
         window.addEventListener('resize', resize)
         window.addEventListener('mousemove', mousemove)
 
+        const onTimer = () => setIsLoaded(true)
+        const timer = () => setTimeout(onTimer, 2000)
+
         return () => {
             window.removeEventListener('resize', resize)
             window.removeEventListener('mousemove', mousemove)
+            clearTimeout(timer)
         }
     }, [])
 
     return (<section className="row">
         <div className="custom-carousel-col-1">
-            {/* {tokens.filter((token, index) => index < 10).map((token) => (
-                <div key={token.id} className="carousel-image-box">
-                    <img src={token.image_original_url} />
-                </div>
-            ))} */}
             {shuffle([...Array(25).keys()].slice(1)).map(index => (
                 <div key={`vertical_carousel_1_${index}`} className="carousel-image-box">
-                    <img src={`/images/gifs/${index}.gif`} />
+                    <div className="position-relative w-100 h-100">
+                        <img src={`/images/gifs/${index}.gif`} className="w-100 h-100" />
+                        {/* <img
+                            src={isLoaded ? `/images/gifs/${index}.gif` : '/images/skeleton.png'}
+                            className="w-100 h-100"
+                        /> */}
+
+                        {/* <div
+                            className={`h-100 skeleton-gradient ${isLoaded ? 'd-none' : 'd-block'}`}
+                            style={{
+                                position: 'absolute', 
+                                width: '70px',
+                                top: '0', 
+                                left: '0', 
+                                background: 'linear-gradient(90deg, #212226 0%, #2D2E33 50.52%, #212226 100%)',
+                                zIndex: 1
+                            }}
+                        /> */}
+                    </div>
                 </div>
             ))}
         </div>
 
         <div className="custom-carousel-col-2">
-            {/* {tokens.filter((token, index) => index >= 10).map((token) => (
-                <div key={token.id} className="carousel-image-box">
-                    <img src={token.image_original_url} />
-                </div>
-            ))} */}
             {shuffle([...Array(25).keys()].slice(1)).map(index => (
                 <div key={`vertical_carousel_2_${index}`} className="carousel-image-box">
-                    <img src={`/images/gifs/${index}.gif`} />
+                    <div className="position-relative w-100">
+                        <img src={`/images/gifs/${index}.gif`} className="w-100 h-100 " />
+                    </div>
                 </div>
             ))}
         </div>

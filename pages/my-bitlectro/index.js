@@ -29,8 +29,8 @@ export default function MyBitlectro({ attributes }) {
             const web3 = new Web3(provider)
             const addresses = await web3.eth.getAccounts()
 
-            // const tokens = await axiosOpenSea.get(`/assets?owner=${addresses[0]}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
-            const tokens = await axiosOpenSea.get('/assets?owner=0xdCD0739CA8935f13f1253a6c5C95D406560e5f6E&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff')
+            const tokens = await axiosOpenSea.get(`/assets?owner=${addresses[0]}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
+            // const tokens = await axiosOpenSea.get('/assets?owner=0xdCD0739CA8935f13f1253a6c5C95D406560e5f6E&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff')
 
             setTokens(tokens.data.assets)
         }
@@ -72,9 +72,9 @@ export default function MyBitlectro({ attributes }) {
                         tokenSelect={setTokenSelected}
                     />
 
-                    <p className="text-white text-center mt-0 mt-lg-5">
+                    {/* <p className="text-white text-center mt-0 mt-lg-5">
                         Dreamloops #9361
-                    </p>
+                    </p> */}
 
                     <GalleryFooter
                         attributes={attributes}

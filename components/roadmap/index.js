@@ -41,9 +41,9 @@ export default function Roadmap({ roadmaps }) {
         const start = roadmap.current.scrollLeft
         let currentTime = 0
         const increment = 20
-        const end = direction ? 380 : -380
+        const end = direction ? 396 : -396
         
-        const animateScroll = function() {
+        const animateScroll = function () {
             currentTime += increment
             const val = easeInOutSquad(currentTime, start, end, 500)
             roadmap.current.scrollLeft = val
@@ -56,7 +56,8 @@ export default function Roadmap({ roadmaps }) {
     }
 
     return (
-        <section className="roadmap"
+        <section
+            className="roadmap"
             onTouchStart={e => setTouchStart(e.targetTouches[0].clientX)}
             onTouchEnd={e => onTouchEnd(e.changedTouches[0].clientX)}
             onMouseDown={e => {

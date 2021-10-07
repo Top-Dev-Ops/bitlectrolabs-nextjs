@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 
 import Hero from '../components/hero'
@@ -9,7 +10,7 @@ import Footer from '../components/footer'
 
 import LinkTo from '../components/custom/LinkTo'
 import ProgressBar from '../components/custom/ProgressBar'
-import CardLayout from '../layouts/card-layout'
+import CardLayout, { CardLayoutCollection } from '../layouts/card-layout'
 import { BsArrowRight } from 'react-icons/bs'
 
 import Prismic from 'prismic-javascript'
@@ -24,6 +25,65 @@ export default function Home({
   marketingBanners,
   tokens
 }) {
+  const [mouseStart, setMouseStart] = useState(0)
+  const [mouseEnd, setMouseEnd] = useState(0)
+
+  const easeInOutSquad = function(t, b, c, d) {
+    t /= d/2;
+    if (t < 1) return c/2*t*t + b;
+    t--;
+    return -c/2 * (t*(t-2) - 1) + b;
+  }
+
+  const scroll = (e) => {
+    const horizontal = document.querySelector('.card-collections')
+    const card = document.querySelector('.card-grid')
+    if (!e.deltaY) return
+    const scrollDirection = (e.deltaY > 0) ? 1 : -1
+
+    const start = horizontal.scrollLeft
+    const end = card.clientWidth * scrollDirection
+    let currentTime = 0
+    const increment = 20
+
+    const animateScroll = function () {
+      currentTime += increment
+      const val = easeInOutSquad(currentTime, start, end, 500)
+      horizontal.scrollLeft = val
+      if (currentTime < 500) {
+        setTimeout(animateScroll, increment)
+      }
+    }
+    animateScroll()
+
+    setTimeout(() => {
+      const scrollLeft = Math.round(horizontal.scrollLeft)
+      const maxScrollLeft = Math.round(horizontal.scrollWidth - horizontal.clientWidth)
+      if (
+        (scrollDirection === -1 && scrollLeft > 0) ||
+        (scrollDirection === 1 && scrollLeft < maxScrollLeft)
+      ) {
+        if (e.preventDefault !== undefined)
+          e.preventDefault()
+      }
+      return true
+    }, 500)
+  }
+
+  useEffect(() => {
+    const horizontal = document.querySelector('.card-collections')
+    horizontal.addEventListener('mousewheel', scroll, false)
+    return () => horizontal.removeEventListener('mousewheel', scroll)
+  }, [])
+
+  useEffect(() => {
+    if (mouseStart - mouseEnd > 150) {
+      scroll({ deltaY: 1 })
+    } else if (mouseStart - mouseEnd < -150) {
+      scroll({ deltaY: -1 })
+    }
+    setMouseStart(0)
+  }, [mouseEnd])
 
   return (
     <>
@@ -33,31 +93,70 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="w-100">
+      <main className="w-100 overflow-x-hidden">
         <Hero tokens={tokens} />
 
         <Subscribe />
 
-        <CardLayout>
-          <div className="mb-5 pb-5 card-grid justify-content-around">
-            <img
-              src="/images/4.png"
-              className="card-image mx-5 mx-sm-auto mt-5 mt-sm-0"
-            />
-            
-            <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
-              <h2 className="text-white">Dreamloops</h2>
-              <p className="w-100 w-lg-50 text-left">A generative series of audio-visual non-fungible tokens - some redeemable for vinyl or cassette.</p>
-              <LinkTo
-                href={'/'}
-                text={'Explore'}
-                icon={<BsArrowRight />}
+        <CardLayoutCollection
+          onMouseDown={e => setMouseStart(e.clientX)}
+          onMouseUp={e => setMouseEnd(e.clientX)}
+          onTouchStart={e => setMouseStart(e.targetTouches[0].clientX)}
+          onTouchEnd={e => setMouseEnd(e.changedTouches[0].clientX)}
+        >
+          <div className="card-collections">
+            <div className="card-grid justify-content-around align-items-sm-center" style={{minWidth: '100%'}}>
+              <img
+                src="/images/4.png"
+                className="card-image mx-5 mx-sm-auto"
               />
+              
+              <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
+                <h2 className="text-white">Dreamloops</h2>
+                <p className="w-100 w-lg-50 text-left">A generative series of audio-visual non-fungible tokens - some redeemable for vinyl or cassette.</p>
+                <LinkTo
+                  href={'/'}
+                  text={'Explore'}
+                  icon={<BsArrowRight />}
+                />
+              </div>
+            </div>
+            <div className="card-grid justify-content-around" style={{minWidth: '100%'}}>
+              <img
+                src="/images/4.png"
+                className="card-image mx-5 mx-sm-auto mt-5 mt-sm-0"
+              />
+              
+              <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
+                <h2 className="text-white">Dreamers</h2>
+                <p className="w-100 w-lg-50 text-left">A generative series of audio-visual non-fungible tokens - some redeemable for vinyl or cassette.</p>
+                <LinkTo
+                  href={'/'}
+                  text={'Explore'}
+                  icon={<BsArrowRight />}
+                />
+              </div>
+            </div>
+            <div className="card-grid justify-content-around" style={{minWidth: '100%'}}>
+              <img
+                src="/images/4.png"
+                className="card-image mx-5 mx-sm-auto mt-5 mt-sm-0"
+              />
+              
+              <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
+                <h2 className="text-white">STRFKR</h2>
+                <p className="w-100 w-lg-50 text-left">A generative series of audio-visual non-fungible tokens - some redeemable for vinyl or cassette.</p>
+                <LinkTo
+                  href={'/'}
+                  text={'Explore'}
+                  icon={<BsArrowRight />}
+                />
+              </div>
             </div>
           </div>
 
-          <ProgressBar percentage={20} extraClassNames="mt-2 mb-5 mt-lg-5" />
-        </CardLayout>
+          <ProgressBar percentage={20} extraClassNames="mt-0 mt-md-5" />
+        </CardLayoutCollection>
         
         {/* FIRST MARKETING CARD */}
         {marketingCards.length > 0 &&

@@ -36,7 +36,6 @@ export default function Collection({
 
                     <CollectionImages
                         images={tokens.length > 0 ? tokens.map(token => token.image_original_url) : []}
-                        // images={heroImages.length > 0 ? heroImages[0].data.single_image_group : []}
                     />
 
                     <CollectionSubHeading

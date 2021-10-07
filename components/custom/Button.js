@@ -67,20 +67,12 @@ export const SVGButton = ({ icon, badge, onClick, extraClassNames, extraStyles, 
     )
 }
 
-export const RadioButton = ({ text, onChange, reset, extraClassNames }) => {
-    const [checked, setChecked] = useState(false)
-
-    const onClick = () => {
-        if (onChange) onChange(!checked, text)
-        setChecked(!checked)
-    }
-
-    useEffect(() => setChecked(false), [reset])
-
+export const RadioButton = ({ text, onChange, reset, extraClassNames, checked }) => {
+    
     return (
         <section className={extraClassNames}>
-            <div className="radio-button" onClick={onClick}>
-                <div className={checked && 'checked'} />
+            <div className="radio-button" onClick={() => onChange(!checked, text)}>
+                <div className={checked ? 'checked' : undefined} />
 
                 <span>{text}</span>
             </div>

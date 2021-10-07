@@ -7,11 +7,9 @@ const LinkTo = ({ text, icon, href, extraClassNames }) => {
             {text}
 
             <Link href={href}>
-                <a>
-                    <span className="mx-3">
-                        {icon}
-                    </span>
-                </a>
+                <span className="mx-3">
+                    {icon}
+                </span>
             </Link>
         </div>
     )

@@ -10,7 +10,7 @@ const Progresser = ({ heading, subHeading, percentage, extraClassNames }) => {
 
             <div className="d-flex justify-content-between h-100">
                 {[...Array(50).keys()].map(index =>
-                    percentage > index ?
+                    (Math.round(percentage * 50 / 2000) + 1) > index ?
                     <div key={`filled_${index}`} className="custom-box-filled" /> :
                     <div key={`unfilled_${index}`} className="custom-box-unfilled" />
                 )}

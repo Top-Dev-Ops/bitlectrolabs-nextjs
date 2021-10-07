@@ -17,6 +17,8 @@ const GalleryFooter = ({
     onClickRight,
     onMouseDown,
     onMouseUp,
+    filters,
+    applyFilter,
 }) => {
     const [activeTab, setActiveTab] = useState('Dreamloops')
     const [modalOpen, setModalOpen] = useState(false)
@@ -25,28 +27,30 @@ const GalleryFooter = ({
 
     const router = useRouter()
 
-    const filters = {}
+    const filterOptions = {}
     attributes.forEach(attribute => {
-        if (Object.keys(filters).includes(attribute.trait_type)) {
-            filters[attribute.trait_type] = [...filters[attribute.trait_type], attribute.value]
+        if (Object.keys(filterOptions).includes(attribute.trait_type)) {
+            filterOptions[attribute.trait_type] = [...filterOptions[attribute.trait_type], attribute.value]
         } else {
-            filters[attribute.trait_type] = []
+            filterOptions[attribute.trait_type] = []
         }
     })
 
-    useKeyPress('ArrowLeft', () => onClickRight())
-    useKeyPress('ArrowRight', () => onClickLeft())
+    useKeyPress('ArrowLeft', () => onClickLeft())
+    useKeyPress('ArrowRight', () => onClickRight())
 
     return (
         <>
             {modalOpen ?
                 <GalleryFilter
-                    attributes={filters}
+                    attributes={filterOptions}
                     onClose={() => {
                         setHoverGridList(false);
                         setHoverSettings(false);
                         setModalOpen(false)
                     }}
+                    filters={filters}
+                    applyFilter={applyFilter}
                 /> :
                 <section className="gallery-footer row">
                     {/* TABS & LIST(GRID) BUTTON */}
@@ -55,7 +59,7 @@ const GalleryFooter = ({
                         style={{zIndex: '3'}}
                     >
                         {/* TABS - DREAMLOOPS, DREAMERS, STRFKR */}
-                        <div className="gallery-footer-text-button mr-0 mx-xl-2">
+                        {/* <div className="gallery-footer-text-button mr-0 mx-xl-2">
                             {router.pathname === '/my-bitlectro' && <TextButton
                                 text='All'
                                 extraClassNames={activeTab === 'All' ? 'active' : undefined}
@@ -76,11 +80,11 @@ const GalleryFooter = ({
                                 extraClassNames={activeTab === 'STRFKR' ? 'active' : undefined}
                                 onClick={() => setActiveTab('STRFKR')}
                             />}
-                        </div>
+                        </div> */}
 
                         {/* GRID OR LIST VIEW BUTTON */}
                         {router.pathname !== '/my-bitlectro' && <SVGButton
-                            icon={view ? <Grid hover={hoverGridList} /> : <List hover={hoverGridList} />}
+                            icon={view ? <List hover={hoverGridList} /> : <Grid hover={hoverGridList} />}
                             extraClassNames="d-none d-xl-block"
                             onClick={changeView}
                             onMouseEnter={() => { setHoverGridList(true); setHoverSettings(false) }}
@@ -96,6 +100,7 @@ const GalleryFooter = ({
                         <TextButton
                             text={router.pathname !== '/my-bitlectro' ? 'About collection' : 'All purchases'}
                             extraClassNames="mx-1"
+                            onClick={() => router.push(`/collections/${activeTab}`)}
                         />
 
                         <div className="d-inline-flex flex-row-reverse">
@@ -103,7 +108,7 @@ const GalleryFooter = ({
                                 <>
                                     <SVGButton
                                         icon={<Settings hover={hoverSettings} />}
-                                        badge={<CircleBadge />}
+                                        badge={filters.length > 0 && <CircleBadge />}
                                         extraClassNames={'mx-1'}
                                         onClick={() => {
                                             setModalOpen(!modalOpen);
@@ -120,7 +125,7 @@ const GalleryFooter = ({
                                         }}
                                     />
                                     <SVGButton
-                                        icon={view ? <Grid hover={hoverGridList} /> : <List hover={hoverGridList} />}
+                                        icon={view ? <List hover={hoverGridList} /> : <Grid hover={hoverGridList} />}
                                         extraClassNames="d-block d-xl-none mx-1"
                                         onClick={changeView}
                                         onMouseEnter={() => {

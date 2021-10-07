@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import Head from 'next/head'
 import LeftBorderedParagraph from '../../components/custom/LeftBorderedParagraph'
 import Footer from '../../components/footer'
@@ -14,6 +15,28 @@ export default function About({
     contents
 }) {
 
+    const section = useRef()
+
+    const onScroll = () => {
+        const bottomPos = document.querySelector('.aboutHeroSection').getBoundingClientRect().bottom
+        const imageHeight = document.querySelector('.aboutHeroImage').getBoundingClientRect().height
+        
+        if (bottomPos - imageHeight - 179 < 0) {
+            document.querySelector('.aboutHeroImage').style.position = 'absolute'
+            document.querySelector('.aboutHeroImage').style.top = `calc(100% - ${imageHeight}px)`
+            document.querySelector('.aboutHeroImage').style.right = 0
+        } else {
+            document.querySelector('.aboutHeroImage').style.position = 'fixed'
+            document.querySelector('.aboutHeroImage').style.top = '179px'
+            document.querySelector('.aboutHeroImage').style.right = '10%'
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll)
+        return () => window.removeEventListener('scroll', onScroll)
+    }, [])
+
     return (
         <>
             <Head>
@@ -24,13 +47,12 @@ export default function About({
 
             <main className="w-100">
                 <div className={styles.aboutHero}>
-                    <div
-                        className="row m-0 p-0"
-                        style={{backgroundImage: `${banner.data.about_banner_image.url}`}}
-                    >
+                    <div className="row m-0 p-0 position-relative aboutHeroSection">
                         <div className={styles.aboutGradientText}>
                             {banner.data.about_banner_title[0].text}
                         </div>
+
+                        <div className={`${styles.aboutHeroImage} aboutHeroImage`} style={{backgroundImage: `url(${banner.data.about_banner_image.url})`}} />
                     </div>
 
                     <p className={styles.aboutMiddleText}>
@@ -48,51 +70,53 @@ export default function About({
                     </p>
                 </div>
 
-                {contents.data.about_content_group.map((content, index) => (
-                    index % 2 === 0 ? (
-                        <div key={`about_content_${index}`} className={styles.aboutWhiteSection}>
-                            <div className="mb-5">
-                                <LeftBorderedParagraph>
-                                    {content.about_content_group_title[0].text}
-                                </LeftBorderedParagraph>
-                            </div>
-
-                            <div>
-                                <p>
-                                    {content.about_content_group_paragraph[0].text}
-                                </p>
-
-                                <Divider extraClassNames={'mb-4'} extraStyles={{ height: '4px', borderWidth: '4px', background: 'linear-gradient(0deg, #B788F3 0%, #6309D7 100%), #A050F6' }} />
-
-                                <p>
-                                    {content.about_content_group_footer[0].text}
-                                </p>
-                            </div>
-                        </div>
-                    ) : (
-                        <div key={`about_content_${index}`}>
-                            <div className={styles.gradientSection}></div>
-
-                            <div className={styles.aboutGraySection}>
-                                <div className={`${styles.aboutGraySection1} pb-5`}>
-                                    <div>
-                                        <LeftBorderedParagraph extraClassNames={'text-white'} width={'50%'}>
-                                            {content.about_content_group_title[0].text}
-                                        </LeftBorderedParagraph>
-                                    </div>
-
-                                    <p className="m-4" style={{ fontSize: '16px', color: '#ffffff' }}>
-                                        {content.about_content_group_paragraph[0].text}
-                                    </p>
+                <section ref={section} className="whiteGraySection">
+                    {contents.data.about_content_group.map((content, index) => (
+                        index % 2 === 0 ? (
+                            <div key={`about_content_${index}`} className={styles.aboutWhiteSection}>
+                                <div className="mb-5">
+                                    <LeftBorderedParagraph>
+                                        {content.about_content_group_title[0].text}
+                                    </LeftBorderedParagraph>
                                 </div>
 
-                                <h4 className={styles.aboutGraySection2}>
-                                    {content.about_content_group_footer[0].text}
-                                </h4>
+                                <div>
+                                    <p>
+                                        {content.about_content_group_paragraph[0].text}
+                                    </p>
+
+                                    <Divider extraClassNames={'mb-4'} extraStyles={{ height: '4px', borderWidth: '4px', background: 'linear-gradient(0deg, #B788F3 0%, #6309D7 100%), #A050F6' }} />
+
+                                    <p>
+                                        {content.about_content_group_footer[0].text}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    )
-                ))}
+                        ) : (
+                            <div key={`about_content_${index}`}>
+                                {/* <div className={styles.gradientSection}></div> */}
+
+                                <div className={styles.aboutGraySection}>
+                                    <div className={`${styles.aboutGraySection1} pb-5`}>
+                                        <div>
+                                            <LeftBorderedParagraph extraClassNames={'text-white'} width={'50%'}>
+                                                {content.about_content_group_title[0].text}
+                                            </LeftBorderedParagraph>
+                                        </div>
+
+                                        <p className="m-4" style={{ fontSize: '16px', color: '#ffffff' }}>
+                                            {content.about_content_group_paragraph[0].text}
+                                        </p>
+                                    </div>
+
+                                    <h4 className={styles.aboutGraySection2}>
+                                        {content.about_content_group_footer[0].text}
+                                    </h4>
+                                </div>
+                            </div>
+                        )
+                    ))}
+                </section>
 
                 <div
                     className={styles.aboutEmailSection}

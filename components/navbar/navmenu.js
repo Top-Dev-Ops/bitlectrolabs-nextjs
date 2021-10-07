@@ -2,15 +2,17 @@ import Link from 'next/link'
 
 const NavMenu = ({ menus }) => {
     return <div className="nav-menu">
-        {menus.map((menu, index) => (
-            <div key={`menu_${menu}`} className="nav-menu-item">
-                <Link href={`/${menu.toLowerCase()}`}>
-                    <a>{menu}</a>
-                </Link>
+        {menus.map((menu, index) =>
+            (
+                <div key={`menu_${menu}`} className="nav-menu-item">
+                    <Link href={menu === 'News' ? 'https://bitlectro.medium.com/' : `/${menu.toLowerCase()}`}>
+                        <a>{menu}</a>
+                    </Link>
 
-                {index !== menus.length - 1 && <span>▪</span>}
-            </div>
-        ))}
+                    {index !== menus.length - 1 && <span>▪</span>}
+                </div>
+            )
+        )}
     </div>
 }
 

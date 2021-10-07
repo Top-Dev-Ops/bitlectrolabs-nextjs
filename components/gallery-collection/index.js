@@ -19,7 +19,7 @@ export default function GalleryCollection({
     const router = useRouter()
 
     useEffect(() => {
-        if (router.pathname !== '/sale') {
+        if (router.pathname !== '/buy') {
             if (audioOnOff) {
                 audio.current.play()
             } else {
@@ -31,16 +31,16 @@ export default function GalleryCollection({
 
     return (
         <section
-            className={`gallery-collection ${router.pathname === '/sale' && 'justify-content-center align-items-center'} ${extraClassNames}`}
+            className={`gallery-collection ${router.pathname === '/buy' && 'justify-content-center align-items-center'} ${extraClassNames}`}
             style={extraStyles}
         >
-            {router.pathname === '/sale' ? (
+            {router.pathname === '/buy' ? (
                 <img src={token.image_original_url} />
             ) : (
                 <>
                     <CloseFilter
-                        style={{width: '40px', height: '40px'}}
-                        onClick={() => onClose(null)}
+                        extraStyles={{paddingTop: '10px', paddingRight: '10px'}}
+                        onClick={onClose}
                     />
 
                     <div className={`w-100 d-flex justify-content-between position-relative`}>
@@ -66,7 +66,7 @@ export default function GalleryCollection({
                         </div>
                     </div>
 
-                    <div className="w-100 d-flex justify-content-center justify-content-sm-between align-items-center mt-5 mt-lg-0 px-4">
+                    <div className="w-100 d-flex justify-content-center justify-content-sm-between align-items-center mt-5 mb-4 mt-lg-0 px-4">
                         <SoundSwitch
                             onOff={audioOnOff}
                             setOnOff={setAudioOnOff}

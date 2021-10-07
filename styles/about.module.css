@@ -8,11 +8,13 @@
     background: var(--purple500);
 }
 
-.aboutHero > div:first-child {
-    background-image: url('../public/images/about.png');
-    background-position: right top;
-    background-repeat: no-repeat;
-    background-size: 407px;
+.aboutHeroImage {
+    position: fixed;
+    top: 179px;
+    background-size: cover;
+    right: 10%;
+    width: 407px;
+    height: 407px;
 }
 
 .aboutGradientText {
@@ -42,6 +44,10 @@
     padding-top: 40px;
     padding-bottom: 150px;
     width: 60%;
+}
+
+.whiteGraySection {
+    border-radius: 60px;
 }
 
 .aboutWhiteSection {
@@ -111,11 +117,13 @@
     .aboutEmailSection {
         height: 646px;
     }
-    .aboutHero > div:first-child {
-        background-image: url('../public/images/about.png');
-        background-position: right top;
-        background-repeat: no-repeat;
-        background-size: 317px;
+    .aboutHeroImage {
+        position: fixed;
+        top: 179px;
+        background-size: cover;
+        right: 10%;
+        width: 317px;
+        height: 317px;
     }
     .aboutGradientText {
         width: 65%;
@@ -145,11 +153,13 @@
         padding-left: 2%;
         padding-right: 2%;
     }
-    .aboutHero > div:first-child {
-        background-image: url('../public/images/about.png');
-        background-position: right top;
-        background-repeat: no-repeat;
-        background-size: 295px;
+    .aboutHeroImage {
+        position: fixed;
+        top: 179px;
+        background-size: cover;
+        right: 10%;
+        width: 295px;
+        height: 295px;
     }
     .aboutEmailSection {
         height: 448px;
@@ -183,11 +193,13 @@
     .aboutHero {
         padding-bottom: 0;
     }
-    .aboutHero > div:first-child {
-        background-image: url('../public/images/about.png');
-        background-position: right top;
-        background-repeat: no-repeat;
-        background-size: 209px;
+    .aboutHeroImage {
+        position: fixed;
+        top: 179px;
+        background-size: cover;
+        right: 10%;
+        width: 209px;
+        height: 209px;
     }
     .aboutEmailSection {
         height: 300px;
@@ -230,11 +242,13 @@
 }
 
 @media (max-width: 768px) {
-    .aboutHero > div:first-child {
-        background-image: url('../public/images/about.png');
-        background-position: right top;
-        background-repeat: no-repeat;
-        background-size: 150px;
+    .aboutHeroImage {
+        position: fixed;
+        top: 179px;
+        background-size: cover;
+        right: 10%;
+        width: 150px;
+        height: 150px;
     }
     .aboutEmailSection {
         height: 200px;
@@ -272,11 +286,13 @@
 }
 
 @media (max-width: 576px) {
-    .aboutHero > div:first-child {
-        background-image: url('../public/images/about.png');
-        background-position: right 20%;
-        background-repeat: no-repeat;
-        background-size: 150px;
+    .aboutHeroImage {
+        position: fixed;
+        top: 179px;
+        background-size: cover;
+        right: 10%;
+        width: 150px;
+        height: 150px;
     }
     .aboutGradientText, .aboutHero > div:nth-child(3) {
         width: 100%;

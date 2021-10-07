@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { animated, useSpring } from 'react-spring'
+import gsap from 'gsap'
 
-export default function LgGalleryList({ left, right, tokenSelect, tokens }) {
+export default function LgGalleryList({ left, right, tokenSelect, tokens, setLastView }) {
 
     const [tokenIndex, setTokenIndex] = useState(0)
     const [startXCoordinate, setStartXCoordinate] = useState(0)
     const [hover, setHover] = useState('')
+    const [images, setImages] = useState(tokens.map(token => token.image_original_url))
+    const [isUpdated, setIsUpdated] = useState(true)
+    const [isLoaded, setIsLoaded] = useState(false)
 
     const config = {
         mass: 1,
         tension: 300,
         friction: 35,
     }
-
-    const images = tokens.map(token => token.image_original_url)
 
     const styles = [
         {
@@ -86,11 +88,53 @@ export default function LgGalleryList({ left, right, tokenSelect, tokens }) {
     const spring4 = useSpring({ ...styles[(tokenIndex + 4) % 5], config })
     const springs = [spring0, spring1, spring2, spring3, spring4]
 
-    const slideLeft = () => setTokenIndex(tokenIndex === 0 ? images.length - 1 : tokenIndex - 1)
-    const slideRight = () => setTokenIndex(tokenIndex === images.length - 1 ? 0 : tokenIndex + 1)
+    const slideLeft = () => {
+        setIsUpdated(!isUpdated)
+        setTokenIndex(tokenIndex === 0 ? images.length - 1 : tokenIndex - 1)
+        if (isUpdated) {
+            const [first, ...rest] = [...images]
+            setImages([...rest, ...first])
+        }
+    }
+    const slideRight = () => {
+        setIsUpdated(!isUpdated)
+        setTokenIndex(tokenIndex === images.length - 1 ? 0 : tokenIndex + 1)
+        if (isUpdated) {
+            const pictures = [...images]
+            const last = pictures.pop()
+            setImages([last, ...pictures])
+        }
+    }
 
-    useEffect(() => slideLeft(), [left])
-    useEffect(() => slideRight(), [right])
+    useEffect(() => slideRight(), [left])
+    useEffect(() => slideLeft(), [right])
+
+    const animateSkeleton = () => {
+        const totalWidth = 300
+        const ele = document.querySelectorAll('.skeleton-gradient')
+        let dirFromLeft = "+=" + totalWidth
+    
+        const mod = gsap.utils.wrap(0, totalWidth)
+        const t1 = gsap.timeline()
+        t1.to(ele, {
+            x: dirFromLeft,
+            modifiers: {
+                x: x => mod(parseFloat(x)) + "px"
+            },
+            duration: 2,
+            ease: 'none',
+            repeat: -1
+        })
+    }
+
+    useEffect(() => {
+        animateSkeleton()
+
+        const onTimer = () => setIsLoaded(true)
+
+        const timer = setTimeout(onTimer, 2000)
+        return () => clearTimeout(timer)
+    }, [])
 
     return (
         <div
@@ -125,21 +169,35 @@ export default function LgGalleryList({ left, right, tokenSelect, tokens }) {
                             overflow: 'hidden',
                             display: 'flex'
                         }}
-                        onClick={() => tokenSelect(tokens[index])}
+                        onClick={() => {setLastView(); tokenSelect(tokens[index])}}
                     >
-                        <animated.img
-                            src={images[index]}
-                            style={{
-                                transform,
-                                height: '100%',
-                                width: '100%',
-                                position: 'absolute',
-                                objectFit: 'cover',
-                            }}
-                            onMouseEnter={() => setHover(index)}
-                            onMouseLeave={() => setHover('')}
-                        />
-                        {hover === index && (
+                        <div className="position-relative w-100">
+                            <animated.img
+                                src={isLoaded ? images[index] : '/images/skeleton.png'}
+                                style={{
+                                    transform,
+                                    height: '100%',
+                                    width: '100%',
+                                    position: 'absolute',
+                                    objectFit: 'cover',
+                                }}
+                                onMouseEnter={() => setHover(index)}
+                                onMouseLeave={() => setHover('')}
+                            />
+
+                            <div
+                                className={`h-100 skeleton-gradient ${isLoaded ? 'd-none' : 'd-block'}`}
+                                style={{
+                                    position: 'absolute', 
+                                    width: '100px', 
+                                    top: '0', 
+                                    left: '-30px', 
+                                    background: 'linear-gradient(90deg, #212226 0%, #2D2E33 50.52%, #212226 100%)',
+                                    zIndex: '3'
+                                }}
+                            />
+                        </div>
+                        {isLoaded && hover === index && (
                             <marquee className="marquee" onMouseEnter={() => setHover(index)}>
                                 <span className="mx-1">
                                     {tokens[index].token_id}

@@ -1,20 +1,33 @@
 import { RadioButton } from "../custom/Button"
 
-export default function GalleryElements({ header, filters, checkFilters, resetFilters }) {
+export default function GalleryElements({
+    header,
+    filters,
+    selectedFilters,
+    checkFilters,
+    resetFilters
+}) {
 
     const alphabets = Array.from(Array(26)).map((e, i) => String.fromCharCode(i + 65))
+
+    const sortedFilters = filters.sort((a, b) => {
+        if (a > b) return 1
+        if (a < b) return -1
+        return 0
+    })
 
     return (
         <>
             {(header === 'percussion' || header === 'song_title' || header === 'scarcity' || header === 'element_count' || header === 'redeemable') ? (
                 <div className="gallery-filter-content-grid">
-                    {filters.map(data => (
+                    {sortedFilters.map(data => (
                         <RadioButton
                             key={`gallery_filter_${header}_${data}`}
                             text={data}
                             onChange={checkFilters}
                             reset={resetFilters}
                             extraClassNames="mb-2"
+                            checked={selectedFilters.includes(data) ? true : false}
                         />
                     ))}
                 </div>
@@ -30,13 +43,14 @@ export default function GalleryElements({ header, filters, checkFilters, resetFi
                                 <span>{alphabet}</span>
 
                                 <div className="gallery-filter-content-grid">
-                                    {filters.map(data => data.startsWith(alphabet) ? (
+                                    {sortedFilters.map(data => data.startsWith(alphabet) ? (
                                         <RadioButton
                                             key={`${alphabet}_${data}`}
                                             text={data}
                                             onChange={checkFilters}
                                             reset={resetFilters}
                                             extraClassNames="mb-2"
+                                            checked={selectedFilters.includes(data) ? true : false}
                                         />
                                     ) : undefined)}
                                 </div>
@@ -49,13 +63,14 @@ export default function GalleryElements({ header, filters, checkFilters, resetFi
                     >
                         <span>0-9</span>
                         <div className="gallery-filter-content-grid">
-                            {filters.map(data => /^[0-9].*/i.test(data) ? (
+                            {sortedFilters.map(data => /^[0-9].*/i.test(data) ? (
                                 <RadioButton
                                     key={`${data}`}
                                     text={data}
                                     onChange={checkFilters}
                                     reset={resetFilters}
                                     extraClassNames="mb-2"
+                                    checked={selectedFilters.includes(data) ? true : false}
                                 />
                             ) : undefined)}
                         </div>

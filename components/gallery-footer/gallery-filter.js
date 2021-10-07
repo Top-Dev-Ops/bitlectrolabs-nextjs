@@ -1,15 +1,15 @@
 import react, { useState } from "react"
 
-import { TextButton, RadioButton } from "../custom/Button"
+import { TextButton } from "../custom/Button"
 import Search from "../custom/Search"
 import { CloseFilter } from "../custom/svgs/Close"
 
 import GalleryElements from "./gallery-elements"
 
-export default function GalleryFilter({ attributes, onClose }) {
+export default function GalleryFilter({ attributes, onClose, filters, applyFilter }) {
     const [activeTab, setActiveTab] = useState(Object.keys(attributes).length > 0 ? Object.keys(attributes)[0] : '')
-    const [filters, setFilters] = useState([])
     const [resetFilters, setResetFilters] = useState(false)
+    const [selectedFilters, setSelectedFilters] = useState(filters)
 
     const headers = Object.keys(attributes)
     
@@ -17,31 +17,26 @@ export default function GalleryFilter({ attributes, onClose }) {
 
     /* RESETS FILTERS EMPTY */
     const reset = () => {
-        setFilters([])
+        applyFilter([])
         setResetFilters(!resetFilters)
-    }
-
-    /* APPLIES FILTERS */
-    const apply = () => {
-        console.log('FILTERS: ', filters)
     }
 
     /* ADDS OR REMOVES FILTERS WHEN CHECKING RADIOS */
     const checkFilters = (checked, filter) => {
         if (checked) {
-            setFilters([...filters, filter])
+            setSelectedFilters([...selectedFilters, filter])
         } else {
-            const temp = [...filters]
+            const temp = [...selectedFilters]
             temp.splice(temp.indexOf(filter), 1)
-            setFilters(temp)
+            setSelectedFilters(temp)
         }
     }
 
     /* REMOVES FILTERS WHEN CLICKING ON ×(CROSS) */
     const removeFilters = (index) => {
-        const temp = [...filters]
+        const temp = [...selectedFilters]
         temp.splice(index, 1)
-        setFilters(temp)
+        setSelectedFilters(temp)
     }
 
     return (
@@ -85,19 +80,20 @@ export default function GalleryFilter({ attributes, onClose }) {
                 <GalleryElements
                     header={activeTab}
                     filters={attributes[activeTab]}
+                    selectedFilters={selectedFilters}
                     checkFilters={checkFilters}
                     resetFilters={resetFilters}
                 />
             </div>
 
             {/* SELECTED FILTERS AT LEFT HANDSIDE */}
-            {filters.length > 0 && (
+            {selectedFilters.length > 0 && (
                 <>
                     <div className="gallery-filter-search">
                         <div>
                             <h2>Filter by</h2>
 
-                            {filters.map((filter, index) => (
+                            {selectedFilters.map((filter, index) => (
                                 <div
                                     key={`${filter}_${index}`}
                                     className="search-box"
@@ -112,8 +108,14 @@ export default function GalleryFilter({ attributes, onClose }) {
                     </div>
 
                     <div className="gallery-filter-search-buttons">
-                        <button onClick={reset}>Reset all</button>
-                        <button onClick={apply}>Apply</button>
+                        <button onClick={() => {
+                            reset()
+                            onClose()
+                        }}>Reset all</button>
+                        <button onClick={() => {
+                            applyFilter(selectedFilters)
+                            onClose()
+                        }}>Apply</button>
                     </div>
                 </>
             )}
