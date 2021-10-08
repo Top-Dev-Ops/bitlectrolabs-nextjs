@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { animated, useSpring } from 'react-spring'
 import gsap from 'gsap'
 
-export default function MdGalleryList({ left, right, tokenSelect, tokens, setLastView }) {
+export default function MdGalleryList({ left, right, tokenSelect, tokens }) {
 
     const [tokenIndex, setTokenIndex] = useState(0)
     const [startXCoordinate, setStartXCoordinate] = useState(0)
@@ -143,10 +143,7 @@ export default function MdGalleryList({ left, right, tokenSelect, tokens, setLas
                             overflow: 'hidden',
                             display: 'flex'
                         }}
-                        onClick={() => {
-                            if (setLastView !== undefined) setLastView()
-                            tokenSelect(tokens[index])
-                        }}
+                        onClick={() => tokenSelect(tokens[index])}
                     >
                         <div className="position-relative w-100">
                             <animated.img

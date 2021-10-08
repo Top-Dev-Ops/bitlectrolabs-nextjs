@@ -112,7 +112,7 @@ export default class Group {
             this.canvas.style.visibility = 'hidden'
             return;
         }
-        this.canvas.style.visibility = 'visible'
+        // this.canvas.style.visibility = 'visible'
         for (let i = 0; i < rows; ++i) {
             for (let j = 0; j < cols; ++j) {
                 const card = this.cards[i][j];
@@ -162,7 +162,7 @@ export default class Group {
         card.scale.set(0.075,0.075,0.075);
         this.label.plane.scale.set(0.028,0.028,0.028)
         /* Handle Image Click Event */
-        this.callback1()
+        this.callback1(false)
         this.callback2(this.data[card.userData.fileNumber])
     }
 

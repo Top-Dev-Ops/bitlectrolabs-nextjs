@@ -54,7 +54,8 @@
 
 .card .card-image, .card-collection .card-image {
     width: 513px;
-    height: 513px;
+    height: auto;
+    object-fit: cover;
 }
 
 .card .card-full-image {

@@ -7,6 +7,7 @@ import CollectionImages from '../../components/collection-images'
 import CollectionSubHeading from '../../components/collection-sub-heading'
 import CollectionCard from '../../components/collection-card'
 import CollectionParagraph from '../../components/collection-paragraph'
+import CollectionRoadmap from '../../components/collection-roadmap'
 import Footer from '../../components/footer'
 
 import styles from '../../styles/collection.module.css'
@@ -22,10 +23,12 @@ export default function Collection({
     overview,
     paragraph,
     statisticses,
-    tokens
+    roadmaps,
+    tokens,
 }) {
     const router = useRouter()
     const dreamImages = Array.from(Array(6)).map((e, i) => `/images/Dreamers/${i}.gif`)
+    console.log(roadmaps)
 
     return (
         <>
@@ -80,6 +83,14 @@ export default function Collection({
                     {router.query.collection === 'Dreamers' && (
                         <img src="/images/dreamers.png" className="w-100 h-auto mb-5 pb-5" />
                     )}
+
+                    {roadmaps.map(roadmap => (
+                        <CollectionRoadmap
+                            key={`collection_roadmap_${roadmap.id}`}
+                            data={roadmap.data}
+                            extraClassNames="my-5"
+                        />
+                    ))}
 
                     {bodies.length > 1 && bodies.map((body, index) => index > 0 ? (
                         <CollectionSubHeading
@@ -146,7 +157,11 @@ export async function getStaticProps({ params }) {
 
     const statisticss = await Client().query(
         Prismic.Predicates.at('document.type', 'statistics_section')
-    )    
+    )
+
+    const roadmapes = await Client().query(
+        Prismic.Predicates.at('document.type', 'collection_roadmap')
+    )
 
     const hero = heroes.results.filter(item => item.data.collection_name[0].text === params.collection)
     const bodies = bodySection.results.filter(item => item.data.collection_name[0].text === params.collection)
@@ -154,6 +169,7 @@ export async function getStaticProps({ params }) {
     const overview = overviews.results.filter(item => item.data.collection_name[0].text === params.collection)
     const paragraph = paragraphs.results.filter(item => item.data.collection_name[0].text === params.collection)
     const statisticses = statisticss.results.filter(item => item.data.collection_name[0].text === params.collection)
+    const roadmaps = roadmapes.results.filter(item => item.data.collection_name[0].text === params.collection)
 
     const openSeaUrl = await (await axiosDreamloops.get('/random_selection'))
         .data
@@ -170,6 +186,7 @@ export async function getStaticProps({ params }) {
             paragraph: paragraph.length > 0 ? paragraph[0] : [],
             heroImages,
             statisticses,
+            roadmaps,
             tokens: tokens.data.assets,
         }
     }

@@ -15,7 +15,6 @@ import GalleryCard from '../../components/gallery-card'
 export default function Gallery({ tokens, attributes }) {
     const [app, setApp] = useState(null)
     const [view, setView] = useState(true)
-    const [lastView, setLastView] = useState(false)
     const [left, setLeft] = useState(false)
     const [right, setRight] = useState(false)
     const [up, setUp] = useState('')
@@ -56,7 +55,7 @@ export default function Gallery({ tokens, attributes }) {
         const _app = new ThreeApp(containerRef.current)
         const threeAppStart = async () => {
             _app.setData(tokens);
-            _app.start(() => { setLastView(view); setView(false) }, setTokenSelected)
+            _app.start(setView, setTokenSelected)
             _app.resize()
             setApp(_app)
         }
@@ -100,7 +99,7 @@ export default function Gallery({ tokens, attributes }) {
                     <GalleryCollection
                         extraClassNames="mb-5 mb-lg-0"
                         onClose={() => {
-                            setView(lastView)
+                            setView(false)
                             setTokenSelected(null)
                         }}
                         token={tokenSelected}
@@ -134,7 +133,6 @@ export default function Gallery({ tokens, attributes }) {
                             right={right}
                             tokens={filteredTokens}
                             tokenSelect={setTokenSelected}
-                            setLastView={() => setLastView(view)}
                         />
                     )}
 
