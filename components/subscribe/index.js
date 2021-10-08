@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MailchimpSubscribe from 'react-mailchimp-subscribe'
+import { decode } from 'html-entities'
 import Button from '../custom/Button'
 
 const SubscribeForm = () => {
@@ -21,8 +22,7 @@ const SubscribeForm = () => {
     )
 }
 
-const Subscribe = ({ subscribe, message, onValidated }) => {
-
+const Subscribe = ({ status, message, onValidated }) => {
     const [focus, setFocus] = useState(false)
     const [hover, setHover] = useState(false)
     const [email, setEmail] = useState(null)
@@ -49,12 +49,39 @@ const Subscribe = ({ subscribe, message, onValidated }) => {
             return null
         }
 
-        const isFormValidated = onValida
+        const isFormValidated = onValidated({ EMAIL: email })
+        return email && email.indexOf('@') > -1 && isFormValidated
     }
 
+    const getMessage = (message) => {
+        if ( !message ) {
+            return null;
+        }
+        const result = message?.split('-') ?? null;
+        if ( "0" !== result?.[0]?.trim() ) {
+            return decode(message);
+        }
+        const formattedMessage = result?.[1]?.trim() ?? null;
+        return formattedMessage ? decode( formattedMessage ) : null;
+    }
+
+    useEffect(() => {
+        if (status === 'success') setEmail(null)
+    }, [status])
+
     return <section className="subscribe-container">
-        <h4>Sign up for first access</h4>
-        <p>Enter your email address to learn about ongoing Bitlectro releases, features, and events</p>
+        {status === "error" || error ? (
+          <h4 style={{color: '#C97131'}}>Subscribing failed. Please try again later.</h4>
+        ) : null }
+        {status === 'success' && status !== "error" && !error && (
+            <h4>Thank you for subscribing!</h4>
+        )}
+        {status === null && (
+            <>
+                <h4>Sign up for first access</h4>
+                <p>Enter your email address to learn about ongoing Bitlectro releases, features, and events</p>
+            </>
+        )}
 
         <div
             className="subscribe-button"
@@ -70,7 +97,7 @@ const Subscribe = ({ subscribe, message, onValidated }) => {
                 onChange={e => setEmail(e.target.value)}
                 onKeyUp={onKeyUp}
             />
-            <Button text={'Subscribe'} variant={'outline-sm'} />
+            <Button text={'Subscribe'} variant={'outline-sm'} onClick={submit} />
         </div>
     </section>
 }

@@ -19,6 +19,7 @@ import '../styles/gallery-list/gallery-list.css'
 import '../styles/gallery-images/gallery-images.css'
 import '../styles/gallery-collection/gallery-collection.css'
 import '../styles/news-card/news-card.css'
+import '../styles/my-purchases/my-purchases.css'
 import '../styles/custom/custom.css'
 
 function MyApp({ Component, pageProps }) {

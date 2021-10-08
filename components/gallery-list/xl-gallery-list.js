@@ -90,15 +90,15 @@ export default function XlGalleryList({ left, right, tokenSelect, tokens, setLas
 
     const slideLeft = () => {
         setIsUpdated(!isUpdated)
-        setTokenIndex(tokenIndex === 0 ? images.length - 1 : tokenIndex - 1)
+        setTokenIndex(tokenIndex === 0 ? tokens.length - 1 : tokenIndex - 1)
         if (isUpdated) {
             const [first, ...rest] = [...images]
-            setImages([...rest, ...first])
+            setImages([...rest, first])
         }
     }
     const slideRight = () => {
         setIsUpdated(!isUpdated)
-        setTokenIndex(tokenIndex === images.length - 1 ? 0 : tokenIndex + 1)
+        setTokenIndex(tokenIndex === tokens.length - 1 ? 0 : tokenIndex + 1)
         if (isUpdated) {
             const pictures = [...images]
             const last = pictures.pop()
@@ -169,7 +169,10 @@ export default function XlGalleryList({ left, right, tokenSelect, tokens, setLas
                             overflow: 'hidden',
                             display: 'flex',
                         }}
-                        onClick={() => { setLastView(); tokenSelect(tokens[index])}}
+                        onClick={() => {
+                            if (setLastView !== undefined) setLastView();
+                            tokenSelect(tokens[index])
+                        }}
                     >
                         <div className="position-relative w-100">
                             <animated.img

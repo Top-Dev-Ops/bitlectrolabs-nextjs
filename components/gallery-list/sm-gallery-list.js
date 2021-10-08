@@ -146,7 +146,10 @@ export default function SmGalleryList({ left, right, tokenSelect, tokens, setLas
                             overflow: 'hidden',
                             display: 'flex'
                         }}
-                        onClick={() => {setLastView(); tokenSelect(tokens[index])}}
+                        onClick={() => {
+                            if (setLastView !== undefined) setLastView()
+                            tokenSelect(tokens[index])
+                        }}
                     >
                         <div className="position-relative w-100">
                             <animated.img

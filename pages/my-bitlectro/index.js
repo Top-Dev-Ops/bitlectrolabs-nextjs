@@ -3,6 +3,7 @@ import GalleryFooter from '../../components/gallery-footer'
 import GalleryList from '../../components/gallery-list'
 import GalleryCollection from '../../components/gallery-collection'
 import GalleryCard from '../../components/gallery-card'
+// import MyPurchases from '../../components/my-purchases'
 
 import { axiosDreamloops, axiosOpenSea } from '../../services/axios'
 
@@ -16,6 +17,7 @@ export default function MyBitlectro({ attributes }) {
     const [right, setRight] = useState(false)
     const [tokens, setTokens] = useState([])
     const [tokenSelected, setTokenSelected] = useState(null)
+    const [showPurchases, setShowPurchases] = useState(false)
 
     useEffect(() => {
         const connectWallet = async () => {
@@ -43,7 +45,7 @@ export default function MyBitlectro({ attributes }) {
                 <>
                     <GalleryCollection
                         extraClassNames="mb-5 mb-lg-0"
-                        onClose={setTokenSelected}
+                        onClose={() => setTokenSelected(null)}
                         token={tokenSelected}
                     />
                     <GalleryCard
@@ -64,7 +66,6 @@ export default function MyBitlectro({ attributes }) {
                         <p>Click “All purchases” to see full list.</p>
                     </div>
 
-                    
                     <GalleryList
                         left={left}
                         right={right}
@@ -80,9 +81,10 @@ export default function MyBitlectro({ attributes }) {
                         attributes={attributes}
                         onClickLeft={() => setLeft(!left)}
                         onClickRight={() => setRight(!right)}
+                        onClickPurchases={() => setShowPurchases(true)}
                     />
                 </>
-            )}            
+            )}
         </section>
     )
 }

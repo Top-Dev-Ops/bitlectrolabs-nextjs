@@ -19,6 +19,7 @@ const GalleryFooter = ({
     onMouseUp,
     filters,
     applyFilter,
+    onClickPurchases,
 }) => {
     const [activeTab, setActiveTab] = useState('Dreamloops')
     const [modalOpen, setModalOpen] = useState(false)
@@ -58,38 +59,16 @@ const GalleryFooter = ({
                         className="col-12 col-lg-5 d-inline-flex flex-row align-items-center mb-2 mb-lg-0"
                         style={{zIndex: '3'}}
                     >
-                        {/* TABS - DREAMLOOPS, DREAMERS, STRFKR */}
-                        {/* <div className="gallery-footer-text-button mr-0 mx-xl-2">
-                            {router.pathname === '/my-bitlectro' && <TextButton
-                                text='All'
-                                extraClassNames={activeTab === 'All' ? 'active' : undefined}
-                                onClick={() => setActiveTab('All')}
-                            />}
-                            <TextButton
-                                text='Dreamloops'
-                                extraClassNames={activeTab === 'Dreamloops' ? 'active' : undefined}
-                                onClick={() => setActiveTab('Dreamloops')}
-                            />
-                            <TextButton
-                                text='Dreamers'
-                                extraClassNames={`mx-1 mx-lg-0 ${activeTab === 'Dreamers' ? 'active' : undefined}`}
-                                onClick={() => setActiveTab('Dreamers')}
-                            />
-                            {router.pathname !== '/my-bitlectro' && <TextButton
-                                text='STRFKR'
-                                extraClassNames={activeTab === 'STRFKR' ? 'active' : undefined}
-                                onClick={() => setActiveTab('STRFKR')}
-                            />}
-                        </div> */}
-
                         {/* GRID OR LIST VIEW BUTTON */}
-                        {router.pathname !== '/my-bitlectro' && <SVGButton
-                            icon={view ? <List hover={hoverGridList} /> : <Grid hover={hoverGridList} />}
-                            extraClassNames="d-none d-xl-block"
-                            onClick={changeView}
-                            onMouseEnter={() => { setHoverGridList(true); setHoverSettings(false) }}
-                            onMouseLeave={() => { setHoverGridList(false); setHoverSettings(false)}}
-                        />}
+                        {router.pathname !== '/my-bitlectro' && (
+                            <SVGButton
+                                icon={view ? <List hover={hoverGridList} /> : <Grid hover={hoverGridList} />}
+                                extraClassNames="d-none d-xl-block"
+                                onClick={changeView}
+                                onMouseEnter={() => { setHoverGridList(true); setHoverSettings(false) }}
+                                onMouseLeave={() => { setHoverGridList(false); setHoverSettings(false)}}
+                            />
+                        )}
                     </div>
 
                     {/* FILTER BUTTON & ABOUT COLLECTION */}
@@ -97,11 +76,19 @@ const GalleryFooter = ({
                         className="col-12 col-lg-5 offset-lg-2 d-inline-flex flex-row align-items-center justify-content-between justify-content-sm-start flex-lg-row-reverse"
                         style={{zIndex: '3'}}
                     >
-                        <TextButton
-                            text={router.pathname !== '/my-bitlectro' ? 'About collection' : 'All purchases'}
-                            extraClassNames="mx-1"
-                            onClick={() => router.push(`/collections/${activeTab}`)}
-                        />
+                        {router.pathname !== '/my-bitlectro' && (
+                            <TextButton
+                                text="About collection"
+                                extraClassNames="mx-1"
+                                onClick={() => {
+                                    if (router.pathname === '/my-bitlectro') {
+                                        onClickPurchases()
+                                    } else {
+                                        router.push(`/collections/${activeTab}`)
+                                    }
+                                }}
+                            />
+                        )}
 
                         <div className="d-inline-flex flex-row-reverse">
                             {router.pathname !== '/my-bitlectro' && (
@@ -145,7 +132,10 @@ const GalleryFooter = ({
                     {/* ARROW BUTTONS AT THE CENTER */}
                     <div
                         className="gallery-footer-arrow w-100 d-inline-flex justify-content-center align-items-end"
-                        style={{top: view ? '-50%' : '0'}}
+                        style={{
+                            top: view ? '-50%' : '0',
+                            bottom: router.pathname === '/my-bitlectro' ? '32px' : undefined,
+                        }}
                     >
                         <ArrowButton
                             direction="left"

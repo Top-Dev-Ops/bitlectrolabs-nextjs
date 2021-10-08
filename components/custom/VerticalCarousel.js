@@ -22,7 +22,7 @@ const VerticalCarousel = ({ tokens }) => {
 
     const animateCarousel = (targetName, _duration) => {
         const { innerWidth } = window
-        const count = 24
+        const count = 60
 
         const gap = innerWidth > 1600 ? 20 :
             innerWidth > 1160 ? 15 :
@@ -104,14 +104,14 @@ const VerticalCarousel = ({ tokens }) => {
 
     useEffect(() => {
         // animateSkeleton()
-        let t1 = animateCarousel(".custom-carousel-col-1 .carousel-image-box", 23)
-        let t2 = animateCarousel(".custom-carousel-col-2 .carousel-image-box", 23)
+        let t1 = animateCarousel(".custom-carousel-col-1 .carousel-image-box", 70)
+        let t2 = animateCarousel(".custom-carousel-col-2 .carousel-image-box", 70)
 
         const resize = () => {
             t1.kill()
             t2.kill()
-            t1 = animateCarousel(".custom-carousel-col-1 .carousel-image-box", 23)
-            t2 = animateCarousel(".custom-carousel-col-2 .carousel-image-box", 23)
+            t1 = animateCarousel(".custom-carousel-col-1 .carousel-image-box", 70)
+            t2 = animateCarousel(".custom-carousel-col-2 .carousel-image-box", 70)
         }
 
         const mousemove = (e) => {
@@ -137,7 +137,7 @@ const VerticalCarousel = ({ tokens }) => {
 
     return (<section className="row">
         <div className="custom-carousel-col-1">
-            {shuffle([...Array(25).keys()].slice(1)).map(index => (
+            {[...Array(61).keys()].map(index => (
                 <div key={`vertical_carousel_1_${index}`} className="carousel-image-box">
                     <div className="position-relative w-100 h-100">
                         <img src={`/images/gifs/${index}.gif`} className="w-100 h-100" />
@@ -163,10 +163,10 @@ const VerticalCarousel = ({ tokens }) => {
         </div>
 
         <div className="custom-carousel-col-2">
-            {shuffle([...Array(25).keys()].slice(1)).map(index => (
+            {[...Array(61).keys()].reverse().map(index => (
                 <div key={`vertical_carousel_2_${index}`} className="carousel-image-box">
-                    <div className="position-relative w-100">
-                        <img src={`/images/gifs/${index}.gif`} className="w-100 h-100 " />
+                    <div className="position-relative w-100 h-100">
+                        <img src={`/images/gifs/${index}.gif`} className="w-100 h-100" />
                     </div>
                 </div>
             ))}
