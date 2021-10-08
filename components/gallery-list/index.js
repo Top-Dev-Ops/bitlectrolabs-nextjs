@@ -11,8 +11,6 @@ export default function GalleryList({
     setLastView,
 }) {
 
-    const { innerWidth } = window
-
     const passTokens = tokens.length > 0 && tokens.length > 6 ? (
         tokens
      ) : tokens.length > 0 ? (
@@ -24,7 +22,7 @@ export default function GalleryList({
             {passTokens.length > 0 && (
                 <>
                     <section className="gallery-list">
-                        {innerWidth >= 1200 ? (
+                        {window.innerWidth >= 1200 ? (
                             <div className="w-100 h-100">
                                 <XlGalleryList
                                     left={left}
@@ -34,7 +32,7 @@ export default function GalleryList({
                                     setLastView={setLastView}
                                 />
                             </div>
-                        ) : innerWidth >= 992 ? (
+                        ) : window.innerWidth >= 992 ? (
                             <div className="w-100 h-100">
                                 <LgGalleryList
                                     left={left}
@@ -44,7 +42,7 @@ export default function GalleryList({
                                     setLastView={setLastView}
                                 />
                             </div>
-                        ) : innerWidth >= 768 ? (
+                        ) : window.innerWidth >= 768 ? (
                             <div className="w-100 h-100">
                                 <MdGalleryList
                                     left={left}
@@ -54,7 +52,7 @@ export default function GalleryList({
                                     setLastView={setLastView}
                                 />
                             </div>
-                        ) : innerWidth > 0 ? (
+                        ) : window.innerWidth > 0 ? (
                             <div className="w-100 h-100">
                                 <SmGalleryList
                                     left={left}

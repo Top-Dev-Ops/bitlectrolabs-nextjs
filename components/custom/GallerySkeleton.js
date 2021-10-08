@@ -23,9 +23,9 @@ export default function GallerySkeleton() {
             <rect width="158" height="360" fill="url(#paint0_linear)"/>
             <defs>
                 <linearGradient id="paint0_linear" x1="2.25423e-06" y1="170.438" x2="158" y2="170.438" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#212226"/>
-                    <stop offset="0.505208" stop-color="#2D2E33"/>
-                    <stop offset="1" stop-color="#212226"/>
+                    <stop stopColor="#212226"/>
+                    <stop offset="0.505208" stopColor="#2D2E33"/>
+                    <stop offset="1" stopColor="#212226"/>
                 </linearGradient>
             </defs>
         </svg>

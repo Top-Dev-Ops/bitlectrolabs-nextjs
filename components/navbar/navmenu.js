@@ -5,7 +5,10 @@ const NavMenu = ({ menus }) => {
         {menus.map((menu, index) =>
             (
                 <div key={`menu_${menu}`} className="nav-menu-item">
-                    <Link href={menu === 'News' ? 'https://bitlectro.medium.com/' : `/${menu.toLowerCase()}`}>
+                    <Link 
+                        href={menu === 'News' ? 'https://bitlectro.medium.com/' :
+                            menu === 'news' ? '/news' : `/${menu.toLowerCase()}`}
+                    >
                         <a>{menu}</a>
                     </Link>
 

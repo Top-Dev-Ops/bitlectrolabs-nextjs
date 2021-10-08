@@ -19,10 +19,7 @@ export default function Footer() {
             <div className="col-12 col-lg-4 mb-2 mb-lg-0 terms-link">
                 <div className="social d-flex justify-content-center align-items-center">
                     <p className="my-0">
-                        {/* <Link href="/terms">
-                            <a>Terms of Use</a>
-                        </Link> */}
-                        <Link href="https://pastebin.com/raw/mfcQUZRm">
+                        <Link href={1 === 2 ? '/terms' : 'https://pastebin.com/raw/mfcQUZRm'}>
                             <a>Terms of Use</a>
                         </Link>
                     </p>
