@@ -28,13 +28,11 @@ export default function GalleryCard({
     }
 
     const unwrapToken = () => {
-        console.log(token)
         UNWRAP_TOKEN(token.token_id)
     }
 
     const purchaseToken = () => {
         setPurchased(true)
-        console.log(token)
     }
 
     const galleryCardScroll = (scroll) => {
