@@ -103,6 +103,8 @@ export default function Home({
           onMouseUp={e => setMouseEnd(e.clientX)}
           onTouchStart={e => setMouseStart(e.targetTouches[0].clientX)}
           onTouchEnd={e => setMouseEnd(e.changedTouches[0].clientX)}
+          onClickLeft={() => scroll({ deltaY: -1 })}
+          onClickRight={() => scroll({ deltaY: 1 })}
         >
           <div className="card-collections">
             <div className="card-grid justify-content-around align-items-sm-center" style={{minWidth: '100%'}}>
@@ -115,7 +117,7 @@ export default function Home({
                 <h2 className="text-white">Dreamloops</h2>
                 <p className="w-100 w-lg-50 text-left">A generative series of audio-visual non-fungible tokens - some redeemable for vinyl or cassette.</p>
                 <LinkTo
-                  href={'/'}
+                  href={'/collections/Dreamloops'}
                   text={'Explore'}
                   icon={<BsArrowRight />}
                 />
@@ -131,7 +133,7 @@ export default function Home({
                 <h2 className="text-white">Dreamers</h2>
                 <p className="w-100 w-lg-50 text-left">A generative series of audio-visual non-fungible tokens - some redeemable for vinyl or cassette.</p>
                 <LinkTo
-                  href={'/'}
+                  href={'/collections/Dreamers'}
                   text={'Explore'}
                   icon={<BsArrowRight />}
                 />

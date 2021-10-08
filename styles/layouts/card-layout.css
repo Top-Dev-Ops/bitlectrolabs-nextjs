@@ -29,6 +29,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .card-collection .card-collections {
@@ -37,10 +38,6 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-}
-
-.card-collection:hover {
-    cursor: pointer;
 }
 
 .card-grid {

@@ -18,6 +18,7 @@ import { axiosDreamloops, axiosOpenSea } from '../../services/axios'
 
 export default function Collection({
     hero,
+    bodies,
     overview,
     paragraph,
     statisticses,
@@ -43,7 +44,7 @@ export default function Collection({
                     />
 
                     <CollectionSubHeading
-                        overview={overview.data}
+                        data={overview.data}
                         extraClassNames={'my-5 py-5'}
                     />
 
@@ -68,7 +69,25 @@ export default function Collection({
                         />
                     ))}
 
-                    <img src="/images/dreamers.png" className="w-100 h-auto mb-5 pb-5" />
+                    
+                    {bodies.length > 0 && (
+                        <CollectionSubHeading
+                            data={bodies[0].data}
+                            extraClassNames={'my-5'}
+                        />
+                    )}
+                    
+                    {router.query.collection === 'Dreamers' && (
+                        <img src="/images/dreamers.png" className="w-100 h-auto mb-5 pb-5" />
+                    )}
+
+                    {bodies.length > 1 && bodies.map((body, index) => index > 0 ? (
+                        <CollectionSubHeading
+                            key={`collection_body_${body.id}`}
+                            data={body.data}
+                            extraClassNames={'my-5'}
+                        />
+                    ) : undefined)}
                 </div>
 
 
@@ -109,6 +128,10 @@ export async function getStaticProps({ params }) {
         Prismic.Predicates.at('document.type', 'hero_section')
     )
 
+    const bodySection = await Client().query(
+        Prismic.Predicates.at('document.type', 'body_section')
+    )
+
     const heroImage = await Client().query(
         Prismic.Predicates.at('document.type', 'hero_images')
     )
@@ -123,9 +146,10 @@ export async function getStaticProps({ params }) {
 
     const statisticss = await Client().query(
         Prismic.Predicates.at('document.type', 'statistics_section')
-    )
+    )    
 
     const hero = heroes.results.filter(item => item.data.collection_name[0].text === params.collection)
+    const bodies = bodySection.results.filter(item => item.data.collection_name[0].text === params.collection)
     const heroImages = heroImage.results.filter(item => item.data.collection_name[0].text === params.collection)
     const overview = overviews.results.filter(item => item.data.collection_name[0].text === params.collection)
     const paragraph = paragraphs.results.filter(item => item.data.collection_name[0].text === params.collection)
@@ -141,6 +165,7 @@ export async function getStaticProps({ params }) {
     return {
         props: {
             hero: hero.length > 0 ? hero[0] : [],
+            bodies: bodies.length > 0 ? bodies.sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date)) : [],
             overview: overview.length > 0 ? overview[0] : [],
             paragraph: paragraph.length > 0 ? paragraph[0] : [],
             heroImages,

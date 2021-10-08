@@ -1,10 +1,9 @@
-import { useRouter
- } from 'next/router'
+import { useRouter } from 'next/router'
 import styles from '../../styles/collection.module.css'
 
 import Divider from '../custom/Divider'
 
-export default function CollectionSubHeading({ overview, extraClassNames }) {
+export default function CollectionSubHeading({ data, extraClassNames }) {
     const router = useRouter()
 
     return (
@@ -19,17 +18,17 @@ export default function CollectionSubHeading({ overview, extraClassNames }) {
                         background: `${router.query.collection === 'Dreamers' ? 'inherit' : undefined}`,
                     }}
                 >
-                    {overview.title[0].text}
+                    {data.title[0].text}
                 </h3>
 
                 <p className="my-3">
-                    {overview.body_paragraph[0].text}
+                    {data.body_paragraph[0].text}
                 </p>
 
                 <Divider extraClassNames={'custom-flexible-divider my-4'} />
 
                 <span className="my-3">
-                    {overview.support_text[0].text}
+                    {data.support_text[0].text}
                 </span>
             </div>
         </section>

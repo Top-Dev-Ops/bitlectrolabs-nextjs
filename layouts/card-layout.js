@@ -1,3 +1,4 @@
+import { ArrowButton } from "../components/custom/Button"
 const CardLayout = ({ variant, children, extraClassNames, extraStyles }) => {
     return (
         <section className={`card ${extraClassNames}`} style={{
@@ -11,7 +12,15 @@ const CardLayout = ({ variant, children, extraClassNames, extraStyles }) => {
     )
 }
 
-export const CardLayoutCollection = ({ children, onMouseDown, onMouseUp, onTouchStart, onTouchEnd }) => {
+export const CardLayoutCollection = ({
+    children,
+    onMouseDown,
+    onMouseUp,
+    onTouchStart,
+    onTouchEnd,
+    onClickLeft,
+    onClickRight,
+}) => {
     return (
         <section
             className="card-collection justify-content-center"
@@ -21,6 +30,26 @@ export const CardLayoutCollection = ({ children, onMouseDown, onMouseUp, onTouch
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
         >
+            <div
+                className="d-none d-lg-block"
+                style={{
+                    position: 'absolute',
+                    right: '5%',
+                    top: '5%',
+                    zIndex: '10'
+                }}
+            >
+                <ArrowButton
+                    direction="left"
+                    extraClassNames="mx-0 mx-lg-2"
+                    onClick={onClickLeft}
+                />
+                <ArrowButton
+                    direction="right"
+                    onClick={onClickRight}
+                />
+            </div>
+
             {children}
         </section>
     )
