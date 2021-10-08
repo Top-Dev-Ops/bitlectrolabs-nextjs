@@ -31,7 +31,7 @@ export default function MyPurchases({
             </div>
 
             <CloseFilter
-                onClick={() => console.log("CLOSE")}
+                onClick={() => {}}
                 extraStyles={{
                     position: 'absolute',
                     top: '30px',

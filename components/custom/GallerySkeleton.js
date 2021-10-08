@@ -2,15 +2,6 @@ import { useEffect } from "react";
 
 export default function GallerySkeleton() {
 
-    useEffect(() => {
-        const timer = () => {
-            console.log("hello")
-        }
-
-        setInterval(timer, 100)
-        return () => clearInterval(timer)
-    }, [])
-
     return (
         <svg
             width="360"

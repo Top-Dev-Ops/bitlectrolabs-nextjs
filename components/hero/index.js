@@ -34,6 +34,8 @@ const Hero = ({ tokens }) => {
 }
 
 export const CollectionHero = ({ hero }) => {
+    const router = useRouter()
+    
     return <section className="collection-hero">
         {hero.banner.url !== null && hero.banner.url !== '' && (
             <img
@@ -44,7 +46,15 @@ export const CollectionHero = ({ hero }) => {
 
         <div className="row gx-0">
             <div className="col-12 text-center">
-                <h2 className="text-center">
+                <h2
+                    className="text-center"
+                    style={{
+                        color: `${router.query.collection === 'Dreamers' ? 'var(--green900)' : 'undefined'}`,
+                        backgroundClip: `${router.query.collection === 'Dreamers' ? 'inherit' : 'text'}`,
+                        WebkitTextFillColor: `${router.query.collection === 'Dreamers' ? 'inherit' : 'transparent'}`,
+                        background: `${router.query.collection === 'Dreamers' ? 'inherit' : undefined}`,
+                    }}
+                >
                     {hero.title[0].text}
                 </h2>
 

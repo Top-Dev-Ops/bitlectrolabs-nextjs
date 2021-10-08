@@ -164,17 +164,25 @@ export default function Gallery({ tokens, attributes }) {
 
 export async function getStaticProps() {
     const attributes = await axiosDreamloops.get('/attributes')
+    let tokens = []
 
-    const openSeaUrl = await (await axiosDreamloops.get('/random_selection'))
+    const openSeaUrls = await (await axiosDreamloops.get('/random_selection'))
         .data
-        .slice(0, 20).map(tokenId => `token_ids=${tokenId}`)
-        .join('&')
+        .map(tokenId => `token_ids=${tokenId}`)
 
-    const tokens = await axiosOpenSea.get(`/assets?${openSeaUrl}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
+    let i
+    let j
+    let openSeaUrl
+    let temporaryTokens
+    for (i = 0,j = openSeaUrls.length; i < j; i += 20) {
+        openSeaUrl = openSeaUrls.slice(i, i + 20).join('&')
+        temporaryTokens = await axiosOpenSea.get(`/assets?${openSeaUrl}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
+        tokens = [...tokens, ...temporaryTokens.data.assets]
+    }
 
     return {
         props: {
-            tokens: tokens.data.assets,
+            tokens: tokens,
             attributes: attributes.data
         }
     }

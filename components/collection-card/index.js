@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import Progresser from "../custom/Progresser"
 
 export default function CollectionCard({
@@ -6,9 +7,19 @@ export default function CollectionCard({
     extraClassNames,
 }) {
 
+    const router = useRouter()
+
     return (
         <section className={`collection-card ${extraClassNames}`}>
-            <h3 className="mb-5">{heading}</h3>
+            <h3
+                className="mb-5"
+                style={{
+                    color: `${router.query.collection === 'Dreamers' ? 'var(--green900)' : 'undefined'}`,
+                    backgroundClip: `${router.query.collection === 'Dreamers' ? 'inherit' : 'text'}`,
+                    WebkitTextFillColor: `${router.query.collection === 'Dreamers' ? 'inherit' : 'transparent'}`,
+                    background: `${router.query.collection === 'Dreamers' ? 'inherit' : undefined}`,
+                }}
+            >{heading}</h3>
 
             {categories.map(category =>
                 <Progresser

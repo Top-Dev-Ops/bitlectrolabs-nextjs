@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { CollectionHero } from '../../components/hero'
 import CollectionImages from '../../components/collection-images'
@@ -22,6 +23,9 @@ export default function Collection({
     statisticses,
     tokens
 }) {
+    const router = useRouter()
+    const dreamImages = Array.from(Array(6)).map((e, i) => `/images/Dreamers/${i}.gif`)
+
     return (
         <>
             <Head>
@@ -35,7 +39,7 @@ export default function Collection({
                     <CollectionHero hero={hero.data} />
 
                     <CollectionImages
-                        images={tokens.length > 0 ? tokens.map(token => token.image_original_url) : []}
+                        images={router.query.collection === 'Dreamers' ? dreamImages : tokens.length > 0 ? tokens.map(token => token.image_original_url) : []}
                     />
 
                     <CollectionSubHeading
@@ -52,18 +56,29 @@ export default function Collection({
                         />
                     ))}
                     
+                    {paragraph.data !== undefined && paragraph.data.section_title.length > 0 && (
+                        <h3 style={{color: 'var(--green900)'}}>{paragraph.data.section_title[0].text}</h3>
+                    )}
                     {paragraph.data !== undefined && paragraph.data.additional_information.map((paragraph, index) => (
                         <CollectionParagraph
                             key={`collection_paragraph_${index}`}
                             heading={`${paragraph.additional_information_title[0].text}`}
                             content={paragraph.additional_information_body.map(item => item.text)}
-                            extraClassNames={'mb-5 pb-5'}
+                            extraClassNames={'mb-5'}
                         />
                     ))}
+
+                    <img src="/images/dreamers.png" className="w-100 h-auto mb-5 pb-5" />
                 </div>
 
+
                 <Link href="/gallery">
-                    <section className={styles.collectionGallery}>
+                    <section
+                        className={styles.collectionGallery}
+                        style={{
+                            background: `${router.query.collection === 'Dreamers' ? 'var(--green900)' : 'var(--purpleGradient1)'}`
+                        }}
+                    >
                         <h4 className="text-white">Gallery</h4>
                     </section>
                 </Link>

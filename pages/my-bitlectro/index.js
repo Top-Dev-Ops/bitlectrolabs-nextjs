@@ -48,9 +48,7 @@ export default function MyBitlectro({ attributes }) {
                         onClose={() => setTokenSelected(null)}
                         token={tokenSelected}
                     />
-                    <GalleryCard
-                        token={tokenSelected}
-                    />
+                    <GalleryCard token={tokenSelected} />
                 </>
             ) : (
                 <>
