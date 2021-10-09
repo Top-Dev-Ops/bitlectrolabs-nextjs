@@ -22,7 +22,7 @@ const VerticalCarousel = ({ tokens }) => {
 
     const animateCarousel = (targetName, _duration) => {
         const { innerWidth } = window
-        const count = 85
+        const count = 82
 
         const gap = innerWidth > 1600 ? 20 :
             innerWidth > 1160 ? 15 :
@@ -70,7 +70,7 @@ const VerticalCarousel = ({ tokens }) => {
             onUpdate: () => {
                 ele.forEach((e, i) => {
                     if (scatter) {
-                        gsap.to(e, { duration: 1.5, left: diffs[i] })
+                        gsap.to(e, { duration: 0.5, left: diffs[i] })
                     } else {
                         gsap.to(e, { duration: 1, left: 0 })
                     }
@@ -84,23 +84,6 @@ const VerticalCarousel = ({ tokens }) => {
         })
         return _timeline
     }
-
-    // const animateSkeleton = () => {
-    //     const ele = document.querySelectorAll('.skeleton-gradient')
-    //     let dirFromLeft = "+=" + totalWidth
-
-    //     const mod = gsap.utils.wrap(0, totalWidth)
-    //     const t1 = gsap.timeline()
-    //     t1.to(ele, {
-    //         x: dirFromLeft,
-    //         modifiers: {
-    //             x: x => mod(parseFloat(x)) + 'px'
-    //         },
-    //         duration: 2,
-    //         ease: 'none',
-    //         repeat: -1
-    //     })
-    // }
 
     useEffect(() => {
         let t1 = animateCarousel(".custom-carousel-col-1 .carousel-image-box", 100)
@@ -136,33 +119,17 @@ const VerticalCarousel = ({ tokens }) => {
 
     return (<section className="row">
         <div className="custom-carousel-col-1">
-            {[...Array(86).keys()].map(index => (
+            {[...Array(83).keys()].map(index => (
                 <div key={`vertical_carousel_1_${index}`} className="carousel-image-box">
                     <div className="position-relative w-100 h-100">
                         <img src={`/images/gifs/${index}.gif`} className="w-100 h-100" />
-                        {/* <img
-                            src={isLoaded ? `/images/gifs/${index}.gif` : '/images/skeleton.png'}
-                            className="w-100 h-100"
-                        /> */}
-
-                        {/* <div
-                            className={`h-100 skeleton-gradient ${isLoaded ? 'd-none' : 'd-block'}`}
-                            style={{
-                                position: 'absolute', 
-                                width: '70px',
-                                top: '0', 
-                                left: '0', 
-                                background: 'linear-gradient(90deg, #212226 0%, #2D2E33 50.52%, #212226 100%)',
-                                zIndex: 1
-                            }}
-                        /> */}
                     </div>
                 </div>
             ))}
         </div>
 
         <div className="custom-carousel-col-2">
-            {[...Array(86).keys()].reverse().map(index => (
+            {[...Array(83).keys()].reverse().map(index => (
                 <div key={`vertical_carousel_2_${index}`} className="carousel-image-box">
                     <div className="position-relative w-100 h-100">
                         <img src={`/images/gifs/${index}.gif`} className="w-100 h-100" />

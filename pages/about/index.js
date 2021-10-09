@@ -21,10 +21,10 @@ export default function About({
         const bottomPos = document.querySelector('.aboutHeroSection').getBoundingClientRect().bottom
         const imageHeight = document.querySelector('.aboutHeroImage').getBoundingClientRect().height
         
-        if (bottomPos - imageHeight - 179 < 0) {
+        if (bottomPos - imageHeight - 299 < 0) {
             document.querySelector('.aboutHeroImage').style.position = 'absolute'
-            document.querySelector('.aboutHeroImage').style.top = `calc(100% - ${imageHeight}px)`
-            document.querySelector('.aboutHeroImage').style.right = 0
+            document.querySelector('.aboutHeroImage').style.top = `calc(100% - ${imageHeight}px - 120px)`
+            document.querySelector('.aboutHeroImage').style.right = '0'
         } else {
             document.querySelector('.aboutHeroImage').style.position = 'fixed'
             document.querySelector('.aboutHeroImage').style.top = '179px'
@@ -46,18 +46,23 @@ export default function About({
             </Head>
 
             <main className="w-100">
-                <div className={styles.aboutHero}>
-                    <div className="row m-0 p-0 position-relative aboutHeroSection">
-                        <div className={styles.aboutGradientText}>
-                            {banner.data.about_banner_title[0].text}
+                <div className={`${styles.aboutHero}`}>
+                    <div className="aboutHeroSection position-relative">
+                        <div
+                            className={`${styles.aboutHeroImage} aboutHeroImage`}
+                            style={{backgroundImage: `url(${banner.data.about_banner_image.url})`}}
+                        />
+
+                        <div className="row m-0 p-0">
+                            <div className={styles.aboutGradientText}>
+                                {banner.data.about_banner_title[0].text}
+                            </div>
                         </div>
 
-                        <div className={`${styles.aboutHeroImage} aboutHeroImage`} style={{backgroundImage: `url(${banner.data.about_banner_image.url})`}} />
+                        <p className={styles.aboutMiddleText}>
+                            {banner.data.about_banner_paragraph[0].text}
+                        </p>
                     </div>
-
-                    <p className={styles.aboutMiddleText}>
-                        {banner.data.about_banner_paragraph[0].text}
-                    </p>
 
                     <div>
                         <LeftBorderedParagraph extraClassNames={'text-white'}>
@@ -70,7 +75,7 @@ export default function About({
                     </p>
                 </div>
 
-                <section ref={section} className="whiteGraySection">
+                <section ref={section} className="whiteGraySection" style={{position: 'relative'}}>
                     {contents.data.about_content_group.map((content, index) => (
                         index % 2 === 0 ? (
                             <div key={`about_content_${index}`} className={styles.aboutWhiteSection}>
@@ -93,7 +98,7 @@ export default function About({
                                 </div>
                             </div>
                         ) : (
-                            <div key={`about_content_${index}`}>
+                            <div key={`about_content_${index}`} className="aboutGraySection">
                                 {/* <div className={styles.gradientSection}></div> */}
 
                                 <div className={styles.aboutGraySection}>
@@ -118,17 +123,19 @@ export default function About({
                     ))}
                 </section>
 
-                <div
-                    className={styles.aboutEmailSection}
-                    onClick={() => {
-                        window.location.href = "mailto:admin@bitlectrolabs.com?subject=Contact us";
-                    }}
-                >
-                    <h3 className="text-white">admin@bitlectrolabs.com</h3>
-                </div>
+                <div className="footer-section w-100">
+                    <div
+                        className={styles.aboutEmailSection}
+                        onClick={() => {
+                            window.location.href = "mailto:admin@bitlectrolabs.com?subject=Contact us";
+                        }}
+                    >
+                        <h3 className="text-white">admin@bitlectrolabs.com</h3>
+                    </div>
 
-                {/* SOCIALS, LOGO & TEMS OF USE */}
-                <Footer />
+                    {/* SOCIALS, LOGO & TEMS OF USE */}
+                    <Footer />
+                </div>
             </main>
         </>
     )

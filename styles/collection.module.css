@@ -1,6 +1,7 @@
 .collectionCard {
     width: 896px;
     margin: 0 auto;
+    margin-top: 295px;
 }
 
 @media (max-width: 992px) {
@@ -19,7 +20,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
-    line-height: 90%;
+    line-height: 100%;
     text-align: left;
     font-weight: 400;
     font-style: normal;
@@ -28,7 +29,7 @@
 .collectionSubHeadingLayout p {
     font-size: var(--textLg);
     color: var(--pureWhite);
-    line-height: 90%;
+    line-height: 130%;
     text-align: left;
 }
 
@@ -38,6 +39,7 @@
     width: 50%;
     margin-left: 50%;
     text-align: left;
+    font-family: Helvetica;
 }
 
 @media (max-width: 1200px) {

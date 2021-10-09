@@ -4,7 +4,7 @@ import Lottie from 'react-lottie'
 export default function Grid({ hover }) {
 
     const defaultOptions = {
-        loop: true,
+        loop: false,
         autoplay: false,
         animationData: require('../../../styles/gallery-footer/grid.json'),
         rendererSettings: {

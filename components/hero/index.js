@@ -40,7 +40,8 @@ export const CollectionHero = ({ hero }) => {
         {hero.banner.url !== null && hero.banner.url !== '' && (
             <img
                 src={hero.banner.url}
-                className="w-100 h-auto mb-5"
+                className="w-100 h-auto"
+                style={{marginBottom: '74px'}}
             />
         )}
 

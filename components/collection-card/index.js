@@ -5,12 +5,13 @@ export default function CollectionCard({
     heading,
     categories,
     extraClassNames,
+    extraStyles
 }) {
 
     const router = useRouter()
 
     return (
-        <section className={`collection-card ${extraClassNames}`}>
+        <section className={`collection-card ${extraClassNames}`} style={extraStyles}>
             <h3
                 className="mb-5"
                 style={{
@@ -21,13 +22,12 @@ export default function CollectionCard({
                 }}
             >{heading}</h3>
 
-            {categories.map(category =>
+            {categories.map((category, index) =>
                 <Progresser
                     key={`collection_stats_${category.category_title[0].text}_${category.category_description}`}
                     heading={`${category.category_title[0].text}`}
                     subHeading={`${category.category_name[0].text}`}
                     percentage={`${category.category_description}`}
-                    extraClassNames={'mt-4'}
                 />
             )}
         </section>

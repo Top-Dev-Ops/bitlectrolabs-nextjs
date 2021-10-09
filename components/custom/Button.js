@@ -14,16 +14,17 @@ export default function Button({ icon, text, variant, onClick }) {
                 onClick={onClick}
             >
                 {icon}
-                <span>{text}</span>
+                <span className="text-center">{text}</span>
             </button>
         </div>
     )
 }
 
-export const ArrowButton = ({ direction, onClick, onMouseDown, onMouseUp, extraClassNames }) => {
+export const ArrowButton = ({ direction, onClick, onMouseDown, onMouseUp, extraClassNames, extraStyles }) => {
     return (
         <button
             className={`border-0 outline-0 custom-button-arrow ${extraClassNames}`}
+            style={extraStyles}
             onMouseDown={() => { onMouseDown !== undefined && onMouseDown(direction) }}
             onMouseUp={() => { onMouseUp !== undefined && onMouseUp(direction) }}
             onClick={onClick}

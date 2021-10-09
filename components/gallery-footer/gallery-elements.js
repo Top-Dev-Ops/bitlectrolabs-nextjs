@@ -26,7 +26,7 @@ export default function GalleryElements({
                             text={data}
                             onChange={checkFilters}
                             reset={resetFilters}
-                            extraClassNames="mb-2"
+                            extraClassNames="mb-3"
                             checked={selectedFilters.includes(data) ? true : false}
                         />
                     ))}

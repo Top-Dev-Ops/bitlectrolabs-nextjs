@@ -20,6 +20,7 @@ export default function Gallery({ tokens, attributes }) {
     const [up, setUp] = useState('')
     const [down, setDown] = useState('')
     const [tokenSelected, setTokenSelected] = useState(null)
+    const [tokenHovered, setTokenHovered] = useState(null)
     const [filters, setFilters] = useState([])
     const [filteredTokens, setFilteredTokens] = useState(tokens)
     
@@ -133,15 +134,19 @@ export default function Gallery({ tokens, attributes }) {
                             right={right}
                             tokens={filteredTokens}
                             tokenSelect={setTokenSelected}
+                            tokenHover={setTokenHovered}
                         />
                     )}
 
-                    {/* <p
-                        className="text-white text-center pt-0 pt-sm-5 pt-md-5 mt-5 pt-xl-0 mt-xl-0"
-                        style={{zIndex: `${view ? '3' : undefined}`}}
+                    <p
+                        className="text-center pt-0 pt-sm-5 pt-md-5 mt-5 pt-xl-0 mt-xl-0"
+                        style={{
+                            zIndex: `${view ? '3' : undefined}`,
+                            color: tokenHovered !== null ? 'var(--pureWhite)' : 'transparent'
+                        }}
                     >
-                        #9361
-                    </p> */}
+                        {tokenHovered !== null ? `#${tokenHovered.token_id}` : 'undefined'}
+                    </p>
 
                     <GalleryFooter
                         view={view}

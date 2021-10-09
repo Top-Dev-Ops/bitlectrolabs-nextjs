@@ -36,7 +36,7 @@ export default function CollectionSubHeading({ data, extraClassNames }) {
 
                 {data.support_text[0] !== undefined && (
                     <>
-                        <Divider extraClassNames={'custom-flexible-divider my-4'} />
+                        <Divider extraClassNames={'custom-divider my-4'} />
 
                         <span className="my-3">
                             {data.support_text[0].text}

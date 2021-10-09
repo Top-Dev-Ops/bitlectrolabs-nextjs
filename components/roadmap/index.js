@@ -14,19 +14,19 @@ export default function Roadmap({ roadmaps }) {
 
     const onTouchEnd = touchEnd => {
         if (touchStart - touchEnd > 150) {
-            slide(true)
+            slide(true, touchStart, touchEnd)
         }
         if (touchStart - touchEnd < -150) {
-            slide(false)
+            slide(false, touchStart, touchEnd)
         }
     }
 
     const onMouseUp = mouseEnd => {
         if (mouseStart - mouseEnd > 150) {
-            slide(true)     // SLIDE TO RIGHT
+            slide(true, mouseStart, mouseEnd)     // SLIDE TO RIGHT
         }
         if (mouseStart - mouseEnd < -150) {
-            slide(false)    // SLIDE TO LEFT
+            slide(false, mouseStart, mouseEnd)    // SLIDE TO LEFT
         }
     }
 
@@ -37,11 +37,16 @@ export default function Roadmap({ roadmaps }) {
         return -c/2 * (t*(t-2) - 1) + b;
     }
 
-    const slide = (direction) => {
+    const slide = (direction, startPosition, endPosition) => {
         const start = roadmap.current.scrollLeft
         let currentTime = 0
         const increment = 20
-        const end = direction ? 396 : -396
+        let end = 0
+        if (endPosition === undefined) {
+            end = direction ? 396 : -396
+        } else {
+            end = startPosition - endPosition
+        }
         
         const animateScroll = function () {
             currentTime += increment

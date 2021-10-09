@@ -8,6 +8,7 @@ export default function GalleryList({
     right,
     tokens,
     tokenSelect,
+    tokenHover,
 }) {
 
     const passTokens = tokens.length > 0 && tokens.length > 6 ? (
@@ -28,6 +29,7 @@ export default function GalleryList({
                                     right={right}
                                     tokens={passTokens}
                                     tokenSelect={tokenSelect}
+                                    tokenHover={tokenHover}
                                 />
                             </div>
                         ) : window.innerWidth >= 992 ? (
@@ -37,6 +39,7 @@ export default function GalleryList({
                                     right={right}
                                     tokens={passTokens}
                                     tokenSelect={tokenSelect}
+                                    tokenHover={tokenHover}
                                 />
                             </div>
                         ) : window.innerWidth >= 768 ? (
@@ -46,6 +49,7 @@ export default function GalleryList({
                                     right={right}
                                     tokens={passTokens}
                                     tokenSelect={tokenSelect}
+                                    tokenHover={tokenHover}
                                 />
                             </div>
                         ) : window.innerWidth > 0 ? (
@@ -55,6 +59,7 @@ export default function GalleryList({
                                     right={right}
                                     tokens={passTokens}
                                     tokenSelect={tokenSelect}
+                                    tokenHover={tokenHover}
                                 />
                             </div>
                         ) : undefined}

@@ -25,6 +25,10 @@ const GalleryFooter = ({
     const [modalOpen, setModalOpen] = useState(false)
     const [hoverGridList, setHoverGridList] = useState(false)
     const [hoverSettings, setHoverSettings] = useState(false)
+    const [left, setLeft] = useState(false)
+    const [right, setRight] = useState(false)
+    const [up, setUp] = useState(false)
+    const [down, setDown] = useState(false)
 
     const router = useRouter()
 
@@ -37,8 +41,10 @@ const GalleryFooter = ({
         }
     })
 
-    useKeyPress('ArrowLeft', () => onClickLeft())
-    useKeyPress('ArrowRight', () => onClickRight())
+    useKeyPress('ArrowLeft', () => {setLeft(false); onClickLeft()}, () => { setLeft(true)})
+    useKeyPress('ArrowRight', () => {setRight(false); onClickRight()}, () => { setRight(true) })
+    useKeyPress('ArrowUp', () => { setUp(false) }, () => { setUp(true) })
+    useKeyPress('ArrowDown', () => { setDown(false) }, () => { setDown(true) })    
 
     return (
         <>
@@ -140,6 +146,9 @@ const GalleryFooter = ({
                         <ArrowButton
                             direction="left"
                             extraClassNames={'mx-1'}
+                            extraStyles={
+                                left === true ? {background: 'var(--midGray600)'} : undefined
+                            }
                             onMouseDown={onMouseDown}
                             onMouseUp={onMouseUp}
                             onClick={onClickLeft}
@@ -148,12 +157,18 @@ const GalleryFooter = ({
                             <ArrowButton
                                 direction="up"
                                 extraClassNames={'mx-1 mb-1'}
+                                extraStyles={
+                                    up === true ? {background: 'var(--midGray600)'} : undefined
+                                }
                                 onMouseDown={onMouseDown}
                                 onMouseUp={onMouseUp}
                             />
                             <ArrowButton
                                 direction="down"
                                 extraClassNames={'mx-1 mt-1'}
+                                extraStyles={
+                                    down === true ? {background: 'var(--midGray600)'} : undefined
+                                }
                                 onMouseDown={onMouseDown}
                                 onMouseUp={onMouseUp}
                             />
@@ -161,6 +176,9 @@ const GalleryFooter = ({
                         <ArrowButton
                             direction="right"
                             extraClassNames="mx-1"
+                            extraStyles={
+                                right === true ? {background: 'var(--midGray600)'} : undefined
+                            }
                             onClick={onClickRight}
                             onMouseDown={onMouseDown}
                             onMouseUp={onMouseUp}

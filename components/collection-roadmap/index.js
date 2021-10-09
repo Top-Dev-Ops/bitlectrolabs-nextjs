@@ -20,13 +20,13 @@ export default function CollectionRoadmap({ data, extraClassNames }) {
                 </h3>
 
                 {data.body_paragraph[0] !== undefined && (
-                    <p className="my-3">
+                    <p className="my-3" style={{fontFamily: 'Helvetica'}}>
                         {data.body_paragraph[0].text}
                     </p>
                 )}
 
                 {data.support_text !== undefined && (
-                    <ul className="mx-2">
+                    <ul className="mx-2" style={{fontFamily: 'Helvetica'}}>
                         {data.support_text.map((text, index) => (
                             <li className="text-white" key={`collection_roadmap_text_${index}`}>{text.text}</li>
                         ))}

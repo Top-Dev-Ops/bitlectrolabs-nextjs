@@ -46,7 +46,7 @@ export default function Collections({ collections }) {
                             <Link href={`/collections/${collection.data.collection_title[0].text}`}>
                                 <div
                                     className="w-100 h-100 d-inline-flex align-items-center justify-content-center"
-                                    style={{background: bgColors[index % 3], borderRadius: '30px'}}
+                                    style={{background: bgColors[index % 3], borderRadius: '30px', maxHeight: '400px'}}
                                 >
                                     <h2 className="text-white">{collection.data.collection_title[0].text}</h2>
                                 </div>

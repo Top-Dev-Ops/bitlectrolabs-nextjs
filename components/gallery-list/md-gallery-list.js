@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { animated, useSpring } from 'react-spring'
 import gsap from 'gsap'
 
-export default function MdGalleryList({ left, right, tokenSelect, tokens }) {
+export default function MdGalleryList({
+    left,
+    right,
+    tokenSelect,
+    tokenHover,
+    tokens
+}) {
 
     const [tokenIndex, setTokenIndex] = useState(0)
     const [startXCoordinate, setStartXCoordinate] = useState(0)
@@ -155,8 +161,8 @@ export default function MdGalleryList({ left, right, tokenSelect, tokens }) {
                                     position: 'absolute',
                                     objectFit: 'cover',
                                 }}
-                                onMouseEnter={() => setHover(index)}
-                                onMouseLeave={() => setHover('')}
+                                onMouseEnter={() => {setHover(index); tokenHover(tokens[index])}}
+                                onMouseLeave={() => {setHover(''); tokenHover(null)}}
                             />
 
                             <div

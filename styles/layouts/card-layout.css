@@ -52,6 +52,18 @@
     }
 }
 
+.card > div > div {
+    text-align: left;
+    width: 75%;
+}
+
+.card > div > div > span {
+    font-size: var(--textMd);
+    font-family: Helvetica;
+    font-weight: normal;
+    line-height: 130%;
+}
+
 .card .card-image, .card-collection .card-image {
     width: 513px;
     height: auto;
@@ -71,6 +83,7 @@
 .card h3, .card-collection h3 {
     text-align: left;
     line-height: 90%;
+    width: 75%
 }
 
 .card p, .card-collection p {
@@ -133,6 +146,9 @@
     .card, .card-collection {
         height: 346px;
         grid-template-columns: 30% 70%;
+    }
+    .card > div >div, .card h3, .card-collection h3 {
+        width: 100%;
     }
 }
 

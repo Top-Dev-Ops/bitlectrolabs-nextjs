@@ -19,6 +19,9 @@
 .subscribe-container p {
     color: var(--pureWhite);
     opacity: 70%;
+    width: 440px;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .subscribe-container .subscribe-button {

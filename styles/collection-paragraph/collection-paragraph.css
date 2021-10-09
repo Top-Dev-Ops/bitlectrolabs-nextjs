@@ -5,6 +5,8 @@
 
 .collection-paragraph h4 {
     color: var(--pureWhite);
+    letter-spacing: -1px;
+    line-height: 110%;
 }
 
 .collection-paragraph p {

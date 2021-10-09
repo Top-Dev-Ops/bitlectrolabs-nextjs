@@ -1,4 +1,5 @@
 import { ArrowButton } from "../components/custom/Button"
+
 const CardLayout = ({ variant, children, extraClassNames, extraStyles }) => {
     return (
         <section className={`card ${extraClassNames}`} style={{

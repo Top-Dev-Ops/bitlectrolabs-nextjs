@@ -4,7 +4,7 @@ import Lottie from 'react-lottie'
 export default function List({ hover }) {
 
     const defaultOptions = {
-        loop: true,
+        loop: false,
         autoplay: false,
         animationData: require('../../../styles/gallery-footer/list.json'),
         rendererSettings: {

@@ -202,7 +202,7 @@ export default function Home({
 
               <div className="d-flex flex-column align-items-center justify-content-center mx-5 pb-3 pb-sm-0">
                 {marketingCard.data.subtitle.length > 0 && (
-                  <div className="w-100 w-md-75">
+                  <div>
                     <p className="w-100 text-left">
                       {marketingCard.data.subtitle[0].text}
                     </p>
@@ -210,13 +210,21 @@ export default function Home({
                 )}
 
                 {marketingCard.data.title.length > 0 && (
-                  <h3 className="text-white w-100 w-md-75">
+                  <h3 className="text-white">
                     {marketingCard.data.title[0].text}
                   </h3>
                 )}
+
+                {marketingCard.data.body_paragraph.length > 0 && (
+                  <div>
+                    <span className="text-white font-weight-normal">
+                      {marketingCard.data.body_paragraph[0].text}
+                    </span>
+                  </div>
+                )}
                 
                 {marketingCard.data.linktext.length > 0 && (
-                  <div className="w-100 w-md-75 d-inline-flex flex-row justify-content-left">
+                  <div className="d-inline-flex flex-row justify-content-left">
                     <LinkTo
                       href={marketingCard.data.link.url !== undefined ? marketingCard.data.link.url : '/'}
                       text={marketingCard.data.linktext[0].text}

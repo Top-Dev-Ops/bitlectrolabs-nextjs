@@ -9,6 +9,8 @@
     font-weight: 400;
     height: 50px;
     padding: 0 20px;
+    min-width: 160px;
+    text-align: center;
 }
 
 .custom-button-primary {
@@ -173,6 +175,8 @@
     border-radius: 15px;
     padding: 2px 12px;
     text-align: center;
+    height: 25px;
+    border: 2px solid var(--pureWhite);
 }
 
 .custom-link {
@@ -214,6 +218,22 @@
     .custom-flexible-divider {
         width: calc(100% - 40px);
         margin-left: 20px;
+    }
+}
+
+.custom-progress {
+    margin-bottom: 65px;
+}
+
+@media (max-width: 1200px) {
+    .custom-progress {
+        margin-bottom: 60px;
+    }
+}
+
+@media (max-width: 992px) {
+    .custom-progress {
+        margin-bottom: 40px;
     }
 }
 
@@ -285,7 +305,8 @@
 /* Vertical Carousel */
 .custom-carousel-col-1  {
     position: absolute;
-    right: 220px;
+    /* right: 270px; */
+    right: calc(9.2vw + 220px);
     top: -200px;
     width: 200px;
     z-index: 0;
@@ -294,7 +315,8 @@
 .custom-carousel-col-2 {
     position: absolute;
     padding-left: 20px;
-    right: 50px;
+    /* right: 50px; */
+    right: 9.2vw;
     top: -250px;
     width: 200px;
     z-index: 0;
@@ -306,13 +328,6 @@
     height: 200px;
     border-radius: 16px;
     z-index: 0;
-}
-
-.custom-carousel-col-1 {
-    right: 270px;
-}
-.custom-carousel-col-2 {
-    right: 50px;
 }
 
 .carousel-image-box img {

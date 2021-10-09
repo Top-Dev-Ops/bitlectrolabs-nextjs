@@ -3,7 +3,8 @@
     height: 100%;
 }
 .gallery-list img:hover {
-    cursor: url('/pointer1.svg') 0 0, pointer;
+    /* cursor: url('/pointer1.svg') 0 0, pointer; */
+    cursor: pointer;
 }
 
 .marquee {
@@ -19,7 +20,8 @@
     transform: translateY(-15px);
 }
 .marquee:hover {
-    cursor: url('/pointer1.svg') 0 0, pointer;
+    /* cursor: url('/pointer1.svg') 0 0, pointer; */
+    cursor: pointer;
 }
 .marquee > span {
     font-size: var(--subHeadingMd);

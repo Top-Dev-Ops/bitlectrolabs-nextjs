@@ -28,7 +28,6 @@ export default function Collection({
 }) {
     const router = useRouter()
     const dreamImages = Array.from(Array(6)).map((e, i) => `/images/Dreamers/${i}.gif`)
-    console.log(roadmaps)
 
     return (
         <>
@@ -51,12 +50,11 @@ export default function Collection({
                         extraClassNames={'my-5 py-5'}
                     />
 
-                    {statisticses.length > 0 && statisticses.map(statistics => (
+                    {statisticses.length > 0 && statisticses.map((statistics, index) => (
                         <CollectionCard
                             key={`collection_statistics_${statistics.uid}`}
                             heading={statistics.data.statistic_section_title[0].text}
                             categories={statistics.data.category}
-                            extraClassNames={'my-5 py-5'}
                         />
                     ))}
                     

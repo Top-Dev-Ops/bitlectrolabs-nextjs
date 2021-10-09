@@ -1,6 +1,6 @@
-const Progresser = ({ heading, subHeading, percentage, extraClassNames }) => {
+const Progresser = ({ heading, subHeading, percentage, extraClassNames, extraStyles }) => {
     return (
-        <div className={`custom-progress ${extraClassNames}`}>
+        <div className={`custom-progress ${extraClassNames}`} style={extraStyles}>
             <div className="d-flex flex-row justify-content-between align-items-center">
                 <p>
                     {`${percentage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}  "${heading}"`}
