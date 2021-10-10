@@ -109,7 +109,7 @@ export default function Home({
           <div className="card-collections">
             <div className="card-grid justify-content-around align-items-sm-center" style={{minWidth: '100%'}}>
               <img
-                src="/images/dreamloops.gif"
+                src="/images/dreamloops_card-mini.gif"
                 className="card-image mx-5 mx-sm-auto"
               />
               
@@ -125,7 +125,7 @@ export default function Home({
             </div>
             <div className="card-grid justify-content-around" style={{minWidth: '100%'}}>
               <img
-                src="/images/dreamers.gif"
+                src="/images/dreamers_card-mini.gif"
                 className="card-image mx-5 mx-sm-auto mt-5 mt-sm-0"
               />
               
