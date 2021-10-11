@@ -161,7 +161,7 @@ export default function Home({
             <div className="card-grid justify-content-around align-items-sm-center" style={{minWidth: '100%'}}>
               <img
                 src="/images/dreamloops_card-mini.gif"
-                className="card-full-image mx-5 mx-sm-auto"
+                className="card-image mx-5 mx-sm-auto"
               />
               
               <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
@@ -177,7 +177,7 @@ export default function Home({
             <div className="card-grid justify-content-around" style={{minWidth: '100%'}}>
               <img
                 src="/images/dreamers_card-mini.gif"
-                className="card-full-image mx-5 mx-sm-auto mt-5 mt-sm-0"
+                className="card-image mx-5 mx-sm-auto mt-5 mt-sm-0"
               />
               
               <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
