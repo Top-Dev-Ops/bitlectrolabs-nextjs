@@ -21,6 +21,13 @@ const axiosTokens = axios.create({
     }
 })
 
+const axiosFilter = axios.create({
+    baseURL: `${process.env.NEXT_PUBLIC_FILTER_URL}`,
+    headers: {
+        accept: 'application/json'
+    }
+})
+
 axiosDreamloops.interceptors.request.use(
     (request) => {
         return request
@@ -75,8 +82,27 @@ axiosTokens.interceptors.response.use(
     }
 )
 
+axiosFilter.interceptors.request.use(
+    (request) => {
+        return request
+    },
+    (error) => {
+        console.error(`Request error: ${error.message} at ${error.config.url}`)
+    }
+)
+
+axiosFilter.interceptors.response.use(
+    (response) => {
+        return response
+    },
+    (error) => {
+        console.error(`Response error: ${error.message} at ${error.config.url}`)
+    }
+)
+
 export {
     axiosDreamloops,
     axiosOpenSea,
     axiosTokens,
+    axiosFilter,
 }

@@ -35,3 +35,4 @@ yarn-error.log*
 
 # desktop ini
 desktop.ini
+package-lock.json

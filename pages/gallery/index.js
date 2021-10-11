@@ -5,7 +5,7 @@ import Head from 'next/head'
 import GalleryFooter from '../../components/gallery-footer'
 import ThreeApp from '../../components/gallery-grid'
 import GalleryList from '../../components/gallery-list'
-import { axiosDreamloops, axiosOpenSea } from '../../services/axios'
+import { axiosDreamloops, axiosOpenSea, axiosFilter } from '../../services/axios'
 
 import styles from '../../styles/gallery.module.css'
 import stylesBitlectro from '../../styles/my-bitlectro.module.css'
@@ -28,17 +28,25 @@ export default function Gallery({ tokens, attributes }) {
 
     // FILTER TOKENS BY SELECTED ATTRIBUTES
     useEffect(() => {
+        const fetch = async () => {
+            const filterUrl = filters.map(filter => `value=${filter}`).join('&')
+            const openSeaUrls = await (await axiosFilter.get(`/search?${filterUrl}`)).data.map(id => `token_ids=${id}`)
+            let tokens = []
+            let i
+            let j
+            let openSeaUrl
+            let temporaryTokens
+            for (i = 0,j = openSeaUrls.length; i < j; i += 30) {
+                openSeaUrl = openSeaUrls.slice(i, i + 30).join('&')
+                temporaryTokens = await axiosOpenSea.get(`/assets?${openSeaUrl}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
+                tokens = [...tokens, ...temporaryTokens.data.assets]
+            }
+            setFilteredTokens(tokens)
+        }
         if (filters.length === 0) {
             setFilteredTokens(tokens)
         } else {
-            setFilteredTokens(tokens.filter(token => {
-                for (let i = 0; i < token.traits.length; i += 1) {
-                    if (filters.includes(token.traits[i].value)) {
-                        return true
-                    }
-                }
-                return false
-            }))
+            fetch()
         }
     }, [filters])
 
@@ -185,7 +193,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            tokens: tokens,
+            tokens,
             attributes: attributes.data
         }
     }

@@ -19,6 +19,9 @@ export default function MyBitlectro({ attributes }) {
     const [tokenSelected, setTokenSelected] = useState(null)
     const [showPurchases, setShowPurchases] = useState(false)
 
+    //UNWRAP UI CONDITIONALS
+    const [isUnwrapping, setIsUnwrapping] = useState(false); 
+
     useEffect(() => {
         const connectWallet = async () => {
             const web3Modal = new Web3Modal({
@@ -32,23 +35,39 @@ export default function MyBitlectro({ attributes }) {
             const addresses = await web3.eth.getAccounts()
 
             const tokens = await axiosOpenSea.get(`/assets?owner=${addresses[0]}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
-            // const tokens = await axiosOpenSea.get('/assets?owner=0xdCD0739CA8935f13f1253a6c5C95D406560e5f6E&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff')
-
+            //const tokens = await axiosOpenSea.get('/assets?owner=0xdCD0739CA8935f13f1253a6c5C95D406560e5f6E&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff')
+                    
             setTokens(tokens.data.assets)
         }
         connectWallet()
     }, [])
 
+    function UNWRAP(type, token_id) {
+        //this for future proof call (Dreamloops vs Dreamers) unwrap
+        if(type == 'Dreamloops') {
+            //am unwrapping dreamloop
+            setIsUnwrapping(true)
+        }
+
+        if(type == 'Dreamers') {
+            setIsUnwrapping(true)
+        }
+    }
+
     return (
         <section className={tokenSelected !== null ? styles.myBitlectro : styles.gallery}>
             {tokenSelected ? (
                 <>
+                    {/* conditional render unwrap env INSIDE gallery-collection component */}
+                    {/* this is kinda like a 'page' in traditional CRA */}
                     <GalleryCollection
                         extraClassNames="mb-5 mb-lg-0"
                         onClose={() => setTokenSelected(null)}
                         token={tokenSelected}
+                        isUnwrapping={isUnwrapping}
                     />
-                    <GalleryCard token={tokenSelected} />
+
+                    <GalleryCard token={tokenSelected} UNWRAP={UNWRAP} />
                 </>
             ) : (
                 <>

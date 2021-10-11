@@ -18,6 +18,10 @@ import { Client } from '../prismic-configuration'
 
 import { axiosDreamloops, axiosOpenSea } from '../services/axios'
 
+import detectEthereumProvider from '@metamask/detect-provider'
+import { toast } from 'react-toastify'
+import Web3 from 'web3'
+
 export default function Home({
   marketingCards,
   roadmaps,
@@ -85,6 +89,53 @@ export default function Home({
     setMouseStart(0)
   }, [mouseEnd])
 
+  useEffect(() => {
+
+
+    async function handleMetaEvents() {
+
+      if(window.ethereum) {
+
+        let W3 = new Web3(window.ethereum);
+  
+        let network = await W3.eth.net.getNetworkType();
+  
+        let provider = await detectEthereumProvider();
+  
+        if (provider) {
+  
+          //disconnect/account change listener
+          provider.on('accountsChanged', function (accounts) {
+            //refreshpage
+            window.location.reload()
+          })
+  
+          provider.on('chainChanged', (_chainId) => window.location.reload());
+  
+          //get accounts if already accessible
+          await provider.request({ method: 'eth_accounts' }).then(res => {
+            if(res.length == 0) {
+              toast.dark('MetaMask detected, please connect your MetaMask!');
+            } else if (network == 'main'){     
+              toast.dark('Connected to Ethereum MainNet')
+            } else{
+              toast.warn('You are on the wrong network / chain. Please switch to Ethereum Mainnet in MetaMask!', {autoClose: false})
+            }
+          }).catch(err => {
+            console.log(err)
+          })
+  
+        } else {
+          //please install metamask
+          toast.warn('No MetaMask Detected - Please Install MetaMask');
+        }
+      }
+    }
+
+    handleMetaEvents()
+
+  }, [])
+
   return (
     <>
       <Head>
@@ -110,7 +161,7 @@ export default function Home({
             <div className="card-grid justify-content-around align-items-sm-center" style={{minWidth: '100%'}}>
               <img
                 src="/images/dreamloops_card-mini.gif"
-                className="card-image mx-5 mx-sm-auto"
+                className="card-full-image mx-5 mx-sm-auto"
               />
               
               <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
@@ -126,7 +177,7 @@ export default function Home({
             <div className="card-grid justify-content-around" style={{minWidth: '100%'}}>
               <img
                 src="/images/dreamers_card-mini.gif"
-                className="card-image mx-5 mx-sm-auto mt-5 mt-sm-0"
+                className="card-full-image mx-5 mx-sm-auto mt-5 mt-sm-0"
               />
               
               <div className="d-flex flex-column align-items-start justify-content-center mt-4 mt-sm-0 mb-0 mx-5">
@@ -144,6 +195,10 @@ export default function Home({
           <ProgressBar percentage={20} extraClassNames="mt-0 mt-md-5" />
         </CardLayoutCollection>
         
+        {/* ROADMAP */}
+
+        <Roadmap roadmaps={roadmaps} />
+
         {/* FIRST MARKETING CARD */}
         {marketingCards.length > 0 &&
           <CardLayout key={`marketing_card_${marketingCards[0].uid}`} variant={marketingCards[0].data.toggle ? 'secondary' : 'primary'}>
@@ -170,7 +225,7 @@ export default function Home({
             {marketingCards[0].data.linktext.length > 0 && (
               <div className="w-100 w-md-75 d-inline-flex flex-row justify-content-left">
                 <LinkTo
-                  href={marketingCards[0].data.link.url !== undefined ? marketingCards[0].data.link.url : '/'}
+                  href={marketingCards[0].data.link.url !== undefined ? marketingCards[0].data.link.url.replace("https://","") : '/'}
                   text={marketingCards[0].data.linktext[0].text}
                   icon={<BsArrowRight />}
                   extraClassNames="my-0 my-lg-4"
@@ -188,8 +243,7 @@ export default function Home({
         </CardLayout>
         }
         
-        {/* ROADMAP */}
-        <Roadmap roadmaps={roadmaps} />
+        
 
         {/* MARKETING CARDS */}
         {marketingCards.length > 0 && marketingCards.map((marketingCard, index) => {
@@ -225,12 +279,24 @@ export default function Home({
                 
                 {marketingCard.data.linktext.length > 0 && (
                   <div className="d-inline-flex flex-row justify-content-left">
-                    <LinkTo
-                      href={marketingCard.data.link.url !== undefined ? marketingCard.data.link.url : '/'}
+                    
+                    <a className="custom-link my-0 my-lg-4" href={marketingCard.data.link_type !== "external" ? marketingCard.data.link.url.replace("https://","") : marketingCard.data.link.url}
+                    text={marketingCard.data.linktext[0].text}
+                    target={marketingCard.data.link_type == "external" ? "_blank" : "_self"}
+                    rel="noreferrer">
+                          <span className="mx-3">
+                          {<BsArrowRight />}
+                                    </span>
+
+                    </a>
+                    {/* <LinkTo
+                      // href={marketingCard.data.link.url !== undefined ? marketingCard.data.link.url.replace("https://","") : '/'}
+                      href={marketingCard.data.link_type !== "external" ? marketingCard.data.link.url.replace("https://","") : marketingCard.data.link.url}
                       text={marketingCard.data.linktext[0].text}
+                      target={marketingCard.data.link_type !== "external" ? "_blank" : "_self"}
                       icon={<BsArrowRight />}
                       extraClassNames="my-0 my-lg-4"
-                    />
+                    /> */}
                   </div>
                 )}
               </div>

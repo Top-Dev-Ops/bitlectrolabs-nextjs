@@ -1,17 +1,18 @@
-import { axiosTokens } from './axios'
+//bitlectro api interactions
+import axios from "axios";
 
-export function SAY_UNWRAP_TOKEN(tokenId) {
-    axiosTokens
-        .post(`/dreamloopsv1/token/unwrap/${tokenId}`)
-        .then(res => {
-            return res.data
-        })
-        .catch(error => console.log(error))
+const TEST_BASE_URL = 'https://dlv1api.bitlectrolabs.com/dreamloopsv1';
+
+
+export function SAY_UNWRAP_TOKEN (token_id) {
+  
+  return axios.post(`${TEST_BASE_URL}/token/unwrap/${token_id}`)
+
 }
 
-export function GET_TOKEN_METADATA(tokenId) {
-    axiosTokens
-        .get(`/dreamloopsv1/metadata/${tokenId}`)
-        .then(res => console.log(res.data))
-        .catch(error => console.log(error))
+
+export function GET_TOKEN_METADATA (token_id) {
+  
+  return axios.get(`${TEST_BASE_URL}/metadata/${token_id}`)
+
 }

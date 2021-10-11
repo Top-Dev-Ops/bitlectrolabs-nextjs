@@ -32,7 +32,7 @@ const Navbar = () => {
                             </a>
                         </Link>
 
-                        <NavMenu menus={['Collections', 'Gallery', 'Buy', 'News', 'About']} />
+                        <NavMenu menus={['Collections', 'Buy', 'News', 'About']} />
 
                         <div className="mobile-button">
                             {metaMaskInstalled ? (
@@ -68,12 +68,12 @@ const Navbar = () => {
                         }}>
                             Collections
                         </h2>
-                        <h2 onClick={() => {
+                        {/* <h2 onClick={() => {
                                 router.push('/gallery')
                                 onClick()
                         }}>
                             Gallery
-                            </h2>
+                            </h2> */}
                         <h2 onClick={() => {
                                 router.push('/news')
                                 onClick()

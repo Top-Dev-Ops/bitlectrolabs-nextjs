@@ -73,6 +73,7 @@
 .card .card-full-image {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .card h2, .card-collection h2 {

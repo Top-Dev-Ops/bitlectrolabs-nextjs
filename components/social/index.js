@@ -15,10 +15,10 @@ const Social = ({ extraClassNames }) => {
             <a href="https://www.youtube.com/channel/UCysKupQ05n-jZ5L14I8EEkA" target="_blank" rel="noreferrer">
                 <Youtube />
             </a>
-            <a href="https://bitlectro.party/" target="_blank" rel="noreferrer">
+            <a href="http://bitlectro.party/" target="_blank" rel="noreferrer">
                 <Magnet />
             </a>
-            <a href="https://opensea.io/collection/dreamloops" target="_blank" rel="noreferrer">
+            <a href="https://opensea.io/collection/thedreamers" target="_blank" rel="noreferrer">
                 <Boat />
             </a>
         </section>

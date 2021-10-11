@@ -100,7 +100,7 @@ export default function Collection({
                 </div>
 
 
-                <Link href="/gallery">
+                {/* <Link href="/gallery">
                     <section
                         className={styles.collectionGallery}
                         style={{
@@ -109,7 +109,7 @@ export default function Collection({
                     >
                         <h4 className="text-white">Gallery</h4>
                     </section>
-                </Link>
+                </Link> */}
 
                 {/* SOCIALS, LOGO & TERMS OF USE */}
                 <Footer />

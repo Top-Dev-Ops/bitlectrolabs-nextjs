@@ -9,7 +9,7 @@ const NavMenu = ({ menus }) => {
                         href={menu === 'News' ? 'https://bitlectro.medium.com/' :
                             menu === 'news' ? '/news' : `/${menu.toLowerCase()}`}
                     >
-                        <a>{menu}</a>
+                        <a target="_blank" rel="noreferrer">{menu}</a>
                     </Link>
 
                     {index !== menus.length - 1 && <span>▪</span>}

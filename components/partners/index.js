@@ -13,8 +13,10 @@ export default function Partners({ partners }) {
             key={`partner_${partner.uid}`}
             className={className}
           >
-            <Link href={`${partner.data.link.url}`}>
-              <img src={`${partner.data.logo_image.url}`} />
+            <Link href={`${partner.data.link.url !== undefined ? partner.data.link.url : '/'}`} passHref> 
+            <a target="_blank">
+              <img src={`${partner.data.logo_image.url}`}/>
+            </a>
             </Link>
           </div>
         ))}

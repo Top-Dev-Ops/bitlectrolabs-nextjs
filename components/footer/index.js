@@ -20,7 +20,7 @@ export default function Footer() {
                 <div className="social d-flex justify-content-center align-items-center">
                     <p className="my-0">
                         <Link href={1 === 2 ? '/terms' : 'https://pastebin.com/raw/mfcQUZRm'}>
-                            <a>Terms of Use</a>
+                            <a target="_blank" rel='noreferrer'>Terms of Use</a>
                         </Link>
                     </p>
                 </div>
