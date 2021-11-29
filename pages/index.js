@@ -49,7 +49,6 @@ export default function Home({
     const end = card.clientWidth * scrollDirection
     let currentTime = 0
     const increment = 20
-
     const animateScroll = function () {
       currentTime += increment
       const val = easeInOutSquad(currentTime, start, end, 500)
@@ -355,7 +354,7 @@ export async function getStaticProps() {
     .join('&')
   
   const tokens = await axiosOpenSea.get(`/assets?${openSeaUrl}&asset_contract_address=0xf1B33aC32dbC6617f7267a349be6ebb004FeCcff`)
-
+  console.log(tokens);
   return {
     props: {
       marketingCards: marketingCards.results.sort((a, b) => new Date(a.first_publication_date) - new Date(b.first_publication_date)),
