@@ -47,6 +47,7 @@ export default function Sale({ tokens }) {
                 position='bottom-left'
                 theme="dark"
             />
+            <h1>No search result</h1>
         </section>
     )
 }
