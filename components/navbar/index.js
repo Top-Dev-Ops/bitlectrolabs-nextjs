@@ -68,12 +68,12 @@ const Navbar = () => {
                         }}>
                             Collections
                         </h2>
-                        {/* <h2 onClick={() => {
+                        <h2 onClick={() => {
                                 router.push('/gallery')
                                 onClick()
                         }}>
                             Gallery
-                            </h2> */}
+                        </h2>
                         <h2 onClick={() => {
                                 router.push('/news')
                                 onClick()
